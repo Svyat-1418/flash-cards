@@ -4,13 +4,13 @@ import { z } from 'zod'
 
 import { Button } from '../../ui/button'
 import { Card } from '../../ui/card'
-import { ControlledTextField, ControlledCheckbox } from '../../ui/controlled'
+import { ControlledCheckbox, ControlledTextField } from '../../ui/controlled'
 import { Typography } from '../../ui/typography'
 
 import s from './login-form.module.scss'
 
 const schema = z.object({
-  login: z.string().trim().nonempty('Enter login').min(3, 'Login must be at least 3 characters'),
+  email: z.string().trim().email('Invalid email address').nonempty('Enter email'),
   password: z
     .string()
     .trim()
@@ -21,7 +21,6 @@ const schema = z.object({
       return { message: 'You must agree to the terms and conditions' }
     },
   }),
-  email: z.string().trim().email('Invalid email address').nonempty('Enter email'),
 })
 
 type Form = z.infer<typeof schema>
@@ -47,8 +46,8 @@ export const LoginForm = () => {
       </Typography>
       <form onSubmit={onSubmit}>
         <ControlledTextField
-          label="login"
-          name={'login'}
+          label="Email"
+          name={'email'}
           control={control}
           containerProps={{ className: s.textField }}
         />
