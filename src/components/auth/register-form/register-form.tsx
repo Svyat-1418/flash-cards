@@ -11,7 +11,12 @@ import s from './register-form.module.scss'
 
 const schema = z
   .object({
-    email: z.string().trim().nonempty('Enter email').min(5, 'Email must be at least 5 characters'),
+    email: z
+      .string()
+      .trim()
+      .email('Invalid email address')
+      .nonempty('Enter email')
+      .min(5, 'Email must be at least 5 characters'),
     password: z
       .string()
       .trim()
