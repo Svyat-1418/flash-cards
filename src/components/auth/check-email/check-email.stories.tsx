@@ -13,6 +13,6 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    email: 'your_email@domain.com',
+    email: 'example@mail.com',
   },
 }
