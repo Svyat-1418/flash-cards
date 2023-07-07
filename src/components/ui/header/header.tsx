@@ -1,4 +1,3 @@
-import avatar from '../../../assets/avatar-test/Avatar-test.svg'
 import Logo from '../../../assets/icons/logo.tsx'
 import { Avatar } from '../avatar'
 import { Button } from '../button'
@@ -13,11 +12,7 @@ type HeaderPropsType = {
   avatarSrc?: string
 }
 
-export const Header = ({
-  isLoggedIn = true,
-  name = 'Ivan',
-  avatarSrc = avatar,
-}: HeaderPropsType) => {
+export const Header = ({ isLoggedIn = true, name = 'Ivan', avatarSrc }: HeaderPropsType) => {
   const loginOrAvatarContent = !isLoggedIn ? (
     <Button>Sign In</Button>
   ) : (
