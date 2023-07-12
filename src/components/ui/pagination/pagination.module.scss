@@ -1,0 +1,38 @@
+.pageList {
+  display: flex;
+  gap: 20px;
+}
+
+.paginationButton {
+  cursor: pointer;
+
+  padding: 0 6px;
+
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-m);
+
+  background: none;
+  border: none;
+  border-radius: 12%;
+
+  &:hover:not(:disabled) {
+    background: var(--color-dark-500);
+  }
+
+  &:disabled {
+    color: var(--color-dark-100);
+  }
+
+  &:focus {
+    outline: 2px solid var(--color-info-300);
+  }
+}
+
+.active {
+  color: var(--color-dark-900);
+  background: var(--color-light-100);
+
+  &:hover:not(:disabled) {
+    background: var(--color-light-100);
+  }
+}
