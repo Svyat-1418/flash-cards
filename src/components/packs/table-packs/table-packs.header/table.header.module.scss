@@ -1,0 +1,25 @@
+.titleSort {
+  cursor: pointer;
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.sortToggleContainer {
+  display: inline-flex;
+  flex-direction: column;
+  flex-shrink: 1;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  padding: 1px;
+}
+
+.sortToggleDown {
+  transform: rotate(180deg);
+  transition: all 500ms;
+}
