@@ -1,7 +1,9 @@
+import Navigation from './pages/navigation.tsx'
+
 export function App() {
   return (
     <>
-      <div>Hello</div>
+      <Navigation />
     </>
   )
 }
