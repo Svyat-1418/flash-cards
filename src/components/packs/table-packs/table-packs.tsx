@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Table } from '../../ui/table'
+import { Table } from '../../table/table-bricks'
 import { ControlButtons } from '../../ui/table/control-buttons'
 
 import { TableHeader } from './table-packs.header'

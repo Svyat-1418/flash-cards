@@ -1,6 +1,6 @@
 import ArrowSort from '../../../../assets/icons/arrow-sort.tsx'
 import ArrowDoubleSort from '../../../../assets/icons/PacksControlIcons/arrow-duble-sort.tsx'
-import { Table } from '../../../ui/table'
+import { Table } from '../../../table/table-bricks'
 import { Typography } from '../../../ui/typography'
 import { ColumnType, SortType } from '../table-packs.tsx'
 
