@@ -1,12 +1,18 @@
-import { ComponentProps, FC } from 'react'
+import { ComponentProps, ComponentPropsWithoutRef, FC } from 'react'
 
 import { clsx } from 'clsx'
 
-import { Typography } from '../typography'
+// eslint-disable-next-line import/no-unresolved
+import { Typography } from '../../ui/typography'
 
-import s from './table.module.scss'
+import s from './table-bricks.module.scss'
 
-export type RootProps = ComponentProps<'table'>
+export type RootProps = ComponentPropsWithoutRef<'table'>
+export type HeadProps = ComponentPropsWithoutRef<'thead'>
+export type BodyProps = ComponentPropsWithoutRef<'tbody'>
+export type RowProps = ComponentPropsWithoutRef<'tr'>
+export type HeadCellProps = ComponentPropsWithoutRef<'th'>
+export type CellProps = ComponentPropsWithoutRef<'td'>
 
 export const Root: FC<RootProps> = ({ className, ...rest }) => {
   const classNames = {
@@ -16,25 +22,21 @@ export const Root: FC<RootProps> = ({ className, ...rest }) => {
   return <table className={classNames.table} {...rest} />
 }
 
-export type HeadProps = ComponentProps<'thead'>
+export const Head: FC<HeadProps> = ({ className, ...rest }) => {
+  const classNames = {
+    tableHead: clsx(className, s.tableHead),
+  }
 
-export const Head: FC<HeadProps> = props => {
-  return <thead {...props} />
+  return <thead className={classNames.tableHead} {...rest} />
 }
-
-export type BodyProps = ComponentProps<'tbody'>
 
 export const Body: FC<BodyProps> = props => {
   return <tbody {...props} />
 }
 
-export type RowProps = ComponentProps<'tr'>
-
 export const Row: FC<RowProps> = props => {
   return <tr {...props} />
 }
-
-export type HeadCellProps = ComponentProps<'th'>
 
 export const HeadCell: FC<HeadCellProps> = ({ className, ...rest }) => {
   const classNames = {
@@ -43,8 +45,6 @@ export const HeadCell: FC<HeadCellProps> = ({ className, ...rest }) => {
 
   return <th className={classNames.headCell} {...rest} />
 }
-
-export type CellProps = ComponentProps<'td'>
 
 export const Cell: FC<CellProps> = ({ className, ...rest }) => {
   const classNames = {
@@ -69,7 +69,7 @@ export const Empty: FC<ComponentProps<'div'> & { mt?: string; mb?: string }> = (
       className={classNames.empty}
       style={{ marginTop: mt, marginBottom: mb }}
     >
-      Пока тут еще нет данных! :(
+      There is no data here yet! :(
     </Typography>
   )
 }
