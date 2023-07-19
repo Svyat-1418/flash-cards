@@ -15,5 +15,6 @@ export const Default: Story = {
   args: {
     name: 'Zakk Wylde',
     isLoggedIn: true,
+    email: 'zanzi@zanzi.by',
   },
 }

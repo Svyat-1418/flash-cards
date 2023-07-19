@@ -20,3 +20,19 @@
   user-select: none;
   border-bottom: 1px dotted var(--color-light-100);
 }
+
+.dropDownHeader {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.dropDownElement {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.email {
+  color: var(--color-dark-100);
+}
