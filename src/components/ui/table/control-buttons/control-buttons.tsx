@@ -1,6 +1,6 @@
 import { Edit } from '../../../../assets/icons/edit'
-import TrashOutline from '../../../../assets/icons/PacksControlIcons/trash.tsx'
 import { OutlinedPlayCircle } from '../../../../assets/icons/play-circle-outline'
+import { Trash } from '../../../../assets/icons/trash'
 
 import s from './control-buttons.module.scss'
 
@@ -29,7 +29,7 @@ export const ControlButtons = ({
             <OutlinedPlayCircle />
           </button>
           <button onClick={remove} className={s.controlButton}>
-            <TrashOutline />
+            <Trash />
           </button>
         </>
       )}

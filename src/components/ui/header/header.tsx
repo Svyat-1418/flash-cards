@@ -1,4 +1,6 @@
 import { Logo } from '../../../assets/icons/logo'
+import { Logout } from '../../../assets/icons/logout'
+import { Person } from '../../../assets/icons/person'
 import { Avatar } from '../avatar'
 import { Button } from '../button'
 import { ContentContainer } from '../content-container'
@@ -45,7 +47,7 @@ export const Header = ({ isLoggedIn = true, name = 'Ivan', avatarSrc, email }: H
         dropdownHeader(name, email, avatarSrc),
         <>
           <div className={s.dropDownElement}>
-            <PersonOutline />
+            <Person />
             <span>Profile</span>
           </div>
         </>,
