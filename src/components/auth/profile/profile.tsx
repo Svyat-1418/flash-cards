@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { useForm } from 'react-hook-form'
 
-import Edit from '../../../assets/icons/edit.tsx'
+import { Edit } from '../../../assets/icons/edit'
 import { Avatar } from '../../ui/avatar'
 import { Button } from '../../ui/button'
 import { Card } from '../../ui/card'

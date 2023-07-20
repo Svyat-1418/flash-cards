@@ -1,5 +1,8 @@
 import { FC, MouseEventHandler } from 'react'
 
+import { ArrowDown } from '../../assets/icons/arraw-down'
+import { ArrowUp } from '../../assets/icons/arraw-up'
+
 import { Sort } from './deck-table'
 import { Column } from './fake-data.ts'
 import { Table } from './table-bricks'
@@ -53,7 +56,7 @@ export const TableHeader: FC<Props> = ({ columns, sort, onSort, ...restProps }) 
             >
               <span>
                 {column.title}
-                {showSort && <span>{sort.direction === 'asc' ? '▲' : '▼'}</span>}
+                {showSort && <span>{sort.direction === 'asc' ? <ArrowUp /> : <ArrowDown />}</span>}
               </span>
             </Table.HeadCell>
           )

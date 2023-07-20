@@ -1,5 +1,5 @@
-import ArrowSort from '../../../../assets/icons/arrow-sort.tsx'
-import ArrowDoubleSort from '../../../../assets/icons/PacksControlIcons/arrow-duble-sort.tsx'
+import { ArrowDoubleSort } from '../../../../assets/icons/arrow-double-sort'
+import { SortArrow } from '../../../../assets/icons/sort-arrow'
 import { Table } from '../../../table/table-bricks'
 import { Typography } from '../../../ui/typography'
 import { ColumnType, SortType } from '../table-packs.tsx'
@@ -34,13 +34,13 @@ export const TableHeader = ({ columns, onSort, sort }: TableHeaderPropsType) => 
         case 'asc':
           return (
             <div className={s.iconContainer}>
-              <ArrowSort />
+              <SortArrow />
             </div>
           )
         case 'desc':
           return (
             <div className={`${s.iconContainer} ${s.sortToggleDown}`}>
-              <ArrowSort />
+              <SortArrow />
             </div>
           )
       }
