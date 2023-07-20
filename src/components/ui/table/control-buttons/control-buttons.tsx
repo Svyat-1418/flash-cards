@@ -1,6 +1,6 @@
-import Edit2Outline from '../../../../assets/icons/PacksControlIcons/edit-2-outline.tsx'
-import PlayCircleOutline from '../../../../assets/icons/PacksControlIcons/play-circle-outline.tsx'
-import TrashOutline from '../../../../assets/icons/PacksControlIcons/trash-outline.tsx'
+import { Edit } from '../../../../assets/icons/edit'
+import TrashOutline from '../../../../assets/icons/PacksControlIcons/trash.tsx'
+import { OutlinedPlayCircle } from '../../../../assets/icons/play-circle-outline'
 
 import s from './control-buttons.module.scss'
 
@@ -20,12 +20,13 @@ export const ControlButtons = ({
   return (
     <div className={s.controlButtonContainer}>
       <button onClick={read} className={s.controlButton}>
-        <Edit2Outline />
+        <Edit />
       </button>
       {isAdmin && (
         <>
           <button onClick={update} className={s.controlButton}>
-            <PlayCircleOutline />
+            {/* eslint-disable-next-line react/jsx-no-undef */}
+            <OutlinedPlayCircle />
           </button>
           <button onClick={remove} className={s.controlButton}>
             <TrashOutline />

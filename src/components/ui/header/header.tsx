@@ -1,4 +1,4 @@
-import Logo from '../../../assets/icons/logo.tsx'
+import { Logo } from '../../../assets/icons/logo'
 import { Avatar } from '../avatar'
 import { Button } from '../button'
 import { ContentContainer } from '../content-container'

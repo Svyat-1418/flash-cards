@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import * as Select from '@radix-ui/react-select'
 
-import SelectToggle from '../../../assets/icons/selectToggle.tsx'
+import { SelectToggle } from '../../../assets/icons/select-toggle'
 import { Typography } from '../typography'
 
 import s from './select.module.scss'
