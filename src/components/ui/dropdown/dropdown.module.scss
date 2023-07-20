@@ -1,0 +1,45 @@
+.triger {
+  cursor: pointer;
+  user-select: none;
+}
+
+.content {
+  padding: 3px 15px;
+  background-color: var(--color-dark-700);
+  border: 1px solid var(--color-dark-500);
+}
+
+.arrowContainer {
+  fill: var(--color-dark-700);
+  stroke: var(--color-dark-500);
+}
+
+.arrow {
+  position: absolute;
+  top: -3px;
+  left: calc(50% - 3px);
+  transform: rotate(45deg);
+
+  width: 7px;
+  height: 7px;
+
+  background-color: var(--color-dark-700);
+  border: 1px solid var(--color-dark-500);
+  border-top: none;
+  border-left: none;
+}
+
+.separator {
+  height: 1px;
+  background-color: var(--color-dark-500);
+}
+
+.element {
+  padding: 12px 0;
+  outline: none;
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--color-dark-500);
+  }
+}
