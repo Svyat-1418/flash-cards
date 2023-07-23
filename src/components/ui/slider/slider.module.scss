@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  gap: 10px
+  gap: 10px;
 }
 
 .value {
@@ -40,7 +40,7 @@
   height: 16px;
   background-color: var(--color-light-100);
   box-shadow: 0 2px 10px black;
-  border-radius: 10px ;
+  border-radius: 10px;
   border: solid 4px var(--color-accent-500);
 }
 
