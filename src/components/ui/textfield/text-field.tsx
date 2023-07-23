@@ -3,6 +3,7 @@ import { ComponentProps, ComponentPropsWithoutRef, forwardRef, useState } from '
 import { clsx } from 'clsx'
 
 import { Eye } from '../../../assets/icons/eye'
+import { Search } from '../../../assets/icons/search-outline/search-outline.tsx'
 import { VisibilityOff } from '../../../assets/icons/visibility-off'
 import { Typography } from '../typography'
 
@@ -23,6 +24,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     const [showPassword, setShowPassword] = useState(false)
 
     const isShowPasswordButtonShown = type === 'password'
+    const isShowSearchButtonShown = type === 'search'
 
     const finalType = getFinalType(type, showPassword)
 
@@ -32,6 +34,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       field: clsx(s.field, !!errorMessage && s.error, className),
       label: clsx(s.label, labelProps?.className),
       error: clsx(s.error),
+      search: clsx(s.searchIcon),
+      searchField: clsx(s.field, s.searchField),
     }
 
     return (
@@ -42,13 +46,16 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           </Typography>
         )}
         <div className={classNames.fieldContainer}>
-          <input
-            className={classNames.field}
-            placeholder={placeholder}
-            ref={ref}
-            type={finalType}
-            {...restProps}
-          />
+          <label>
+            {isShowSearchButtonShown && <Search className={classNames.search} />}
+            <input
+              className={isShowSearchButtonShown ? classNames.searchField : classNames.field}
+              placeholder={placeholder}
+              ref={ref}
+              type={finalType}
+              {...restProps}
+            />
+          </label>
           {isShowPasswordButtonShown && (
             <button
               className={s.showPassword}
