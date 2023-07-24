@@ -1,47 +1,61 @@
 .container {
   display: flex;
   gap: 10px;
+  align-items: center;
 }
 
 .value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
   border: grey solid 1px;
-  width: 30px;
-  text-align: center;
 }
 
 .root {
+  touch-action: none;
+  user-select: none;
+
   position: relative;
+
   display: flex;
   align-items: center;
-  user-select: none;
-  touch-action: none;
+
   width: 200px;
   height: 20px;
 }
 
 .track {
-  background-color: var(--color-accent-900);
   position: relative;
+
   flex-grow: 1;
-  border-radius: 9999px;
+
   height: 5px;
+
+  background-color: var(--color-accent-900);
+  border-radius: 9999px;
 }
 
 .range {
   position: absolute;
+  height: 100%;
   background-color: var(--color-accent-300);
   border-radius: 9999px;
-  height: 100%;
 }
 
 .thumb {
   display: block;
+
   width: 16px;
   height: 16px;
+
   background-color: var(--color-light-100);
-  box-shadow: 0 2px 10px black;
-  border-radius: 10px;
   border: solid 4px var(--color-accent-500);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px black;
 }
 
 .thumb:hover {
@@ -51,4 +65,8 @@
 .thumb:focus {
   outline: none;
   box-shadow: 0 0 0 1px var(--color-accent-100);
+}
+
+.label {
+  margin-bottom: 5px;
 }
