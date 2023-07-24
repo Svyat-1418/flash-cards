@@ -1,11 +1,15 @@
 import { FC, MouseEventHandler } from 'react'
 
-import { ArrowDown } from '../../assets/icons/arraw-down'
-import { ArrowUp } from '../../assets/icons/arraw-up'
+import { clsx } from 'clsx'
 
-import { Sort } from './deck-table'
+import { ArrowDown } from '../../../assets/icons/arraw-down'
+import { ArrowUp } from '../../../assets/icons/arraw-up'
+import { Sort } from '../../decks/deck-table'
+import { Typography } from '../typography'
+
 import { Column } from './fake-data.ts'
-import { Table } from './table-bricks'
+import { Table } from './table'
+import s from './table.module.scss'
 
 type Props = {
   columns: Column[]
@@ -48,6 +52,7 @@ export const TableHeader: FC<Props> = ({ columns, sort, onSort, ...restProps }) 
 
           return (
             <Table.HeadCell
+              className={clsx(column.isSortable, s.sortable)}
               {...{
                 [dataAttributes.sortable]: column.isSortable,
                 [dataAttributes.name]: column.key,
@@ -55,7 +60,7 @@ export const TableHeader: FC<Props> = ({ columns, sort, onSort, ...restProps }) 
               key={column.title}
             >
               <span>
-                {column.title}
+                <Typography variant={'subtitle2'}>{column.title}</Typography>
                 {showSort && <span>{sort.direction === 'asc' ? <ArrowUp /> : <ArrowDown />}</span>}
               </span>
             </Table.HeadCell>

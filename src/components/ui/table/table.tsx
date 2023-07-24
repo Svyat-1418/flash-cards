@@ -3,9 +3,9 @@ import { ComponentProps, ComponentPropsWithoutRef, FC } from 'react'
 import { clsx } from 'clsx'
 
 // eslint-disable-next-line import/no-unresolved
-import { Typography } from '../../ui/typography'
+import { Typography } from '../typography'
 
-import s from './table-bricks.module.scss'
+import s from './table.module.scss'
 
 export type RootProps = ComponentPropsWithoutRef<'table'>
 export type HeadProps = ComponentPropsWithoutRef<'thead'>
