@@ -11,7 +11,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const TabSwitchDefault: Story = {
+export const SliderRangeDefault: Story = {
   args: {
     max: 100,
     min: 0,
