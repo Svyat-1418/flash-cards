@@ -17,11 +17,7 @@ const schema = z.object({
     .trim()
     .nonempty('Enter password')
     .min(8, 'Password must be at least 8 characters'),
-  rememberMe: z.literal<boolean>(true, {
-    errorMap: () => {
-      return { message: 'You must agree to the terms and conditions' }
-    },
-  }),
+  rememberMe: z.boolean().optional(),
 })
 
 type FormType = z.infer<typeof schema>
