@@ -1,53 +1,57 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom'
 
-import { App } from '../App.tsx'
+import { Layout } from '../components/layout'
+import { useGetMeQuery } from '../services/auth/auth.ts'
 
-import Error404 from './error404.tsx'
+import { Cards } from './cards'
+import { Decks } from './decks'
 import { Login } from './login'
+import { PasswordRecovery } from './passwordRecovery'
 import { ProfilePage } from './profile'
-import { SignUp } from './sign-up'
+import { SignUpPage } from './sign-up'
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
-    errorElement: <Error404 />,
+    element: <Layout />,
+    children: [
+      {
+        element: <ProtectedRoutes />,
+        children: [
+          {
+            path: '/',
+            element: <Decks />,
+          },
+          {
+            path: 'cards/:deckId',
+            element: <Cards />,
+          },
+          {
+            path: 'profile',
+            element: <ProfilePage />,
+          },
+        ],
+      },
+      {
+        path: 'login',
+        element: <Login />,
+      },
+      {
+        path: 'sign-up',
+        element: <SignUpPage />,
+      },
+      {
+        path: 'recover-password',
+        element: <PasswordRecovery />,
+      },
+    ],
   },
-
-  {
-    path: 'profile',
-    element: <ProfilePage />,
-  },
-  // {
-  //   path: 'packs',
-  //   element: <Packs />,
-  // },
-  // {
-  //   path: 'cards',
-  //   element: <Cards />,
-  // },
-  // {
-  //   path: 'learn',
-  //   element: <Learn />,
-  // },
-  {
-    path: 'login',
-    element: <Login />,
-  },
-  {
-    path: 'registration',
-    element: <SignUp />,
-  },
-  // {
-  //   path: 'check-email',
-  //   element: <CheckEmail />,
-  // },
-  // {
-  //   path: 'set-new-password',
-  //   element: <NewPassword />,
-  // },
-  // {
-  //   path: 'forgot-password',
-  //   element: <ForgotPassword />,
-  // },
 ])
+
+function ProtectedRoutes() {
+  const { data, isLoading } = useGetMeQuery()
+
+  if (isLoading) return <div>Loading...</div>
+
+  return data ? <Outlet /> : <Navigate to="/login" />
+}
