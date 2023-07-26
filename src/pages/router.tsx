@@ -5,6 +5,7 @@ import { useGetMeQuery } from '../services/auth/auth.ts'
 
 import { Cards } from './cards'
 import { Decks } from './decks'
+import Error404 from './error404.tsx'
 import { Login } from './login'
 import { PasswordRecovery } from './passwordRecovery'
 import { ProfilePage } from './profile'
@@ -14,6 +15,7 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
+    errorElement: <Error404 />,
     children: [
       {
         element: <ProtectedRoutes />,
