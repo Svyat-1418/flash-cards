@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-import { Table, TableHeader } from '../../../components/ui/table'
-import { columns, content } from '../../../components/ui/table/fake-data.ts'
+import { Table, TableHeader } from '../../ui/table'
+import { columns, content } from '../../ui/table/fake-data.ts'
 
 import { DeckTableBody } from './deck-table-body.tsx'
 

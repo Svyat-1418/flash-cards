@@ -1,13 +1,14 @@
 import { useState } from 'react'
 
 import { Trash } from '../../assets/icons/trash'
-import { Button } from '../../components/ui/button'
-import { ButtonGroup, ButtonSwitchType } from '../../components/ui/button-group'
-import { ContentContainer } from '../../components/ui/content-container'
 import { SliderRange as Slider } from '../../components/ui/slider'
-import { TextField } from '../../components/ui/textfield'
-import { Typography } from '../../components/ui/typography'
+import { Button } from '../ui/button'
+import { ButtonGroup, ButtonSwitchType } from '../ui/button-group'
+import { ContentContainer } from '../ui/content-container'
+import { TextField } from '../ui/textfield'
+import { Typography } from '../ui/typography'
 
+import { DeckTable } from './deck-table'
 import s from './decks.module.scss'
 
 export const Decks = () => {
@@ -50,6 +51,7 @@ export const Decks = () => {
           </>
         </Button>
       </div>
+      <DeckTable />
     </ContentContainer>
   )
 }

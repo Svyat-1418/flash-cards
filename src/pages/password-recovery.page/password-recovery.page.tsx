@@ -1,5 +1,5 @@
 import { ForgotPassword } from '../../components/auth/forgot-password'
 
-export const PasswordRecovery = () => {
+export const PasswordRecoveryPage = () => {
   return <ForgotPassword />
 }
