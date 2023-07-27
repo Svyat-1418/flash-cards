@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import { Logo } from '../../../assets/icons/logo'
 import { Logout } from '../../../assets/icons/logout'
 import { Person } from '../../../assets/icons/person'
@@ -39,7 +41,9 @@ export const Header = ({
   }
 
   const loginOrAvatarContent = !isLoggedIn ? (
-    <Button>Sign In</Button>
+    <Button as={Link} to={'login'}>
+      Sign In
+    </Button>
   ) : (
     <Dropdown
       trigger={
@@ -59,9 +63,9 @@ export const Header = ({
           </div>
         </>,
         <>
-          <div className={s.dropDownElement}>
+          <div onClick={logout} className={s.dropDownElement}>
             <Logout />
-            <span onClick={logout}>Logout</span>
+            <span>Logout</span>
           </div>
         </>,
       ]}
@@ -69,13 +73,13 @@ export const Header = ({
   )
 
   return (
-    <div className={s.header}>
+    <header className={s.header}>
       <ContentContainer>
         <div className={s.headerContainer}>
           <Logo />
           {loginOrAvatarContent}
         </div>
       </ContentContainer>
-    </div>
+    </header>
   )
 }

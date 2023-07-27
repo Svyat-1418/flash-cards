@@ -3,30 +3,30 @@ import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom'
 import { Layout } from '../components/layout'
 import { useGetMeQuery } from '../services/auth/auth.ts'
 
-import Error404 from './404/error404.tsx'
-import { Cards } from './cards'
-import { Decks } from './decks'
-import { Login } from './login'
-import { PasswordRecovery } from './passwordRecovery'
-import { ProfilePage } from './profile'
-import { SignUpPage } from './sign-up'
+import { CardsPage } from './cards.page'
+import { DecksPage } from './decks.page'
+import Error404Page from './error404.page/error404.page.tsx'
+import { LoginPage } from './login.page'
+import { PasswordRecoveryPage } from './password-recovery.page'
+import { ProfilePage } from './profile.page'
+import { SignUpPage } from './sign-up.page'
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
-    errorElement: <Error404 />,
+    errorElement: <Error404Page />,
     children: [
       {
         element: <ProtectedRoutes />,
         children: [
           {
             path: '/',
-            element: <Decks />,
+            element: <DecksPage />,
           },
           {
             path: 'cards/:deckId',
-            element: <Cards />,
+            element: <CardsPage />,
           },
           {
             path: 'profile',
@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'login',
-        element: <Login />,
+        element: <LoginPage />,
       },
       {
         path: 'sign-up',
@@ -44,7 +44,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'recover-password',
-        element: <PasswordRecovery />,
+        element: <PasswordRecoveryPage />,
       },
     ],
   },

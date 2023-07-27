@@ -5,7 +5,6 @@ import { ForgotPassword } from './forgot-password.tsx'
 const meta = {
   title: 'Auth/ForgotPassword',
   component: ForgotPassword,
-  tags: ['autodocs'],
 } satisfies Meta<typeof ForgotPassword>
 
 export default meta
