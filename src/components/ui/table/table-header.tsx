@@ -4,7 +4,7 @@ import { clsx } from 'clsx'
 
 import { ArrowDown } from '../../../assets/icons/arraw-down'
 import { ArrowUp } from '../../../assets/icons/arraw-up'
-import { Sort } from '../../../pages/decks/deck-table'
+import { Sort } from '../../decks/deck-table'
 import { Typography } from '../typography'
 
 import { Column } from './fake-data.ts'

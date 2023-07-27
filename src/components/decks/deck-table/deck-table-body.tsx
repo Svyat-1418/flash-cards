@@ -1,9 +1,9 @@
 import { FC } from 'react'
 
-import { ControlButtons } from '../../../components/ui/control-buttons'
-import { Table } from '../../../components/ui/table'
-import { TableContent } from '../../../components/ui/table/fake-data.ts'
-import { Typography } from '../../../components/ui/typography'
+import { ControlButtons } from '../../ui/control-buttons'
+import { Table } from '../../ui/table'
+import { TableContent } from '../../ui/table/fake-data.ts'
+import { Typography } from '../../ui/typography'
 
 type Props = {
   content: TableContent[]

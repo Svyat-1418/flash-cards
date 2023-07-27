@@ -52,6 +52,7 @@ export const LoginForm = (props: Props) => {
           />
           <ControlledTextField
             label="Password"
+            type={'password'}
             name={'password'}
             control={control}
             containerProps={{ className: s.textField }}

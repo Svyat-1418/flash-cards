@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { LoginForm } from '../../components/auth/login-form'
-import { useGetMeQuery, useLoginMutation } from '../../services/auth/auth'
-import { LoginArgs } from '../../services/auth/types'
+import { useGetMeQuery, useLoginMutation } from '../../services/auth/auth.ts'
+import { LoginArgs } from '../../services/auth/types.ts'
 
-export const Login = () => {
+export const LoginPage = () => {
   const [login] = useLoginMutation()
   const { data: me } = useGetMeQuery()
 
