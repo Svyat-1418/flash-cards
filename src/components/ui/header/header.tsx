@@ -13,10 +13,17 @@ type HeaderPropsType = {
   isLoggedIn: boolean
   name?: string
   avatarSrc?: string
-  email: string
+  email?: string
+  logout: () => void
 }
 
-export const Header = ({ isLoggedIn = true, name = 'Ivan', avatarSrc, email }: HeaderPropsType) => {
+export const Header = ({
+  isLoggedIn = true,
+  name = 'Ivan',
+  avatarSrc,
+  email = '',
+  logout,
+}: HeaderPropsType) => {
   const dropdownHeader = (name: string, email: string, avatarSrc?: string) => {
     return (
       <div className={s.dropDownHeader}>
@@ -54,7 +61,7 @@ export const Header = ({ isLoggedIn = true, name = 'Ivan', avatarSrc, email }: H
         <>
           <div className={s.dropDownElement}>
             <Logout />
-            <span>Logout</span>
+            <span onClick={logout}>Logout</span>
           </div>
         </>,
       ]}
