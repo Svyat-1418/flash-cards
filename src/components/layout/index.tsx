@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom'
 
 import { useGetMeQuery, useLogoutMutation } from '../../services/auth/auth'
 
-import { Header } from './header'
+import { Header as HeaderComponent } from './../ui/header'
 import s from './layout.module.scss'
 
 export const Layout = () => {
@@ -11,9 +11,11 @@ export const Layout = () => {
 
   return (
     <div className={s.container}>
-      <Header isAuth={!!data} userInfo={data} onSignOut={logout} />
+      <HeaderComponent isLoggedIn={!!data} email={data?.email} name={data?.name} logout={logout} />
       <div aria-hidden className={s.placeholder} />
-      <Outlet />
+      <div className={s.outletContainer}>
+        <Outlet />
+      </div>
     </div>
   )
 }
