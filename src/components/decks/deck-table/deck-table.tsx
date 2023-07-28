@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
 import { Table, TableHeader } from '../../ui/table'
-import { columns, content } from '../../ui/table/fake-data.ts'
 
+import { deckColumns, deckContent } from './deck-fake-data.ts'
 import { DeckTableBody } from './deck-table-body.tsx'
 
 export type Sort = {
@@ -15,8 +15,8 @@ export const DeckTable = () => {
 
   return (
     <Table.Root>
-      <TableHeader columns={columns} sort={sort} onSort={setSort} />
-      <DeckTableBody content={content} />
+      <TableHeader columns={deckColumns} sort={sort} onSort={setSort} />
+      <DeckTableBody content={deckContent} />
     </Table.Root>
   )
 }

@@ -1,15 +1,12 @@
-export type Column = {
-  key: string
-  title: string
-  isSortable?: boolean
-}
-export type TableContent = {
+import { Column } from '../../ui/table/types.ts'
+
+export type DeckTableContent = {
   title: string
   cardsCount: number
   updated: string
   createdBy: string
 }
-export const content: TableContent[] = [
+export const deckContent: DeckTableContent[] = [
   {
     title: 'Project A',
     cardsCount: 10,
@@ -41,7 +38,7 @@ export const content: TableContent[] = [
     createdBy: 'Emma Davis',
   },
 ]
-export const columns: Column[] = [
+export const deckColumns: Column[] = [
   {
     key: 'name',
     title: 'Name',
