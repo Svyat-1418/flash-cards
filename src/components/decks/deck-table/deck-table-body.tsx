@@ -1,21 +1,21 @@
 import { FC } from 'react'
 
+import { ItemsType } from '../../../services/decks/types.ts'
 import { ControlButtons } from '../../ui/control-buttons'
 import { Table } from '../../ui/table'
-import { TableContent } from '../../ui/table/fake-data.ts'
 import { Typography } from '../../ui/typography'
 
 type Props = {
-  content: TableContent[]
+  content: ItemsType[]
 }
 
 export const DeckTableBody: FC<Props> = ({ content }) => {
   return (
     <Table.Body>
       {content.map(item => (
-        <Table.Row key={item.title}>
+        <Table.Row key={item.id}>
           <Table.Cell>
-            <Typography variant={'body2'}>{item.title}</Typography>
+            <Typography variant={'body2'}>{item.name}</Typography>
           </Table.Cell>
           <Table.Cell>
             <Typography variant={'body2'}>{item.cardsCount}</Typography>
@@ -24,7 +24,7 @@ export const DeckTableBody: FC<Props> = ({ content }) => {
             <Typography variant={'body2'}>{item.updated}</Typography>
           </Table.Cell>
           <Table.Cell>
-            <Typography variant={'body2'}>{item.createdBy}</Typography>
+            <Typography variant={'body2'}>{item.author.name}</Typography>
           </Table.Cell>
           <Table.Cell>
             <ControlButtons />
