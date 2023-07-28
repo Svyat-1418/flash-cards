@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import { Logo } from '../../../assets/icons/logo'
 import { Logout } from '../../../assets/icons/logout'
 import { Person } from '../../../assets/icons/person'
@@ -13,10 +15,17 @@ type HeaderPropsType = {
   isLoggedIn: boolean
   name?: string
   avatarSrc?: string
-  email: string
+  email?: string
+  logout: () => void
 }
 
-export const Header = ({ isLoggedIn = true, name = 'Ivan', avatarSrc, email }: HeaderPropsType) => {
+export const Header = ({
+  isLoggedIn = true,
+  name = 'Ivan',
+  avatarSrc,
+  email = '',
+  logout,
+}: HeaderPropsType) => {
   const dropdownHeader = (name: string, email: string, avatarSrc?: string) => {
     return (
       <div className={s.dropDownHeader}>
@@ -32,7 +41,9 @@ export const Header = ({ isLoggedIn = true, name = 'Ivan', avatarSrc, email }: H
   }
 
   const loginOrAvatarContent = !isLoggedIn ? (
-    <Button>Sign In</Button>
+    <Button as={Link} to={'login'}>
+      Sign In
+    </Button>
   ) : (
     <Dropdown
       trigger={
@@ -52,7 +63,7 @@ export const Header = ({ isLoggedIn = true, name = 'Ivan', avatarSrc, email }: H
           </div>
         </>,
         <>
-          <div className={s.dropDownElement}>
+          <div onClick={logout} className={s.dropDownElement}>
             <Logout />
             <span>Logout</span>
           </div>
@@ -62,13 +73,13 @@ export const Header = ({ isLoggedIn = true, name = 'Ivan', avatarSrc, email }: H
   )
 
   return (
-    <div className={s.header}>
+    <header className={s.header}>
       <ContentContainer>
         <div className={s.headerContainer}>
           <Logo />
           {loginOrAvatarContent}
         </div>
       </ContentContainer>
-    </div>
+    </header>
   )
 }

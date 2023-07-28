@@ -1,0 +1,19 @@
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.settingContainer {
+  display: flex;
+  gap: 25px;
+  align-items: end;
+  justify-content: space-between;
+
+  margin-bottom: 36px;
+}
+
+.sliderContainer {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
