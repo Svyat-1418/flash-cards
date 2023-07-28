@@ -1,16 +1,21 @@
 import { useState } from 'react'
 
 import { Table, TableHeader } from '../../ui/table'
-import { columns, content } from '../../ui/table/fake-data.ts'
+import { Column, TableContent } from '../../ui/table/fake-data.ts'
 
 import { DeckTableBody } from './deck-table-body.tsx'
+
+export type DeckTablePropsType = {
+  columns: Column[]
+  content: TableContent[]
+}
 
 export type Sort = {
   key: string
   direction: 'asc' | 'desc'
 } | null
 
-export const DeckTable = () => {
+export const DeckTable = ({ columns, content }: DeckTablePropsType) => {
   const [sort, setSort] = useState<Sort>(null)
 
   return (
