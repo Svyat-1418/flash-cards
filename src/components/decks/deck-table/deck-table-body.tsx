@@ -2,11 +2,12 @@ import { FC } from 'react'
 
 import { ControlButtons } from '../../ui/control-buttons'
 import { Table } from '../../ui/table'
-import { TableContent } from '../../ui/table/fake-data.ts'
 import { Typography } from '../../ui/typography'
 
+import { DeckTableContent } from './deck-fake-data.ts'
+
 type Props = {
-  content: TableContent[]
+  content: DeckTableContent[]
 }
 
 export const DeckTableBody: FC<Props> = ({ content }) => {
