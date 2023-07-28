@@ -1,9 +1,11 @@
-import Navigation from './pages/navigation.tsx'
+import { RouterProvider } from 'react-router-dom'
+
+import { router } from './pages/router.tsx'
 
 export function App() {
   return (
     <>
-      <Navigation />
+      <RouterProvider router={router} />
     </>
   )
 }

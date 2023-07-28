@@ -46,7 +46,11 @@ export const Pagination = ({
       >
         {'<'}
       </button>
-      {currentPage > 5 && <span>...</span>}
+      {currentPage > 5 && (
+        <>
+          <span className={s.firstAndLastPage}>1</span> <span>...</span>
+        </>
+      )}
       {pageArray.map(p => {
         const paginationButtonClassname = `${s.paginationButton} ${
           p === currentPage ? s.active : ''
@@ -59,6 +63,7 @@ export const Pagination = ({
         )
       })}
       {currentPage + 1 < pageCount && <span>...</span>}
+      <span className={s.firstAndLastPage}>{pageCount}</span>
       <button
         className={s.paginationButton}
         onClick={() => onPageChange(currentPage + 1)}

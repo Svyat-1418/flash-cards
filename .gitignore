@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 watchers.xml
+svg
 
 # Editor directories and files
 .vscode/*
