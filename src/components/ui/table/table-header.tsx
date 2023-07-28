@@ -7,9 +7,9 @@ import { ArrowUp } from '../../../assets/icons/arraw-up'
 import { Sort } from '../../decks/deck-table'
 import { Typography } from '../typography'
 
-import { Column } from './fake-data.ts'
 import { Table } from './table'
 import s from './table.module.scss'
+import { Column } from './types.ts'
 
 type Props = {
   columns: Column[]
