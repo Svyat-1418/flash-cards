@@ -1,13 +1,13 @@
 import { useState } from 'react'
 
+import { ItemsType } from '../../../services/decks/types.ts'
 import { Table, TableHeader } from '../../ui/table'
-import { Column, TableContent } from '../../ui/table/fake-data.ts'
 
+import { deckColumns } from './deck-fake-data.ts'
 import { DeckTableBody } from './deck-table-body.tsx'
 
 export type DeckTablePropsType = {
-  columns: Column[]
-  content: TableContent[]
+  deckContent: ItemsType[]
 }
 
 export type Sort = {
@@ -15,13 +15,13 @@ export type Sort = {
   direction: 'asc' | 'desc'
 } | null
 
-export const DeckTable = ({ columns, content }: DeckTablePropsType) => {
+export const DeckTable = ({ deckContent }: DeckTablePropsType) => {
   const [sort, setSort] = useState<Sort>(null)
 
   return (
     <Table.Root>
-      <TableHeader columns={columns} sort={sort} onSort={setSort} />
-      <DeckTableBody content={content} />
+      <TableHeader columns={deckColumns} sort={sort} onSort={setSort} />
+      <DeckTableBody deckContent={deckContent} />
     </Table.Root>
   )
 }

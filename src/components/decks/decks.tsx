@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { Trash } from '../../assets/icons/trash'
 import { SliderRange as Slider } from '../../components/ui/slider'
+import { ItemsType } from '../../services/decks/types.ts'
 import { Button } from '../ui/button'
 import { ButtonGroup, ButtonSwitchType } from '../ui/button-group'
 import { ContentContainer } from '../ui/content-container'
@@ -11,7 +12,11 @@ import { Typography } from '../ui/typography'
 import { DeckTable } from './deck-table'
 import s from './decks.module.scss'
 
-export const Decks = () => {
+export type DecksPropsType = {
+  deckContent: ItemsType[]
+}
+
+export const Decks = ({ deckContent }: DecksPropsType) => {
   const [activeButton, setActiveButton] = useState<'all' | 'my'>('all')
   const showMyCards = () => {
     setActiveButton('my')
@@ -51,7 +56,7 @@ export const Decks = () => {
           </>
         </Button>
       </div>
-      <DeckTable />
+      <DeckTable deckContent={deckContent} />
     </ContentContainer>
   )
 }

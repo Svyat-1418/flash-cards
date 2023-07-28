@@ -1,32 +1,34 @@
 import { FC } from 'react'
 
-import { ItemsType } from '../../../services/decks/types.ts'
 import { ControlButtons } from '../../ui/control-buttons'
+import { Rating } from '../../ui/rating'
 import { Table } from '../../ui/table'
 import { Typography } from '../../ui/typography'
 
-import { deckContent as fakeContent } from './deck-fake-data.ts'
+import { CardTableContent } from './card-fake-data.ts'
 
 type Props = {
-  deckContent: ItemsType[]
+  content: CardTableContent[]
 }
 
-export const DeckTableBody: FC<Props> = ({ deckContent = fakeContent }: Props) => {
+export const CardTableBody: FC<Props> = ({ content }) => {
   return (
     <Table.Body>
-      {deckContent.map(item => (
-        <Table.Row key={item.id}>
+      {content.map(item => (
+        <Table.Row key={item.question}>
           <Table.Cell>
-            <Typography variant={'body2'}>{item.name}</Typography>
+            <Typography variant={'body2'}>{item.question}</Typography>
           </Table.Cell>
           <Table.Cell>
-            <Typography variant={'body2'}>{item.cardsCount}</Typography>
+            <Typography variant={'body2'}>{item.answer}</Typography>
           </Table.Cell>
           <Table.Cell>
             <Typography variant={'body2'}>{item.updated}</Typography>
           </Table.Cell>
           <Table.Cell>
-            <Typography variant={'body2'}>{item.author.name}</Typography>
+            <Typography variant={'body2'}>
+              <Rating starCount={5} grade={item.grade} />
+            </Typography>
           </Table.Cell>
           <Table.Cell>
             <ControlButtons />
