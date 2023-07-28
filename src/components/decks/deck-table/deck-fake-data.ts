@@ -1,11 +1,7 @@
 import { ItemsType } from '../../../services/decks/types.ts'
+import { Column } from '../../ui/table/types.ts'
 
-export type Column = {
-  key: string
-  title: string
-  isSortable?: boolean
-}
-export const content: ItemsType[] = [
+export const deckContent: ItemsType[] = [
   {
     author: { name: 'John Doe', id: '1' },
     id: new Date().getTime().toString(),
@@ -72,7 +68,7 @@ export const content: ItemsType[] = [
     created: '2023-07-07',
   },
 ]
-export const columns: Column[] = [
+export const deckColumns: Column[] = [
   {
     key: 'name',
     title: 'Name',
