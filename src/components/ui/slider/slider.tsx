@@ -11,11 +11,19 @@ type SliderPropsType = {
   step: number
   rangeValue: number[]
   disabled?: boolean
+  setSliderRangeValues: (value: number[]) => void
+  setSliderValues: (value: number[]) => void
 }
 
-export const SliderRange = ({ min, max, step, rangeValue, label }: SliderPropsType) => {
-  const handleChange = () => {}
-
+export const SliderRange = ({
+  min,
+  max,
+  step,
+  rangeValue,
+  label,
+  setSliderRangeValues,
+  setSliderValues,
+}: SliderPropsType) => {
   return (
     <div>
       <Typography variant={'body2'} className={s.label}>
@@ -34,7 +42,8 @@ export const SliderRange = ({ min, max, step, rangeValue, label }: SliderPropsTy
           max={max}
           min={min}
           step={step}
-          onChange={handleChange}
+          onValueChange={e => setSliderRangeValues(e)}
+          onValueCommit={e => setSliderValues(e)}
         >
           <Slider.Track className={s.track}>
             <Slider.Range className={s.range} />
