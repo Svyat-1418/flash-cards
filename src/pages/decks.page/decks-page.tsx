@@ -22,6 +22,7 @@ export const DecksPage = () => {
   useEffect(() => {
     if (sliderRangeValues[1] !== decksData?.maxCardsCount) {
       setSliderRangeValues(values => [values[0], decksData?.maxCardsCount || 100])
+      setSliderValues(values => [values[0], decksData?.maxCardsCount || 10])
     }
   }, [decksData?.maxCardsCount])
 
