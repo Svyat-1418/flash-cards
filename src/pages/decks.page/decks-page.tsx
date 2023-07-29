@@ -1,10 +1,40 @@
+import { useEffect, useState } from 'react'
+
 import { Decks } from '../../components/decks'
-import { deckContent } from '../../components/decks/deck-table/deck-fake-data.ts'
+import { useGetMeQuery } from '../../services/auth/auth.ts'
 import { useGetDecksQuery } from '../../services/decks/decks.ts'
 
 export const DecksPage = () => {
-  const { data } = useGetDecksQuery({})
+  const [currentPage, setCurrentPage] = useState(1)
+  const [showMyDecks, setShowMyDecks] = useState(false)
+  const [sliderValues, setSliderValues] = useState([0, 100])
+  const [sliderRangeValues, setSliderRangeValues] = useState([0, 100])
 
-  // todo Решить вопрос с фейк данными(storybook)
-  return <Decks deckContent={data ? data.items : deckContent} />
+  const { data: user } = useGetMeQuery()
+  const { data: decksData } = useGetDecksQuery({
+    currentPage: currentPage,
+    authorId: showMyDecks ? user?.id : undefined,
+    minCardsCount: sliderValues[0].toString(),
+    maxCardsCount: sliderValues[1].toString(),
+  })
+
+  //todo Исправить Слайдер(Добавить Стейт для контроля)
+  useEffect(() => {
+    if (sliderRangeValues[1] !== decksData?.maxCardsCount) {
+      setSliderRangeValues(values => [values[0], decksData?.maxCardsCount || 100])
+    }
+  }, [decksData?.maxCardsCount])
+
+  return (
+    <Decks
+      deckContent={decksData?.items}
+      pagination={decksData?.pagination}
+      changeCurrentPage={setCurrentPage}
+      setShowMyDecks={setShowMyDecks}
+      sliderValues={[0, decksData ? decksData.maxCardsCount : 20]}
+      sliderRangeValues={sliderRangeValues}
+      setSliderValues={setSliderValues}
+      setSliderRangeValues={setSliderRangeValues}
+    />
+  )
 }

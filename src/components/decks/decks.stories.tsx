@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
 
+import { deckContent } from './deck-table/deck-fake-data.ts'
 import { Decks } from './decks.tsx'
 
 const meta = {
@@ -10,4 +11,8 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {}
+export const Default: Story = {
+  args: {
+    deckContent,
+  },
+}
