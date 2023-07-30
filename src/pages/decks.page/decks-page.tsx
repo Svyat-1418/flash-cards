@@ -18,7 +18,6 @@ export const DecksPage = () => {
     maxCardsCount: sliderValues[1].toString(),
   })
 
-  //todo Исправить Слайдер(Добавить Стейт для контроля)
   useEffect(() => {
     if (sliderRangeValues[1] !== decksData?.maxCardsCount) {
       setSliderRangeValues(values => [values[0], decksData?.maxCardsCount || 100])
@@ -31,6 +30,7 @@ export const DecksPage = () => {
       deckContent={decksData?.items}
       pagination={decksData?.pagination}
       changeCurrentPage={setCurrentPage}
+      showMyDecks={showMyDecks}
       setShowMyDecks={setShowMyDecks}
       sliderValues={[0, decksData ? decksData.maxCardsCount : 20]}
       sliderRangeValues={sliderRangeValues}
