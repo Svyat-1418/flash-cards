@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import { Trash } from '../../assets/icons/trash'
 import { SliderRange as Slider } from '../../components/ui/slider'
 import { ItemsType, PaginationType } from '../../services/decks/types.ts'
@@ -18,6 +16,7 @@ export type DecksPropsType = {
   pagination: PaginationType | undefined
   changeCurrentPage: (page: number) => void
   setShowMyDecks: (value: boolean) => void
+  showMyDecks: boolean
   sliderValues: number[]
   sliderRangeValues: number[]
   setSliderRangeValues: (values: number[]) => void
@@ -29,29 +28,27 @@ export const Decks = ({
   pagination,
   changeCurrentPage,
   setShowMyDecks,
+  showMyDecks,
   sliderValues,
   sliderRangeValues,
   setSliderValues,
   setSliderRangeValues,
 }: DecksPropsType) => {
-  const [activeButton, setActiveButton] = useState<'all' | 'my'>('all')
   const showMyCards = () => {
     setShowMyDecks(true)
-    setActiveButton('my')
   }
   const showAllCards = () => {
     setShowMyDecks(false)
-    setActiveButton('all')
   }
   const buttonsForFilterCards: ButtonSwitchType[] = [
     {
       title: 'My Cards',
-      active: activeButton === 'my',
+      active: showMyDecks,
       callback: showMyCards,
     },
     {
       title: 'All Cards',
-      active: activeButton === 'all',
+      active: !showMyDecks,
       callback: showAllCards,
     },
   ]
