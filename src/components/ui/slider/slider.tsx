@@ -39,11 +39,12 @@ export const SliderRange = ({
         <Slider.Root
           className={s.root}
           defaultValue={rangeValue}
+          value={rangeValue}
           max={max}
           min={min}
           step={step}
           onValueChange={e => setSliderRangeValues(e)}
-          onValueCommit={e => setSliderValues(e)}
+          onValueCommit={() => setSliderValues(rangeValue)}
         >
           <Slider.Track className={s.track}>
             <Slider.Range className={s.range} />
