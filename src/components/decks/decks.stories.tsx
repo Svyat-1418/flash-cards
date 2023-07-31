@@ -14,5 +14,18 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     deckContent,
+    showMyDecks: false,
+    changeCurrentPage: () => {},
+    setSliderValues: () => {},
+    setShowMyDecks: () => {},
+    pagination: {
+      currentPage: 1,
+      itemsPerPage: 10,
+      totalPages: 11,
+      totalItems: 105,
+    },
+    sliderRangeValues: [0, 100],
+    sliderValues: [0, 100],
+    setSliderRangeValues: () => {},
   },
 }
