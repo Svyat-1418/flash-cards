@@ -10,6 +10,7 @@ export const DecksPage = () => {
   const [sliderValues, setSliderValues] = useState([0, 100])
   const [sliderRangeValues, setSliderRangeValues] = useState([0, 100])
 
+  // todo при фильтре колод сетать страницу 1 в пагинации
   const { data: user } = useGetMeQuery()
   const { data: decksData } = useGetDecksQuery({
     currentPage: currentPage,
