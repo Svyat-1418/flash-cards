@@ -18,10 +18,10 @@ export const authApi = createApi({
       providesTags: ['Me'],
     }),
     login: builder.mutation<LoginArgs, any>({
-      query: ({ email, password }) => ({
+      query: ({ email, password, rememberMe }) => ({
         url: `auth/login`,
         method: 'POST',
-        body: { email, password },
+        body: { email, password, rememberMe },
       }),
       invalidatesTags: ['Me'],
     }),
