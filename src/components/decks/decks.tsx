@@ -72,6 +72,7 @@ export const Decks = ({
           label={'Number of cards'}
           setSliderValues={setSliderValues}
           setSliderRangeValues={setSliderRangeValues}
+          resetCurrentPage={changeCurrentPage}
         />
         <Button variant={'secondary'}>
           <>
