@@ -20,7 +20,8 @@ export type DecksPropsType = {
   sliderValues: number[]
   sliderRangeValues: number[]
   setSliderRangeValues: (values: number[]) => void
-  setSliderValues: (values: number[]) => void
+  setSliderValues: () => void
+  searchDeck: (decksName: string) => void
 }
 
 export const Decks = ({
@@ -33,6 +34,7 @@ export const Decks = ({
   sliderRangeValues,
   setSliderValues,
   setSliderRangeValues,
+  searchDeck,
 }: DecksPropsType) => {
   const showMyCards = () => {
     setShowMyDecks(true)
@@ -62,7 +64,11 @@ export const Decks = ({
         <Button>Add New Pack</Button>
       </div>
       <div className={s.settingContainer}>
-        <TextField type={'search'} placeholder={'Input search'} />
+        <TextField
+          type={'search'}
+          placeholder={'Input search'}
+          onChange={e => searchDeck(e.currentTarget.value)}
+        />
         <ButtonGroup buttons={buttonsForFilterCards} label={'Show packs cards'} />
         <Slider
           max={sliderValues[1]}
@@ -72,7 +78,6 @@ export const Decks = ({
           label={'Number of cards'}
           setSliderValues={setSliderValues}
           setSliderRangeValues={setSliderRangeValues}
-          resetCurrentPage={changeCurrentPage}
         />
         <Button variant={'secondary'}>
           <>
