@@ -9,7 +9,17 @@ export const DecksPage = () => {
   const [showMyDecks, setShowMyDecks] = useState(false)
   const [sliderValues, setSliderValues] = useState([0, 100])
   const [sliderRangeValues, setSliderRangeValues] = useState([0, 100])
+  const [decksName, setDecksName] = useState('')
 
+  const searchDeck = (name: string) => {
+    setCurrentPage(1)
+    setDecksName(name)
+  }
+
+  const filteringByNumberOfCards = () => {
+    setCurrentPage(1)
+    setSliderValues(sliderRangeValues)
+  }
   // todo при фильтре колод сетать страницу 1 в пагинации
   const { data: user } = useGetMeQuery()
   const { data: decksData } = useGetDecksQuery({
@@ -17,6 +27,7 @@ export const DecksPage = () => {
     authorId: showMyDecks ? user?.id : undefined,
     minCardsCount: sliderValues[0].toString(),
     maxCardsCount: sliderValues[1].toString(),
+    name: decksName,
   })
 
   useEffect(() => {
@@ -35,8 +46,9 @@ export const DecksPage = () => {
       setShowMyDecks={setShowMyDecks}
       sliderValues={[0, decksData ? decksData.maxCardsCount : 20]}
       sliderRangeValues={sliderRangeValues}
-      setSliderValues={setSliderValues}
+      setSliderValues={filteringByNumberOfCards}
       setSliderRangeValues={setSliderRangeValues}
+      searchDeck={searchDeck}
     />
   )
 }
