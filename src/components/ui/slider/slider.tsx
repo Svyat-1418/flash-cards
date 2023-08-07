@@ -13,6 +13,7 @@ type SliderPropsType = {
   disabled?: boolean
   setSliderRangeValues: (value: number[]) => void
   setSliderValues: (value: number[]) => void
+  resetCurrentPage: (page: number) => void
 }
 
 export const SliderRange = ({
@@ -23,7 +24,13 @@ export const SliderRange = ({
   label,
   setSliderRangeValues,
   setSliderValues,
+  resetCurrentPage,
 }: SliderPropsType) => {
+  const onValueCommitHandle = () => {
+    resetCurrentPage(1)
+    setSliderValues(rangeValue)
+  }
+
   return (
     <div>
       <Typography variant={'body2'} className={s.label}>
@@ -44,7 +51,7 @@ export const SliderRange = ({
           min={min}
           step={step}
           onValueChange={e => setSliderRangeValues(e)}
-          onValueCommit={() => setSliderValues(rangeValue)}
+          onValueCommit={onValueCommitHandle}
         >
           <Slider.Track className={s.track}>
             <Slider.Range className={s.range} />
