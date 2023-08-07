@@ -25,7 +25,9 @@ export const DeckTableBody: FC<Props> = ({ deckContent }: Props) => {
             <Typography variant={'body2'}>{item.cardsCount}</Typography>
           </Table.Cell>
           <Table.Cell>
-            <Typography variant={'body2'}>{item.updated}</Typography>
+            <Typography variant={'body2'}>
+              {new Date(item.updated).toLocaleDateString('ru')}
+            </Typography>
           </Table.Cell>
           <Table.Cell>
             <Typography variant={'body2'}>{item.author.name}</Typography>
