@@ -8,6 +8,7 @@ import { Pagination } from '../ui/pagination'
 import { TextField } from '../ui/textfield'
 import { Typography } from '../ui/typography'
 
+import { AddNewPackModal } from './add-new-pack.modal'
 import { DeckTable } from './deck-table'
 import s from './decks.module.scss'
 
@@ -22,6 +23,8 @@ export type DecksPropsType = {
   setSliderRangeValues: (values: number[]) => void
   setSliderValues: () => void
   searchDeck: (decksName: string) => void
+  modalIsOpen: boolean
+  setModalIsOpen: (value: boolean) => void
 }
 
 export const Decks = ({
@@ -35,6 +38,8 @@ export const Decks = ({
   setSliderValues,
   setSliderRangeValues,
   searchDeck,
+  modalIsOpen,
+  setModalIsOpen,
 }: DecksPropsType) => {
   const showMyCards = () => {
     setShowMyDecks(true)
@@ -57,11 +62,16 @@ export const Decks = ({
 
   return (
     <ContentContainer>
+      <AddNewPackModal
+        modalIsOpen={modalIsOpen}
+        setModalIsOpen={setModalIsOpen}
+        onSubmit={() => {}}
+      />
       <div className={s.titleContainer}>
         <Typography variant={'large'} as={'h1'}>
           Decks List
         </Typography>
-        <Button>Add New Pack</Button>
+        <Button onClick={() => setModalIsOpen(true)}>Add New Pack</Button>
       </div>
       <div className={s.settingContainer}>
         <TextField
