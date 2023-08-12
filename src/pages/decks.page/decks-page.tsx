@@ -7,9 +7,13 @@ import { useGetDecksQuery } from '../../services/decks/decks.ts'
 export const DecksPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [showMyDecks, setShowMyDecks] = useState(false)
+  //slider
   const [sliderValues, setSliderValues] = useState([0, 100])
   const [sliderRangeValues, setSliderRangeValues] = useState([0, 100])
+  //search
   const [decksName, setDecksName] = useState('')
+  //modal add new pack
+  const [modalIsOpen, setModalIsOpen] = useState(false)
 
   const searchDeck = (name: string) => {
     setCurrentPage(1)
@@ -20,6 +24,7 @@ export const DecksPage = () => {
     setCurrentPage(1)
     setSliderValues(sliderRangeValues)
   }
+
   // todo при фильтре колод сетать страницу 1 в пагинации
   const { data: user } = useGetMeQuery()
   const { data: decksData } = useGetDecksQuery({
@@ -49,6 +54,8 @@ export const DecksPage = () => {
       setSliderValues={filteringByNumberOfCards}
       setSliderRangeValues={setSliderRangeValues}
       searchDeck={searchDeck}
+      modalIsOpen={modalIsOpen}
+      setModalIsOpen={setModalIsOpen}
     />
   )
 }
