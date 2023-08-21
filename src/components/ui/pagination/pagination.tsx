@@ -62,8 +62,8 @@ export const Pagination = ({
           </button>
         )
       })}
-      {currentPage + 1 < pageCount && <span>...</span>}
-      <span className={s.firstAndLastPage}>{pageCount}</span>
+      {currentPage + 1 < pageCount && pageCount > 5 && <span>...</span>}
+      {currentPage > 5 && <span className={s.firstAndLastPage}>{pageCount}</span>}
       <button
         className={s.paginationButton}
         onClick={() => onPageChange(currentPage + 1)}
@@ -71,7 +71,9 @@ export const Pagination = ({
       >
         {'>'}
       </button>
-      <button className={s.paginationButton}>{pageCount}</button>
+      <button className={s.paginationButton} onClick={() => onPageChange(pageCount)}>
+        {pageCount}
+      </button>
     </div>
   )
 }

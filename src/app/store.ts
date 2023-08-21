@@ -1,19 +1,16 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 
 import { authApi } from '../services/auth/auth.ts'
-
-// import { authApi } from '../services/auth/auth'
-// import { cardsApi } from '../services/cards/cards'
-// import { decksApi } from '../services/decks/decks'
+import { decksApi } from '../services/decks/decks.ts'
 
 export const store = configureStore({
   reducer: {
     [authApi.reducerPath]: authApi.reducer,
-    // [decksApi.reducerPath]: decksApi.reducer,
+    [decksApi.reducerPath]: decksApi.reducer,
     // [cardsApi.reducerPath]: cardsApi.reducer,
   },
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(authApi.middleware),
-  // .concat(decksApi.middleware)
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(authApi.middleware).concat(decksApi.middleware),
   // .concat(cardsApi.middleware),
 })
 
