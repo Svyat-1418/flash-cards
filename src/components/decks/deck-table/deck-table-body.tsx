@@ -1,31 +1,36 @@
 import { FC } from 'react'
 
+import { Link } from 'react-router-dom'
+
+import { ItemsType } from '../../../services/decks/types.ts'
 import { ControlButtons } from '../../ui/control-buttons'
 import { Table } from '../../ui/table'
 import { Typography } from '../../ui/typography'
 
-import { DeckTableContent } from './deck-fake-data.ts'
-
 type Props = {
-  content: DeckTableContent[]
+  deckContent: ItemsType[]
 }
 
-export const DeckTableBody: FC<Props> = ({ content }) => {
+export const DeckTableBody: FC<Props> = ({ deckContent }: Props) => {
   return (
     <Table.Body>
-      {content.map(item => (
-        <Table.Row key={item.title}>
+      {deckContent.map(item => (
+        <Table.Row key={item.id}>
           <Table.Cell>
-            <Typography variant={'body2'}>{item.title}</Typography>
+            <Typography variant={'body2'} as={Link} to={`cards/${item.id}`}>
+              {item.name}
+            </Typography>
           </Table.Cell>
           <Table.Cell>
             <Typography variant={'body2'}>{item.cardsCount}</Typography>
           </Table.Cell>
           <Table.Cell>
-            <Typography variant={'body2'}>{item.updated}</Typography>
+            <Typography variant={'body2'}>
+              {new Date(item.updated).toLocaleDateString('ru')}
+            </Typography>
           </Table.Cell>
           <Table.Cell>
-            <Typography variant={'body2'}>{item.createdBy}</Typography>
+            <Typography variant={'body2'}>{item.author.name}</Typography>
           </Table.Cell>
           <Table.Cell>
             <ControlButtons />
