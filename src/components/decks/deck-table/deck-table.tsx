@@ -1,13 +1,13 @@
 import { useState } from 'react'
 
-import { ItemsType } from '../../../services/decks/types.ts'
+import { ItemType } from '../../../services/decks/types.ts'
 import { Table, TableHeader } from '../../ui/table'
 
 import { deckColumns } from './deck-fake-data.ts'
 import { DeckTableBody } from './deck-table-body.tsx'
 
 export type DeckTablePropsType = {
-  deckContent: ItemsType[]
+  deckContent: ItemType[]
 }
 
 export type Sort = {

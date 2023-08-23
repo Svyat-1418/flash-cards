@@ -1,7 +1,7 @@
-import { ItemsType } from '../../../services/decks/types.ts'
+import { ItemType } from '../../../services/decks/types.ts'
 import { Column } from '../../ui/table/types.ts'
 
-export const deckContent: ItemsType[] = [
+export const deckContent: ItemType[] = [
   {
     author: { name: 'John Doe', id: '1' },
     id: new Date().getTime().toString(),

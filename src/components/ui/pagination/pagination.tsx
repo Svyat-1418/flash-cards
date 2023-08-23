@@ -15,8 +15,8 @@ export const Pagination = ({
 }: PaginationPropsType) => {
   let pageArray: Array<number> = []
 
-  if (currentPage <= 5) {
-    if (pageCount >= 5) {
+  if (currentPage <= 4) {
+    if (pageCount >= 4) {
       for (let i = 1; i <= 5; i++) {
         pageArray.push(i)
       }
@@ -28,7 +28,7 @@ export const Pagination = ({
     }
   }
 
-  if (currentPage > 5) {
+  if (currentPage >= 5) {
     if (currentPage < pageCount) {
       pageArray = [currentPage - 1, currentPage, currentPage + 1]
     }
@@ -46,9 +46,12 @@ export const Pagination = ({
       >
         {'<'}
       </button>
-      {currentPage > 5 && (
+      {currentPage >= 5 && (
         <>
-          <span className={s.firstAndLastPage}>1</span> <span>...</span>
+          <button className={s.paginationButton} onClick={() => onPageChange(1)}>
+            1
+          </button>{' '}
+          <span>...</span>
         </>
       )}
       {pageArray.map(p => {
@@ -63,7 +66,11 @@ export const Pagination = ({
         )
       })}
       {currentPage + 1 < pageCount && pageCount > 5 && <span>...</span>}
-      {currentPage > 5 && <span className={s.firstAndLastPage}>{pageCount}</span>}
+      {currentPage < pageCount - 1 && (
+        <button className={s.paginationButton} onClick={() => onPageChange(pageCount)}>
+          {pageCount}
+        </button>
+      )}
       <button
         className={s.paginationButton}
         onClick={() => onPageChange(currentPage + 1)}
@@ -71,9 +78,9 @@ export const Pagination = ({
       >
         {'>'}
       </button>
-      <button className={s.paginationButton} onClick={() => onPageChange(pageCount)}>
-        {pageCount}
-      </button>
+      {/*<button className={s.paginationButton} onClick={() => onPageChange(pageCount)}>*/}
+      {/*  {pageCount}*/}
+      {/*</button>*/}
     </div>
   )
 }
