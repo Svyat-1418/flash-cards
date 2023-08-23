@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react'
 
+import { toast } from 'react-toastify'
+
 import { Decks } from '../../components/decks'
 import { useGetMeQuery } from '../../services/auth/auth.ts'
-import { useGetDecksQuery } from '../../services/decks/decks.ts'
+import { useCreateDeckMutation, useGetDecksQuery } from '../../services/decks/decks.ts'
+import { AddDeckRequestType } from '../../services/decks/types.ts'
 
 export const DecksPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
@@ -34,6 +37,18 @@ export const DecksPage = () => {
     maxCardsCount: sliderValues[1].toString(),
     name: decksName,
   })
+  const [addDeck] = useCreateDeckMutation()
+  const addDeckHandle = async (args: AddDeckRequestType) => {
+    try {
+      await addDeck(args).unwrap()
+      setModalIsOpen(false)
+      toast.success('Deck created successfully')
+    } catch (err) {
+      const error = err as { data: { message: string } }
+
+      toast.error(error.data.message)
+    }
+  }
 
   useEffect(() => {
     if (sliderRangeValues[1] !== decksData?.maxCardsCount) {
@@ -56,6 +71,7 @@ export const DecksPage = () => {
       searchDeck={searchDeck}
       modalIsOpen={modalIsOpen}
       setModalIsOpen={setModalIsOpen}
+      addDeck={addDeckHandle}
     />
   )
 }

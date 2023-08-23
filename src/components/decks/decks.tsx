@@ -1,6 +1,6 @@
 import { Trash } from '../../assets/icons/trash'
 import { SliderRange as Slider } from '../../components/ui/slider'
-import { ItemsType, PaginationType } from '../../services/decks/types.ts'
+import { AddDeckRequestType, ItemType, PaginationType } from '../../services/decks/types.ts'
 import { Button } from '../ui/button'
 import { ButtonGroup, ButtonSwitchType } from '../ui/button-group'
 import { ContentContainer } from '../ui/content-container'
@@ -13,7 +13,7 @@ import { DeckTable } from './deck-table'
 import s from './decks.module.scss'
 
 export type DecksPropsType = {
-  deckContent: ItemsType[] | undefined
+  deckContent: ItemType[] | undefined
   pagination: PaginationType | undefined
   changeCurrentPage: (page: number) => void
   setShowMyDecks: (value: boolean) => void
@@ -25,6 +25,7 @@ export type DecksPropsType = {
   searchDeck: (decksName: string) => void
   modalIsOpen: boolean
   setModalIsOpen: (value: boolean) => void
+  addDeck: (args: AddDeckRequestType) => void
 }
 
 export const Decks = ({
@@ -40,6 +41,7 @@ export const Decks = ({
   searchDeck,
   modalIsOpen,
   setModalIsOpen,
+  addDeck,
 }: DecksPropsType) => {
   const showMyCards = () => {
     setShowMyDecks(true)
@@ -65,7 +67,7 @@ export const Decks = ({
       <AddNewPackModal
         modalIsOpen={modalIsOpen}
         setModalIsOpen={setModalIsOpen}
-        onSubmit={() => {}}
+        onSubmit={addDeck}
       />
       <div className={s.titleContainer}>
         <Typography variant={'large'} as={'h1'}>

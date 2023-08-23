@@ -3,7 +3,7 @@ export type AuthorType = {
   name: string
 }
 
-export type ItemsType = {
+export type ItemType = {
   author: AuthorType
   id: string
   userId: string
@@ -25,7 +25,7 @@ export type PaginationType = {
 }
 
 export type DecksResponseType = {
-  items: ItemsType[]
+  items: ItemType[]
   pagination: PaginationType
   maxCardsCount: number
 }
@@ -39,4 +39,10 @@ export type DecksRequestType = {
   orderBy?: `${OrderByProp}-asc` | `${OrderByProp}-desc`
   currentPage?: number
   itemsPerPage?: number
+}
+
+export type AddDeckRequestType = {
+  cover?: File | undefined
+  name: string
+  isPrivate?: boolean
 }
