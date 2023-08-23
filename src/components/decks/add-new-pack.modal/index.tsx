@@ -7,9 +7,11 @@ import { ControlledCheckbox, ControlledTextField } from '../../ui/controlled'
 import { Modal } from '../../ui/modal'
 import { Typography } from '../../ui/typography'
 
+import s from './add-new-pack.modal.module.scss'
+
 const schema = z.object({
-  newPack: z.string().trim().nonempty('Enter pack name'),
-  privatePack: z.boolean(),
+  name: z.string().trim().nonempty('Enter pack name'),
+  isPrivate: z.boolean(),
 })
 
 type FormType = z.infer<typeof schema>
@@ -24,16 +26,21 @@ export const AddNewPackModal = ({
   setModalIsOpen,
   onSubmit,
 }: AddNewPackModalPropsType) => {
-  const { handleSubmit, control } = useForm<FormType>({
+  const { handleSubmit, control, reset } = useForm<FormType>({
     resolver: zodResolver(schema),
     mode: 'onTouched',
     defaultValues: {
-      newPack: '',
-      privatePack: false,
+      name: '',
+      isPrivate: false,
     },
   })
 
-  const addNewPack = handleSubmit(onSubmit)
+  const onSubmitHandle = (args: FormType) => {
+    onSubmit(args)
+    reset()
+  }
+
+  const addNewPack = handleSubmit(onSubmitHandle)
 
   return (
     <Modal
@@ -47,14 +54,21 @@ export const AddNewPackModal = ({
       }
     >
       <form onSubmit={addNewPack}>
-        <ControlledTextField control={control} name={'newPack'} label={'Add new pack'} />
-        <ControlledCheckbox control={control} name={'privatePack'} label={'Private pack'} />
-        <Button variant={'secondary'} onClick={() => setModalIsOpen(false)}>
-          Cancel
-        </Button>
-        <Button variant={'primary'} type={'submit'}>
-          Add New Pack
-        </Button>
+        <ControlledTextField control={control} name={'name'} label={'Add new pack'} />
+        <ControlledCheckbox
+          control={control}
+          name={'isPrivate'}
+          label={'Private pack'}
+          className={s.checkbox}
+        />
+        <div className={s.buttonContainer}>
+          <Button variant={'secondary'} onClick={() => setModalIsOpen(false)}>
+            Cancel
+          </Button>
+          <Button variant={'primary'} type={'submit'}>
+            Add New Pack
+          </Button>
+        </div>
       </form>
     </Modal>
   )
