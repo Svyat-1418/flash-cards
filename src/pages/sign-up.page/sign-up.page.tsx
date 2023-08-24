@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { SignUp } from '../../components/auth/sign-up'
-import { useSignUpMutation } from '../../services/auth/auth.ts'
+import { useSignUpMutation } from '../../services/auth/auth-endpoints.ts'
 import { LoginArgs } from '../../services/auth/types.ts'
 
 export const SignUpPage = () => {
