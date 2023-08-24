@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { LoginForm } from '../../components/auth/login-form'
-import { useGetMeQuery, useLoginMutation } from '../../services/auth/auth.ts'
+import { useLoginMutation, useMeQuery } from '../../services/auth/auth-endpoints.ts'
 import { LoginArgs } from '../../services/auth/types.ts'
 
 export const LoginPage = () => {
   const [login] = useLoginMutation()
-  const { data: me } = useGetMeQuery()
+  const { data: me, isLoading: meLoading } = useMeQuery()
 
   useEffect(() => {
     if (!me) return
@@ -18,6 +18,10 @@ export const LoginPage = () => {
   }, [me])
 
   const navigate = useNavigate()
+
+  if (meLoading) {
+    return <div>Loading...</div>
+  }
   const handleLogin = (args: LoginArgs) => {
     return login(args)
       .unwrap()

@@ -3,13 +3,13 @@ import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
 import { Decks } from '../../components/decks'
-import { useGetMeQuery } from '../../services/auth/auth.ts'
+import { useMeQuery } from '../../services/auth/auth-endpoints.ts'
 import {
   useCreateDeckMutation,
   useDeleteDeckMutation,
   useGetDecksQuery,
   useUpdateDeckMutation,
-} from '../../services/decks/decks.ts'
+} from '../../services/decks/decks-endpoints.ts'
 import { AddDeckRequestType, ItemType, UpdateDeckRequestType } from '../../services/decks/types.ts'
 
 export const DecksPage = () => {
@@ -35,7 +35,7 @@ export const DecksPage = () => {
     setSliderValues(sliderRangeValues)
   }
 
-  const { data: user } = useGetMeQuery()
+  const { data: user } = useMeQuery()
   const { data: decksData } = useGetDecksQuery({
     currentPage: currentPage,
     authorId: showMyDecks ? user?.id : undefined,
