@@ -47,6 +47,8 @@ export type AddDeckRequestType = {
   isPrivate?: boolean
 }
 
+export type UpdateDeckRequestType = AddDeckRequestType & { id?: string }
+
 export type DeleteDeckResponseType = Omit<ItemType, 'author'>
 
 export type DeleteDeckRequestType = { id: string }
