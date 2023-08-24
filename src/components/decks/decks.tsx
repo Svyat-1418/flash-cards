@@ -1,6 +1,11 @@
 import { Trash } from '../../assets/icons/trash'
 import { SliderRange as Slider } from '../../components/ui/slider'
-import { AddDeckRequestType, ItemType, PaginationType } from '../../services/decks/types.ts'
+import {
+  AddDeckRequestType,
+  ItemType,
+  PaginationType,
+  UpdateDeckRequestType,
+} from '../../services/decks/types.ts'
 import { Button } from '../ui/button'
 import { ButtonGroup, ButtonSwitchType } from '../ui/button-group'
 import { ContentContainer } from '../ui/content-container'
@@ -11,6 +16,7 @@ import { Typography } from '../ui/typography'
 import { AddNewPackModal } from './add-new-pack.modal'
 import { DeckTable } from './deck-table'
 import s from './decks.module.scss'
+import { EditPackModal } from './edit-pack.modal'
 
 export type DecksPropsType = {
   userId: string | undefined
@@ -24,10 +30,15 @@ export type DecksPropsType = {
   setSliderRangeValues: (values: number[]) => void
   setSliderValues: () => void
   searchDeck: (decksName: string) => void
-  modalIsOpen: boolean
-  setModalIsOpen: (value: boolean) => void
+  addPackModalIsOpen: boolean
+  setAddPackModalIsOpen: (value: boolean) => void
+  editPackModalIsOpen: boolean
+  setEditPackModalIsOpen: (value: boolean) => void
   addDeck: (args: AddDeckRequestType) => void
   deleteDeck: (id: string) => void
+  updateDeck: (args: UpdateDeckRequestType) => void
+  editingDeck: ItemType | null
+  setEditingDeck: (item: ItemType) => void
 }
 
 export const Decks = ({
@@ -42,10 +53,15 @@ export const Decks = ({
   setSliderValues,
   setSliderRangeValues,
   searchDeck,
-  modalIsOpen,
-  setModalIsOpen,
+  addPackModalIsOpen,
+  setAddPackModalIsOpen,
+  editPackModalIsOpen,
+  setEditPackModalIsOpen,
   addDeck,
   deleteDeck,
+  updateDeck,
+  editingDeck,
+  setEditingDeck,
 }: DecksPropsType) => {
   const showMyCards = () => {
     setShowMyDecks(true)
@@ -65,19 +81,34 @@ export const Decks = ({
       callback: showAllCards,
     },
   ]
+  const openEditDeckModal = (item: ItemType) => {
+    setEditingDeck(item)
+    setEditPackModalIsOpen(true)
+  }
+
+  const updateDeckHandle = (args: { name: string; isPrivate: boolean }) => {
+    updateDeck({ id: editingDeck?.id, name: args.name, isPrivate: args.isPrivate })
+  }
 
   return (
     <ContentContainer>
       <AddNewPackModal
-        modalIsOpen={modalIsOpen}
-        setModalIsOpen={setModalIsOpen}
+        modalIsOpen={addPackModalIsOpen}
+        setModalIsOpen={setAddPackModalIsOpen}
         onSubmit={addDeck}
+      />
+      <EditPackModal
+        name={editingDeck?.name}
+        isPrivate={editingDeck?.isPrivate}
+        modalIsOpen={editPackModalIsOpen}
+        setModalIsOpen={setEditPackModalIsOpen}
+        onSubmit={updateDeckHandle}
       />
       <div className={s.titleContainer}>
         <Typography variant={'large'} as={'h1'}>
           Decks List
         </Typography>
-        <Button onClick={() => setModalIsOpen(true)}>Add New Pack</Button>
+        <Button onClick={() => setAddPackModalIsOpen(true)}>Add New Pack</Button>
       </div>
       <div className={s.settingContainer}>
         <TextField
@@ -104,7 +135,12 @@ export const Decks = ({
       </div>
       {deckContent.length ? (
         <>
-          <DeckTable deckContent={deckContent} userId={userId} deleteDeck={deleteDeck} />
+          <DeckTable
+            deckContent={deckContent}
+            userId={userId}
+            deleteDeck={deleteDeck}
+            editDeck={openEditDeckModal}
+          />
           <div className={s.paginationContainer}>
             <Pagination
               currentPage={pagination?.currentPage}
