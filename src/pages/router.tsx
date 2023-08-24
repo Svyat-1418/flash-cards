@@ -1,7 +1,7 @@
 import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom'
 
 import { Layout } from '../components/layout'
-import { useGetMeQuery } from '../services/auth/auth.ts'
+import { useMeQuery } from '../services/auth/auth-endpoints.ts'
 
 import { CardsPage } from './cards.page'
 import { DecksPage } from './decks.page'
@@ -51,7 +51,7 @@ export const router = createBrowserRouter([
 ])
 
 function ProtectedRoutes() {
-  const { data, isLoading } = useGetMeQuery()
+  const { data, isLoading } = useMeQuery()
 
   if (isLoading) return <div>Loading...</div>
 
