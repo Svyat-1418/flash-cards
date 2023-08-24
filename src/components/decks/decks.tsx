@@ -13,6 +13,7 @@ import { DeckTable } from './deck-table'
 import s from './decks.module.scss'
 
 export type DecksPropsType = {
+  userId: string | undefined
   deckContent: ItemType[] | undefined
   pagination: PaginationType | undefined
   changeCurrentPage: (page: number) => void
@@ -26,9 +27,11 @@ export type DecksPropsType = {
   modalIsOpen: boolean
   setModalIsOpen: (value: boolean) => void
   addDeck: (args: AddDeckRequestType) => void
+  deleteDeck: (id: string) => void
 }
 
 export const Decks = ({
+  userId,
   deckContent = [],
   pagination,
   changeCurrentPage,
@@ -42,6 +45,7 @@ export const Decks = ({
   modalIsOpen,
   setModalIsOpen,
   addDeck,
+  deleteDeck,
 }: DecksPropsType) => {
   const showMyCards = () => {
     setShowMyDecks(true)
@@ -100,7 +104,7 @@ export const Decks = ({
       </div>
       {deckContent.length ? (
         <>
-          <DeckTable deckContent={deckContent} />
+          <DeckTable deckContent={deckContent} userId={userId} deleteDeck={deleteDeck} />
           <div className={s.paginationContainer}>
             <Pagination
               currentPage={pagination?.currentPage}
