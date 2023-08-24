@@ -7,6 +7,7 @@ import {
   DeleteDeckRequestType,
   DeleteDeckResponseType,
   ItemType,
+  UpdateDeckRequestType,
 } from './types.ts'
 
 export const decksApi = createApi({
@@ -39,7 +40,20 @@ export const decksApi = createApi({
       }),
       invalidatesTags: ['Decks'],
     }),
+    updateDeck: builder.mutation<ItemType, UpdateDeckRequestType>({
+      query: body => ({
+        url: `decks/${body.id}`,
+        method: `PATCH`,
+        body: { name: body.name, isPrivate: body.isPrivate },
+      }),
+      invalidatesTags: ['Decks'],
+    }),
   }),
 })
 
-export const { useGetDecksQuery, useCreateDeckMutation, useDeleteDeckMutation } = decksApi
+export const {
+  useGetDecksQuery,
+  useCreateDeckMutation,
+  useDeleteDeckMutation,
+  useUpdateDeckMutation,
+} = decksApi
