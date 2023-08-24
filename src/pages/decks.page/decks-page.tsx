@@ -4,7 +4,11 @@ import { toast } from 'react-toastify'
 
 import { Decks } from '../../components/decks'
 import { useGetMeQuery } from '../../services/auth/auth.ts'
-import { useCreateDeckMutation, useGetDecksQuery } from '../../services/decks/decks.ts'
+import {
+  useCreateDeckMutation,
+  useDeleteDeckMutation,
+  useGetDecksQuery,
+} from '../../services/decks/decks.ts'
 import { AddDeckRequestType } from '../../services/decks/types.ts'
 
 export const DecksPage = () => {
@@ -28,7 +32,6 @@ export const DecksPage = () => {
     setSliderValues(sliderRangeValues)
   }
 
-  // todo при фильтре колод сетать страницу 1 в пагинации
   const { data: user } = useGetMeQuery()
   const { data: decksData } = useGetDecksQuery({
     currentPage: currentPage,
@@ -38,11 +41,23 @@ export const DecksPage = () => {
     name: decksName,
   })
   const [addDeck] = useCreateDeckMutation()
+  const [deleteDeck] = useDeleteDeckMutation()
   const addDeckHandle = async (args: AddDeckRequestType) => {
     try {
       await addDeck(args).unwrap()
       setModalIsOpen(false)
       toast.success('Deck created successfully')
+    } catch (err) {
+      const error = err as { data: { message: string } }
+
+      toast.error(error.data.message)
+    }
+  }
+
+  const deleteDeckHandle = async (id: string) => {
+    try {
+      await deleteDeck({ id }).unwrap()
+      toast.success('Deck deleted successfully')
     } catch (err) {
       const error = err as { data: { message: string } }
 
@@ -59,6 +74,7 @@ export const DecksPage = () => {
 
   return (
     <Decks
+      userId={user?.id}
       deckContent={decksData?.items}
       pagination={decksData?.pagination}
       changeCurrentPage={setCurrentPage}
@@ -72,6 +88,7 @@ export const DecksPage = () => {
       modalIsOpen={modalIsOpen}
       setModalIsOpen={setModalIsOpen}
       addDeck={addDeckHandle}
+      deleteDeck={deleteDeckHandle}
     />
   )
 }
