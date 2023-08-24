@@ -9,14 +9,19 @@ import s from './modal.module.scss'
 
 type DialogsPropsType = {
   children: ReactNode
-  trigger: ReactNode
   open: boolean
-  onClose: () => void
+  onClose?: () => void
   showCloseButton: boolean
   title: ReactNode
 }
 
-export const Modal = ({ children, open, onClose, title, showCloseButton }: DialogsPropsType) => {
+export const Modal = ({
+  children,
+  open = true,
+  onClose,
+  title,
+  showCloseButton,
+}: DialogsPropsType) => {
   return (
     <Dialog.Root open={open} onOpenChange={onClose}>
       <Dialog.Portal>
