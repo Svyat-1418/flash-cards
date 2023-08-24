@@ -1,6 +1,6 @@
 import { Trash } from '../../assets/icons/trash'
 import { SliderRange as Slider } from '../../components/ui/slider'
-import { ItemsType, PaginationType } from '../../services/decks/types.ts'
+import { AddDeckRequestType, ItemType, PaginationType } from '../../services/decks/types.ts'
 import { Button } from '../ui/button'
 import { ButtonGroup, ButtonSwitchType } from '../ui/button-group'
 import { ContentContainer } from '../ui/content-container'
@@ -8,11 +8,13 @@ import { Pagination } from '../ui/pagination'
 import { TextField } from '../ui/textfield'
 import { Typography } from '../ui/typography'
 
+import { AddNewPackModal } from './add-new-pack.modal'
 import { DeckTable } from './deck-table'
 import s from './decks.module.scss'
 
 export type DecksPropsType = {
-  deckContent: ItemsType[] | undefined
+  userId: string | undefined
+  deckContent: ItemType[] | undefined
   pagination: PaginationType | undefined
   changeCurrentPage: (page: number) => void
   setShowMyDecks: (value: boolean) => void
@@ -22,9 +24,14 @@ export type DecksPropsType = {
   setSliderRangeValues: (values: number[]) => void
   setSliderValues: () => void
   searchDeck: (decksName: string) => void
+  modalIsOpen: boolean
+  setModalIsOpen: (value: boolean) => void
+  addDeck: (args: AddDeckRequestType) => void
+  deleteDeck: (id: string) => void
 }
 
 export const Decks = ({
+  userId,
   deckContent = [],
   pagination,
   changeCurrentPage,
@@ -35,6 +42,10 @@ export const Decks = ({
   setSliderValues,
   setSliderRangeValues,
   searchDeck,
+  modalIsOpen,
+  setModalIsOpen,
+  addDeck,
+  deleteDeck,
 }: DecksPropsType) => {
   const showMyCards = () => {
     setShowMyDecks(true)
@@ -57,11 +68,16 @@ export const Decks = ({
 
   return (
     <ContentContainer>
+      <AddNewPackModal
+        modalIsOpen={modalIsOpen}
+        setModalIsOpen={setModalIsOpen}
+        onSubmit={addDeck}
+      />
       <div className={s.titleContainer}>
         <Typography variant={'large'} as={'h1'}>
           Decks List
         </Typography>
-        <Button>Add New Pack</Button>
+        <Button onClick={() => setModalIsOpen(true)}>Add New Pack</Button>
       </div>
       <div className={s.settingContainer}>
         <TextField
@@ -88,7 +104,7 @@ export const Decks = ({
       </div>
       {deckContent.length ? (
         <>
-          <DeckTable deckContent={deckContent} />
+          <DeckTable deckContent={deckContent} userId={userId} deleteDeck={deleteDeck} />
           <div className={s.paginationContainer}>
             <Pagination
               currentPage={pagination?.currentPage}

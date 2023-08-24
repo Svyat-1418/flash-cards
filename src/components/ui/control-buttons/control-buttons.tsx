@@ -12,7 +12,7 @@ type Props = {
 }
 
 export const ControlButtons = ({
-  isAdmin = true,
+  isAdmin = false,
   handleLearn,
   handleEdit,
   handleDelete,
@@ -22,7 +22,7 @@ export const ControlButtons = ({
       <button onClick={handleLearn} className={s.controlButton}>
         <OutlinedPlayCircle />
       </button>
-      {isAdmin && (
+      {isAdmin ? (
         <>
           <button onClick={handleEdit} className={s.controlButton}>
             <Edit />
@@ -31,6 +31,8 @@ export const ControlButtons = ({
             <Trash />
           </button>
         </>
+      ) : (
+        <div className={s.emptyBox}></div>
       )}
     </div>
   )

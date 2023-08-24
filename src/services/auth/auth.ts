@@ -44,6 +44,7 @@ export const authApi = createApi({
         url: `auth/logout`,
         method: 'POST',
       }),
+      invalidatesTags: ['Me'],
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
           authApi.util.updateQueryData('getMe', undefined, () => {
