@@ -10,6 +10,7 @@ export type DeckTablePropsType = {
   userId?: string | undefined
   deckContent: ItemType[]
   deleteDeck: (id: string) => void
+  editDeck: (item: ItemType) => void
 }
 
 export type Sort = {
@@ -17,13 +18,18 @@ export type Sort = {
   direction: 'asc' | 'desc'
 } | null
 
-export const DeckTable = ({ deckContent, userId, deleteDeck }: DeckTablePropsType) => {
+export const DeckTable = ({ deckContent, userId, deleteDeck, editDeck }: DeckTablePropsType) => {
   const [sort, setSort] = useState<Sort>(null)
 
   return (
     <Table.Root>
       <TableHeader columns={deckColumns} sort={sort} onSort={setSort} />
-      <DeckTableBody deckContent={deckContent} userId={userId} deleteDeck={deleteDeck} />
+      <DeckTableBody
+        deckContent={deckContent}
+        userId={userId}
+        deleteDeck={deleteDeck}
+        editDeck={editDeck}
+      />
     </Table.Root>
   )
 }
