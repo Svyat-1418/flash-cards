@@ -8,8 +8,9 @@ import {
   useCreateDeckMutation,
   useDeleteDeckMutation,
   useGetDecksQuery,
+  useUpdateDeckMutation,
 } from '../../services/decks/decks.ts'
-import { AddDeckRequestType } from '../../services/decks/types.ts'
+import { AddDeckRequestType, ItemType, UpdateDeckRequestType } from '../../services/decks/types.ts'
 
 export const DecksPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
@@ -20,7 +21,9 @@ export const DecksPage = () => {
   //search
   const [decksName, setDecksName] = useState('')
   //modal add new pack
-  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [addPackModalIsOpen, setAddPackModalIsOpen] = useState(false)
+  const [editPackModalIsOpen, setEditPackModalIsOpen] = useState(false)
+  const [editingDeck, setEditingDeck] = useState<ItemType | null>(null)
 
   const searchDeck = (name: string) => {
     setCurrentPage(1)
@@ -42,10 +45,12 @@ export const DecksPage = () => {
   })
   const [addDeck] = useCreateDeckMutation()
   const [deleteDeck] = useDeleteDeckMutation()
+  const [updateDeck] = useUpdateDeckMutation()
+
   const addDeckHandle = async (args: AddDeckRequestType) => {
     try {
       await addDeck(args).unwrap()
-      setModalIsOpen(false)
+      setAddPackModalIsOpen(false)
       toast.success('Deck created successfully')
     } catch (err) {
       const error = err as { data: { message: string } }
@@ -63,6 +68,12 @@ export const DecksPage = () => {
 
       toast.error(error.data.message)
     }
+  }
+
+  const updateDeckHandle = (args: UpdateDeckRequestType) => {
+    updateDeck(args)
+      .unwrap()
+      .then(() => setEditPackModalIsOpen(false))
   }
 
   useEffect(() => {
@@ -85,10 +96,15 @@ export const DecksPage = () => {
       setSliderValues={filteringByNumberOfCards}
       setSliderRangeValues={setSliderRangeValues}
       searchDeck={searchDeck}
-      modalIsOpen={modalIsOpen}
-      setModalIsOpen={setModalIsOpen}
+      addPackModalIsOpen={addPackModalIsOpen}
+      setAddPackModalIsOpen={setAddPackModalIsOpen}
+      editPackModalIsOpen={editPackModalIsOpen}
+      setEditPackModalIsOpen={setEditPackModalIsOpen}
       addDeck={addDeckHandle}
       deleteDeck={deleteDeckHandle}
+      updateDeck={updateDeckHandle}
+      editingDeck={editingDeck}
+      setEditingDeck={setEditingDeck}
     />
   )
 }

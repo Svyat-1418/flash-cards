@@ -11,15 +11,19 @@ type Props = {
   deckContent: ItemType[]
   userId?: string | undefined
   deleteDeck: (id: string) => void
+  editDeck: (item: ItemType) => void
 }
 
-export const DeckTableBody: FC<Props> = ({ deckContent, userId, deleteDeck }: Props) => {
+export const DeckTableBody: FC<Props> = ({ deckContent, userId, deleteDeck, editDeck }: Props) => {
   return (
     <Table.Body>
       {deckContent.map(item => {
         const isAdmin = item.userId === userId
         const deleteItem = () => {
           deleteDeck(item.id)
+        }
+        const editItem = () => {
+          editDeck(item)
         }
 
         return (
@@ -41,7 +45,7 @@ export const DeckTableBody: FC<Props> = ({ deckContent, userId, deleteDeck }: Pr
               <Typography variant={'body2'}>{item.author.name}</Typography>
             </Table.Cell>
             <Table.Cell>
-              <ControlButtons isAdmin={isAdmin} handleDelete={deleteItem} />
+              <ControlButtons isAdmin={isAdmin} handleDelete={deleteItem} handleEdit={editItem} />
             </Table.Cell>
           </Table.Row>
         )
