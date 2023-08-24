@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { baseApi } from '../base-api.ts'
 
 import {
   AddDeckRequestType,
@@ -10,13 +10,7 @@ import {
   UpdateDeckRequestType,
 } from './types.ts'
 
-export const decksApi = createApi({
-  reducerPath: 'decksApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_BASE_API_URL,
-    credentials: 'include',
-  }),
-  tagTypes: ['Decks'],
+export const decksEndpoints = baseApi.injectEndpoints({
   endpoints: builder => ({
     getDecks: builder.query<DecksResponseType, DecksRequestType>({
       query: params => ({
@@ -56,4 +50,4 @@ export const {
   useCreateDeckMutation,
   useDeleteDeckMutation,
   useUpdateDeckMutation,
-} = decksApi
+} = decksEndpoints
