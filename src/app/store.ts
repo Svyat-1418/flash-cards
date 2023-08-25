@@ -4,9 +4,6 @@ import { baseApi } from '../services/base-api.ts'
 
 export const store = configureStore({
   reducer: {
-    //[authApi.reducerPath]: authApi.reducer,
-    //[decksApi.reducerPath]: decksApi.reducer,
-    // [cardsApi.reducerPath]: cardsApi.reducer,
     [baseApi.reducerPath]: baseApi.reducer,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(baseApi.middleware),
