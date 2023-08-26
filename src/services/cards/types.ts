@@ -22,7 +22,7 @@ export type GetCardsResponse = {
   cardsCount: number
 }
 
-export type CreateCardArgs = {
+export type CreateCardBody = {
   question: string
   answer: string
   questionImg?: string
@@ -30,6 +30,7 @@ export type CreateCardArgs = {
   questionVideo?: string
   answerVideo?: string
 }
+export type CreateCardArgs = CreateCardBody & { deckId: string }
 export type CreateCardResponse = {
   id: string
   deckId: string
@@ -38,13 +39,13 @@ export type CreateCardResponse = {
   answer: string
   shots: number
   questionImg?: Nullable<string>
-  answerImg?: Nullable<string>
-  answerVideo?: any
-  questionVideo?: any
-  comments?: any
-  type?: Nullable<string>
+  answerImg: Nullable<string>
+  answerVideo: Nullable<string>
+  questionVideo: Nullable<string>
+  comments: Nullable<string>
+  type: Nullable<string>
   rating: number
-  moreId?: Nullable<string>
+  moreId: Nullable<string>
   created: string
   updated: string
 }
