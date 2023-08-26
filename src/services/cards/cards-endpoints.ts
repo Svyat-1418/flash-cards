@@ -3,7 +3,7 @@ import { isEmpty } from 'remeda'
 import { baseApi } from '../base-api.ts'
 import { PaginatedResponse } from '../common.types.ts'
 
-import { Card, GetCardsParams } from './types.ts'
+import { Card, CreateCardArgs, CreateCardResponse, GetCardsParams } from './types.ts'
 
 const cardsEndpoints = baseApi.injectEndpoints({
   endpoints: builder => ({
@@ -16,7 +16,15 @@ const cardsEndpoints = baseApi.injectEndpoints({
       },
       providesTags: ['Cards'],
     }),
+    createCard: builder.mutation<CreateCardResponse, CreateCardArgs>({
+      query: ({ deckId, ...body }) => ({
+        url: `decks/${deckId}/cards`,
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['Cards'],
+    }),
   }),
 })
 
-export const { useGetCardsQuery } = cardsEndpoints
+export const { useGetCardsQuery, useCreateCardMutation } = cardsEndpoints
