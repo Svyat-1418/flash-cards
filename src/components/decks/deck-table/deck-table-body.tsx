@@ -10,20 +10,21 @@ import { Typography } from '../../ui/typography'
 type Props = {
   deckContent: ItemType[]
   userId?: string | undefined
-  deleteDeck: (id: string) => void
   editDeck: (item: ItemType) => void
+  deleteDeck: (item: ItemType) => void
 }
 
-export const DeckTableBody: FC<Props> = ({ deckContent, userId, deleteDeck, editDeck }: Props) => {
+export const DeckTableBody: FC<Props> = ({ deckContent, userId, editDeck, deleteDeck }: Props) => {
   return (
     <Table.Body>
       {deckContent.map(item => {
         const isAdmin = item.userId === userId
-        const deleteItem = () => {
-          deleteDeck(item.id)
-        }
         const editItem = () => {
           editDeck(item)
+        }
+
+        const deleteItem = () => {
+          deleteDeck(item)
         }
 
         return (

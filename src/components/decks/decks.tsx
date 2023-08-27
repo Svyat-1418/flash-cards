@@ -16,6 +16,7 @@ import { Typography } from '../ui/typography'
 import { AddNewPackModal } from './add-new-pack.modal'
 import { DeckTable } from './deck-table'
 import s from './decks.module.scss'
+import { DeletePackModal } from './delete-pack.modal'
 import { EditPackModal } from './edit-pack.modal'
 
 export type DecksPropsType = {
@@ -34,11 +35,13 @@ export type DecksPropsType = {
   setAddPackModalIsOpen: (value: boolean) => void
   editPackModalIsOpen: boolean
   setEditPackModalIsOpen: (value: boolean) => void
+  deletePackModalIsOpen: boolean
+  setDeletePackModalIsOpen: (value: boolean) => void
   addDeck: (args: AddDeckRequestType) => void
   deleteDeck: (id: string) => void
   updateDeck: (args: UpdateDeckRequestType) => void
   editingDeck: ItemType | null
-  setEditingDeck: (item: ItemType) => void
+  setEditingDeck: (item: ItemType | null) => void
 }
 
 export const Decks = ({
@@ -57,6 +60,8 @@ export const Decks = ({
   setAddPackModalIsOpen,
   editPackModalIsOpen,
   setEditPackModalIsOpen,
+  deletePackModalIsOpen,
+  setDeletePackModalIsOpen,
   addDeck,
   deleteDeck,
   updateDeck,
@@ -86,8 +91,19 @@ export const Decks = ({
     setEditPackModalIsOpen(true)
   }
 
+  const openDeleteDeckModal = (item: ItemType) => {
+    setEditingDeck(item)
+    setDeletePackModalIsOpen(true)
+  }
+
   const updateDeckHandle = (args: { name: string; isPrivate: boolean }) => {
     updateDeck({ id: editingDeck?.id, name: args.name, isPrivate: args.isPrivate })
+  }
+
+  const deleteDeckHandle = () => {
+    if (editingDeck?.id) {
+      deleteDeck(editingDeck.id)
+    }
   }
 
   return (
@@ -103,6 +119,11 @@ export const Decks = ({
         modalIsOpen={editPackModalIsOpen}
         setModalIsOpen={setEditPackModalIsOpen}
         onSubmit={updateDeckHandle}
+      />
+      <DeletePackModal
+        modalIsOpen={deletePackModalIsOpen}
+        setModalIsOpen={setDeletePackModalIsOpen}
+        onSubmit={deleteDeckHandle}
       />
       <div className={s.titleContainer}>
         <Typography variant={'large'} as={'h1'}>
@@ -138,8 +159,8 @@ export const Decks = ({
           <DeckTable
             deckContent={deckContent}
             userId={userId}
-            deleteDeck={deleteDeck}
             editDeck={openEditDeckModal}
+            deleteDeck={openDeleteDeckModal}
           />
           <div className={s.paginationContainer}>
             <Pagination

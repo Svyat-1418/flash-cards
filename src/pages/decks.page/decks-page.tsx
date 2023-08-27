@@ -23,6 +23,7 @@ export const DecksPage = () => {
   //modal add new pack
   const [addPackModalIsOpen, setAddPackModalIsOpen] = useState(false)
   const [editPackModalIsOpen, setEditPackModalIsOpen] = useState(false)
+  const [deletePackModalIsOpen, setDeletePackModalIsOpen] = useState(false)
   const [editingDeck, setEditingDeck] = useState<ItemType | null>(null)
 
   const searchDeck = (name: string) => {
@@ -63,6 +64,8 @@ export const DecksPage = () => {
     try {
       await deleteDeck({ id }).unwrap()
       toast.success('Deck deleted successfully')
+      setDeletePackModalIsOpen(false)
+      setEditingDeck(null)
     } catch (err) {
       const error = err as { data: { message: string } }
 
@@ -73,7 +76,10 @@ export const DecksPage = () => {
   const updateDeckHandle = (args: UpdateDeckRequestType) => {
     updateDeck(args)
       .unwrap()
-      .then(() => setEditPackModalIsOpen(false))
+      .then(() => {
+        setEditPackModalIsOpen(false)
+        setEditingDeck(null)
+      })
   }
 
   useEffect(() => {
@@ -100,6 +106,8 @@ export const DecksPage = () => {
       setAddPackModalIsOpen={setAddPackModalIsOpen}
       editPackModalIsOpen={editPackModalIsOpen}
       setEditPackModalIsOpen={setEditPackModalIsOpen}
+      deletePackModalIsOpen={deletePackModalIsOpen}
+      setDeletePackModalIsOpen={setDeletePackModalIsOpen}
       addDeck={addDeckHandle}
       deleteDeck={deleteDeckHandle}
       updateDeck={updateDeckHandle}
