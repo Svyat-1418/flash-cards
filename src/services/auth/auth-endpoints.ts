@@ -10,8 +10,8 @@ export const authEndpoints = baseApi.injectEndpoints({
         url: 'auth/me',
         method: 'GET',
         extraOptions: { maxRetries: false },
-        providesTags: ['Me'],
       }),
+      providesTags: ['Me'],
     }),
     login: builder.mutation<LoginResponse, LoginArgs>({
       query: args => ({
