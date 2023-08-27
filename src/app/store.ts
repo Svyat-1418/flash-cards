@@ -1,12 +1,11 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
 
 import { baseApi } from '../services/base-api.ts'
+import { cardsSlice } from '../services/cards/cards.slice.ts'
 
 export const store = configureStore({
   reducer: {
-    //[authApi.reducerPath]: authApi.reducer,
-    //[decksApi.reducerPath]: decksApi.reducer,
-    // [cardsApi.reducerPath]: cardsApi.reducer,
+    [cardsSlice.name]: cardsSlice.reducer,
     [baseApi.reducerPath]: baseApi.reducer,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(baseApi.middleware),
