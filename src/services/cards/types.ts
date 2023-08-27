@@ -2,9 +2,9 @@ import { Nullable } from '../../types/common.types.ts'
 
 export type GetCardsParams = {
   deckId: string
+  answer: string
   currentPage?: number
   itemsPerPage?: number
-  pageSize?: number
   orderBy?: string | null
 }
 export type GetCardsResponse = {
