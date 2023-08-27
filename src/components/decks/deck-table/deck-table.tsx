@@ -9,8 +9,8 @@ import { DeckTableBody } from './deck-table-body.tsx'
 export type DeckTablePropsType = {
   userId?: string | undefined
   deckContent: ItemType[]
-  deleteDeck: (id: string) => void
   editDeck: (item: ItemType) => void
+  deleteDeck: (item: ItemType) => void
 }
 
 export type Sort = {
@@ -18,7 +18,7 @@ export type Sort = {
   direction: 'asc' | 'desc'
 } | null
 
-export const DeckTable = ({ deckContent, userId, deleteDeck, editDeck }: DeckTablePropsType) => {
+export const DeckTable = ({ deckContent, userId, editDeck, deleteDeck }: DeckTablePropsType) => {
   const [sort, setSort] = useState<Sort>(null)
 
   return (
@@ -27,8 +27,8 @@ export const DeckTable = ({ deckContent, userId, deleteDeck, editDeck }: DeckTab
       <DeckTableBody
         deckContent={deckContent}
         userId={userId}
-        deleteDeck={deleteDeck}
         editDeck={editDeck}
+        deleteDeck={deleteDeck}
       />
     </Table.Root>
   )
