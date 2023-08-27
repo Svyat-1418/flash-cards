@@ -31,6 +31,7 @@ export type CreateCardBody = {
   answerVideo?: string
 }
 export type CreateCardArgs = CreateCardBody & { deckId: string }
+export type UpdateCardArgs = CreateCardBody & { cardId: string }
 export type CreateCardResponse = {
   id: string
   deckId: string
@@ -67,3 +68,19 @@ export type Card = {
 }
 
 export type DeleteCardParams = { id: string }
+
+export type UpdateCardResponse = {
+  id: string
+  deckId: string
+  userId: string
+  question: string
+  answer: string
+  shots: number
+  answerImg: string
+  questionImg: string
+  questionVideo: string
+  answerVideo: string
+  rating: number
+  created: string
+  updated: string
+}

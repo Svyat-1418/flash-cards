@@ -9,6 +9,8 @@ import {
   CreateCardResponse,
   DeleteCardParams,
   GetCardsParams,
+  UpdateCardArgs,
+  UpdateCardResponse,
 } from './types.ts'
 
 const cardsEndpoints = baseApi.injectEndpoints({
@@ -37,7 +39,20 @@ const cardsEndpoints = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Cards'],
     }),
+    updateCard: builder.mutation<UpdateCardResponse, UpdateCardArgs>({
+      query: ({ cardId, ...body }) => ({
+        url: `cards/${cardId}`,
+        method: 'PATCH',
+        body,
+      }),
+      invalidatesTags: ['Cards'],
+    }),
   }),
 })
 
-export const { useGetCardsQuery, useCreateCardMutation, useDeleteCardMutation } = cardsEndpoints
+export const {
+  useGetCardsQuery,
+  useCreateCardMutation,
+  useDeleteCardMutation,
+  useUpdateCardMutation,
+} = cardsEndpoints
