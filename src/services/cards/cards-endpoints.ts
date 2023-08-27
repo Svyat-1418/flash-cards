@@ -3,7 +3,13 @@ import { isEmpty } from 'remeda'
 import { baseApi } from '../base-api.ts'
 import { PaginatedResponse } from '../common.types.ts'
 
-import { Card, CreateCardArgs, CreateCardResponse, GetCardsParams } from './types.ts'
+import {
+  Card,
+  CreateCardArgs,
+  CreateCardResponse,
+  DeleteCardParams,
+  GetCardsParams,
+} from './types.ts'
 
 const cardsEndpoints = baseApi.injectEndpoints({
   endpoints: builder => ({
@@ -24,7 +30,14 @@ const cardsEndpoints = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Cards'],
     }),
+    deleteCard: builder.mutation<void, DeleteCardParams>({
+      query: ({ id }) => ({
+        url: `cards/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Cards'],
+    }),
   }),
 })
 
-export const { useGetCardsQuery, useCreateCardMutation } = cardsEndpoints
+export const { useGetCardsQuery, useCreateCardMutation, useDeleteCardMutation } = cardsEndpoints
