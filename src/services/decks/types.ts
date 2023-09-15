@@ -3,7 +3,7 @@ export type AuthorType = {
   name: string
 }
 
-export type ItemType = {
+export type Deck = {
   author: AuthorType
   id: string
   userId: string
@@ -25,7 +25,7 @@ export type PaginationType = {
 }
 
 export type DecksResponseType = {
-  items: ItemType[]
+  items: Deck[]
   pagination: PaginationType
   maxCardsCount: number
 }
@@ -49,6 +49,6 @@ export type AddDeckRequestType = {
 
 export type UpdateDeckRequestType = AddDeckRequestType & { id?: string }
 
-export type DeleteDeckResponseType = Omit<ItemType, 'author'>
+export type DeleteDeckResponseType = Omit<Deck, 'author'>
 
 export type DeleteDeckRequestType = { id: string }
