@@ -10,7 +10,7 @@ import {
   useGetDecksQuery,
   useUpdateDeckMutation,
 } from '../../services/decks/decks-endpoints.ts'
-import { AddDeckRequestType, ItemType, UpdateDeckRequestType } from '../../services/decks/types.ts'
+import { AddDeckRequestType, Deck, UpdateDeckRequestType } from '../../services/decks/types.ts'
 
 export const DecksPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
@@ -24,7 +24,7 @@ export const DecksPage = () => {
   const [addPackModalIsOpen, setAddPackModalIsOpen] = useState(false)
   const [editPackModalIsOpen, setEditPackModalIsOpen] = useState(false)
   const [deletePackModalIsOpen, setDeletePackModalIsOpen] = useState(false)
-  const [editingDeck, setEditingDeck] = useState<ItemType | null>(null)
+  const [editingDeck, setEditingDeck] = useState<Deck | null>(null)
 
   const searchDeck = (name: string) => {
     setCurrentPage(1)

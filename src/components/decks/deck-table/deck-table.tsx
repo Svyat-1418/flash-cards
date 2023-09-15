@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { ItemType } from '../../../services/decks/types.ts'
+import { Deck } from '../../../services/decks/types.ts'
 import { Table, TableHeader } from '../../ui/table'
 
 import { deckColumns } from './deck-fake-data.ts'
@@ -8,9 +8,9 @@ import { DeckTableBody } from './deck-table-body.tsx'
 
 export type DeckTablePropsType = {
   userId?: string | undefined
-  deckContent: ItemType[]
-  editDeck: (item: ItemType) => void
-  deleteDeck: (item: ItemType) => void
+  deckContent: Deck[]
+  editDeck: (item: Deck) => void
+  deleteDeck: (item: Deck) => void
 }
 
 export type Sort = {

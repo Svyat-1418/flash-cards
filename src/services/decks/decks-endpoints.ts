@@ -6,7 +6,7 @@ import {
   DecksResponseType,
   DeleteDeckRequestType,
   DeleteDeckResponseType,
-  ItemType,
+  Deck,
   UpdateDeckRequestType,
 } from './types.ts'
 
@@ -19,7 +19,7 @@ export const decksEndpoints = baseApi.injectEndpoints({
       }),
       providesTags: ['Decks'],
     }),
-    createDeck: builder.mutation<ItemType, AddDeckRequestType>({
+    createDeck: builder.mutation<Deck, AddDeckRequestType>({
       query: body => ({
         url: `decks`,
         method: 'POST',
@@ -34,7 +34,7 @@ export const decksEndpoints = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Decks'],
     }),
-    updateDeck: builder.mutation<ItemType, UpdateDeckRequestType>({
+    updateDeck: builder.mutation<Deck, UpdateDeckRequestType>({
       query: ({ id, ...body }) => ({
         url: `decks/${id}`,
         method: `PATCH`,

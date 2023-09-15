@@ -2,7 +2,7 @@ import { Trash } from '../../assets/icons/trash'
 import { SliderRange as Slider } from '../../components/ui/slider'
 import {
   AddDeckRequestType,
-  ItemType,
+  Deck,
   PaginationType,
   UpdateDeckRequestType,
 } from '../../services/decks/types.ts'
@@ -21,7 +21,7 @@ import { EditPackModal } from './edit-pack.modal'
 
 export type DecksPropsType = {
   userId: string | undefined
-  deckContent: ItemType[] | undefined
+  deckContent: Deck[] | undefined
   pagination: PaginationType | undefined
   changeCurrentPage: (page: number) => void
   setShowMyDecks: (value: boolean) => void
@@ -40,8 +40,8 @@ export type DecksPropsType = {
   addDeck: (args: AddDeckRequestType) => void
   deleteDeck: (id: string) => void
   updateDeck: (args: UpdateDeckRequestType) => void
-  editingDeck: ItemType | null
-  setEditingDeck: (item: ItemType | null) => void
+  editingDeck: Deck | null
+  setEditingDeck: (item: Deck | null) => void
 }
 
 export const Decks = ({
@@ -86,12 +86,12 @@ export const Decks = ({
       callback: showAllCards,
     },
   ]
-  const openEditDeckModal = (item: ItemType) => {
+  const openEditDeckModal = (item: Deck) => {
     setEditingDeck(item)
     setEditPackModalIsOpen(true)
   }
 
-  const openDeleteDeckModal = (item: ItemType) => {
+  const openDeleteDeckModal = (item: Deck) => {
     setEditingDeck(item)
     setDeletePackModalIsOpen(true)
   }
