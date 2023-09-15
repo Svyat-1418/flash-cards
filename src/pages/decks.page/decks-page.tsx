@@ -1,9 +1,21 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import { toast } from 'react-toastify'
 
+import { useAppDispatch, useAppSelector } from '../../app/hooks.ts'
 import { Decks } from '../../components/decks'
 import { useMeQuery } from '../../services/auth/auth-endpoints.ts'
+import {
+  setAddPackModalIsOpen,
+  setCurrentPage,
+  setDecksName,
+  setDeletePackModalIsOpen,
+  setEditingDeck,
+  setEditPackModalIsOpen,
+  setShowMyDecks,
+  setSliderRangeValues,
+  setSliderValues,
+} from '../../services/decks/deck-query-params.slice.ts'
 import {
   useCreateDeckMutation,
   useDeleteDeckMutation,
@@ -13,27 +25,55 @@ import {
 import { AddDeckRequestType, Deck, UpdateDeckRequestType } from '../../services/decks/types.ts'
 
 export const DecksPage = () => {
-  const [currentPage, setCurrentPage] = useState(1)
-  const [showMyDecks, setShowMyDecks] = useState(false)
-  //slider
-  const [sliderValues, setSliderValues] = useState([0, 100])
-  const [sliderRangeValues, setSliderRangeValues] = useState([0, 100])
-  //search
-  const [decksName, setDecksName] = useState('')
-  //modal add new pack
-  const [addPackModalIsOpen, setAddPackModalIsOpen] = useState(false)
-  const [editPackModalIsOpen, setEditPackModalIsOpen] = useState(false)
-  const [deletePackModalIsOpen, setDeletePackModalIsOpen] = useState(false)
-  const [editingDeck, setEditingDeck] = useState<Deck | null>(null)
+  const dispatch = useAppDispatch()
+  const {
+    currentPage,
+    showMyDecks,
+    sliderValues,
+    sliderRangeValues,
+    decksName,
+    addPackModalIsOpen,
+    editPackModalIsOpen,
+    deletePackModalIsOpen,
+    editingDeck,
+  } = useAppSelector(state => state.decksQueryParams)
+
+  const setCurrentPageHandle = (page: number) => {
+    dispatch(setCurrentPage({ page }))
+  }
+  const setShowMyDecksHandle = (value: boolean) => {
+    dispatch(setShowMyDecks({ value }))
+  }
+  const setSliderValuesHandle = (values: number[]) => {
+    dispatch(setSliderValues({ values }))
+  }
+  const setSliderRangeValuesHandle = (values: number[]) => {
+    dispatch(setSliderRangeValues({ values }))
+  }
+  const setDecksNameHandle = (name: string) => {
+    dispatch(setDecksName({ name }))
+  }
+  const setAddPackModalIsOpenHandle = (isOpen: boolean) => {
+    dispatch(setAddPackModalIsOpen({ isOpen }))
+  }
+  const setEditPackModalIsOpenHandle = (isOpen: boolean) => {
+    dispatch(setEditPackModalIsOpen({ isOpen }))
+  }
+  const setDeletePackModalIsOpenHandle = (isOpen: boolean) => {
+    dispatch(setDeletePackModalIsOpen({ isOpen }))
+  }
+  const setEditingDeckHandle = (deck: Deck | null) => {
+    dispatch(setEditingDeck({ deck }))
+  }
 
   const searchDeck = (name: string) => {
-    setCurrentPage(1)
-    setDecksName(name)
+    setCurrentPageHandle(1)
+    setDecksNameHandle(name)
   }
 
   const filteringByNumberOfCards = () => {
-    setCurrentPage(1)
-    setSliderValues(sliderRangeValues)
+    setCurrentPageHandle(1)
+    setSliderValuesHandle(sliderRangeValues)
   }
 
   const { data: user } = useMeQuery()
@@ -51,7 +91,7 @@ export const DecksPage = () => {
   const addDeckHandle = async (args: AddDeckRequestType) => {
     try {
       await addDeck(args).unwrap()
-      setAddPackModalIsOpen(false)
+      setAddPackModalIsOpenHandle(false)
       toast.success('Deck created successfully')
     } catch (err) {
       const error = err as { data: { message: string } }
@@ -64,8 +104,8 @@ export const DecksPage = () => {
     try {
       await deleteDeck({ id }).unwrap()
       toast.success('Deck deleted successfully')
-      setDeletePackModalIsOpen(false)
-      setEditingDeck(null)
+      setDeletePackModalIsOpenHandle(false)
+      setEditingDeckHandle(null)
     } catch (err) {
       const error = err as { data: { message: string } }
 
@@ -77,15 +117,15 @@ export const DecksPage = () => {
     updateDeck(args)
       .unwrap()
       .then(() => {
-        setEditPackModalIsOpen(false)
-        setEditingDeck(null)
+        setEditPackModalIsOpenHandle(false)
+        setEditingDeckHandle(null)
       })
   }
 
   useEffect(() => {
     if (sliderRangeValues[1] !== decksData?.maxCardsCount) {
-      setSliderRangeValues(values => [values[0], decksData?.maxCardsCount || 100])
-      setSliderValues(values => [values[0], decksData?.maxCardsCount || 10])
+      setSliderRangeValuesHandle([sliderRangeValues[0], decksData?.maxCardsCount || 100])
+      setSliderValuesHandle([sliderValues[0], decksData?.maxCardsCount || 10])
     }
   }, [decksData?.maxCardsCount])
 
@@ -94,25 +134,25 @@ export const DecksPage = () => {
       userId={user?.id}
       deckContent={decksData?.items}
       pagination={decksData?.pagination}
-      changeCurrentPage={setCurrentPage}
+      changeCurrentPage={setCurrentPageHandle}
       showMyDecks={showMyDecks}
-      setShowMyDecks={setShowMyDecks}
+      setShowMyDecks={setShowMyDecksHandle}
       sliderValues={[0, decksData ? decksData.maxCardsCount : 20]}
       sliderRangeValues={sliderRangeValues}
       setSliderValues={filteringByNumberOfCards}
-      setSliderRangeValues={setSliderRangeValues}
+      setSliderRangeValues={setSliderRangeValuesHandle}
       searchDeck={searchDeck}
       addPackModalIsOpen={addPackModalIsOpen}
-      setAddPackModalIsOpen={setAddPackModalIsOpen}
+      setAddPackModalIsOpen={setAddPackModalIsOpenHandle}
       editPackModalIsOpen={editPackModalIsOpen}
-      setEditPackModalIsOpen={setEditPackModalIsOpen}
+      setEditPackModalIsOpen={setEditPackModalIsOpenHandle}
       deletePackModalIsOpen={deletePackModalIsOpen}
-      setDeletePackModalIsOpen={setDeletePackModalIsOpen}
+      setDeletePackModalIsOpen={setDeletePackModalIsOpenHandle}
       addDeck={addDeckHandle}
       deleteDeck={deleteDeckHandle}
       updateDeck={updateDeckHandle}
       editingDeck={editingDeck}
-      setEditingDeck={setEditingDeck}
+      setEditingDeck={setEditingDeckHandle}
     />
   )
 }
