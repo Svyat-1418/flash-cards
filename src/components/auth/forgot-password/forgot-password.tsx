@@ -20,21 +20,24 @@ const schema = z.object({
 })
 
 type Form = z.infer<typeof schema>
+type ForgotPasswordPropsType = {
+  onSubmit: (email: string) => void
+}
 
-export const ForgotPassword = () => {
+export const ForgotPassword = ({ onSubmit }: ForgotPasswordPropsType) => {
   const { control, handleSubmit } = useForm<Form>({
     resolver: zodResolver(schema),
     mode: 'onTouched',
   })
 
-  const onSubmit = handleSubmit(data => alert(JSON.stringify(data)))
+  const handleFormSubmit = handleSubmit(data => onSubmit(data.email))
 
   return (
     <Card className={s.card}>
       <Typography as={'h1'} variant={'large'}>
         Forgot your password?
       </Typography>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleFormSubmit}>
         <ControlledTextField control={control} name={'email'} label={'Email'} />
         <Typography className={`${s.description} ${s.emailInputPrompt}`} variant={'body2'}>
           {'Enter your email address and we will send you further \n instructions'}
