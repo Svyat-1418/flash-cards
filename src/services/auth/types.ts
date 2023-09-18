@@ -43,3 +43,14 @@ export type User = {
   isEmailVerified: boolean
   avatar: string
 }
+
+export type ForgotPasswordArgs = {
+  html?: string
+  email: string
+  subject?: string
+}
+
+export type NewPasswordArgs = {
+  token: string
+  password: string
+}

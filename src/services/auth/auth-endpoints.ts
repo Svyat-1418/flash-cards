@@ -1,7 +1,15 @@
 import { Nullable } from '../../types/common.types.ts'
 import { baseApi } from '../base-api.ts'
 
-import { LoginArgs, LoginResponse, MeResponse, SignUpArgs, SignUpResponse } from './types.ts'
+import {
+  ForgotPasswordArgs,
+  LoginArgs,
+  LoginResponse,
+  MeResponse,
+  NewPasswordArgs,
+  SignUpArgs,
+  SignUpResponse,
+} from './types.ts'
 
 export const authEndpoints = baseApi.injectEndpoints({
   endpoints: builder => ({
@@ -48,7 +56,28 @@ export const authEndpoints = baseApi.injectEndpoints({
         body: args,
       }),
     }),
+    forgotPassword: builder.mutation<any, ForgotPasswordArgs>({
+      query: args => ({
+        url: `auth/recover-password`,
+        method: 'POST',
+        args: { ...args },
+      }),
+    }),
+    newPassword: builder.mutation<any, NewPasswordArgs>({
+      query: args => ({
+        url: `auth/reset-password/${args.token}`,
+        method: 'POST',
+        args: { password: args.password },
+      }),
+    }),
   }),
 })
 
-export const { useMeQuery, useLoginMutation, useLogoutMutation, useSignUpMutation } = authEndpoints
+export const {
+  useMeQuery,
+  useLoginMutation,
+  useLogoutMutation,
+  useSignUpMutation,
+  useForgotPasswordMutation,
+  useNewPasswordMutation,
+} = authEndpoints

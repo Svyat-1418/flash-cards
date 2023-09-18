@@ -8,6 +8,7 @@ import { ControlledTextField } from '../../ui/controlled'
 import { Typography } from '../../ui/typography'
 
 import s from './new-password.module.scss'
+
 const schema = z.object({
   password: z
     .string()
@@ -19,7 +20,7 @@ const schema = z.object({
 type Form = z.infer<typeof schema>
 
 type Props = {
-  onSubmit: (data: Form) => void
+  onSubmit: (password: string) => void
 }
 
 export const NewPassword = (props: Props) => {
@@ -31,7 +32,7 @@ export const NewPassword = (props: Props) => {
     },
   })
 
-  const onSubmit = handleSubmit(props.onSubmit)
+  const onSubmit = handleSubmit(data => props.onSubmit(data.password))
 
   return (
     <>
