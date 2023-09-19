@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import { Email } from '../../../assets/icons/email'
 import { Button } from '../../ui/button'
 import { Card } from '../../ui/card'
@@ -18,9 +20,10 @@ export const CheckEmail = ({ email }: Props) => {
         <Email />
       </div>
       <Typography variant="body2" className={s.instructions}>
-        {`We’ve sent an Email with instructions to \n ${email}`}
+        {`We’ve sent an Email with instructions to`}
+        <Typography variant="body1">{email}</Typography>
       </Typography>
-      <Button as={'a'} href={'/sing-in'} className={s.signInLink}>
+      <Button as={Link} to={'/login'} className={s.signInLink}>
         Back to Sign in
       </Button>
     </Card>
