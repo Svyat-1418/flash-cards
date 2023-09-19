@@ -14,9 +14,9 @@ export const NewPasswordPage = () => {
         .unwrap()
         .then(() => {
           toast.success('Пароль успешно изменен')
-          navigate('login')
+          navigate('/login')
         })
-        .catch(e => toast.error(e))
+        .catch(() => toast.error('error'))
     }
   }
 
