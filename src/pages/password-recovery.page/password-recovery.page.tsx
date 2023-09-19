@@ -12,13 +12,10 @@ export const PasswordRecoveryPage = () => {
   const recoverPasswordHandle = (email: string) => {
     const data = recoverPasswordUtil(email)
 
-    //todo  data -> Bad request??
-    console.log(data)
-
     return recoverPassword(data)
       .unwrap()
       .then(() => {
-        navigate(`check-email/${email}`)
+        navigate(`/check-email/${email}`)
       })
       .catch(() => {
         toast.error('ERROR')
