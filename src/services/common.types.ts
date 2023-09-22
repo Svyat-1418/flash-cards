@@ -5,7 +5,7 @@ export type Pagination = {
   totalItems: number
 }
 
-export type PaginatedResponse<T> = {
+export type PaginatedEntity<T> = {
   pagination: Pagination
   items: T[]
 }
