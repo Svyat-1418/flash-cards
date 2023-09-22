@@ -1,26 +1,14 @@
 import { Nullable } from '../../types/common.types.ts'
+import { PaginatedEntity } from '../common.types.ts'
 
-export type GetCardsParams = {
+export type GetCardsArgs = {
   deckId: string
   answer: string
   currentPage?: number
   itemsPerPage?: number
-  orderBy?: string | null
+  orderBy?: Nullable<string>
 }
-export type GetCardsResponse = {
-  id: string
-  userId: string
-  name: string
-  isPrivate: boolean
-  shots: number
-  cover: string
-  rating?: number
-  isDeleted: any
-  isBlocked: Nullable<boolean>
-  created: string
-  updated: string
-  cardsCount: number
-}
+export type GetCardsResponse = PaginatedEntity<Card>
 
 export type CreateCardBody = {
   question: string
@@ -51,22 +39,6 @@ export type CreateCardResponse = {
   updated: string
 }
 
-export type Card = {
-  id: string
-  question: string
-  answer: string
-  deckId: string
-  questionImg?: any
-  answerImg?: any
-  questionVideo?: any
-  answerVideo?: any
-  created: string
-  updated: string
-  shots: number
-  grade: number
-  userId: string
-}
-
 export type DeleteCardParams = { id: string }
 
 export type UpdateCardResponse = {
@@ -83,4 +55,20 @@ export type UpdateCardResponse = {
   rating: number
   created: string
   updated: string
+}
+
+export type Card = {
+  id: string
+  deckId: string
+  userId: string
+  answer: string
+  question: string
+  answerImg?: Nullable<string>
+  questionImg?: Nullable<string>
+  answerVideo?: Nullable<string>
+  questionVideo?: Nullable<string>
+  created: string
+  updated: string
+  shots: number
+  grade: number
 }
