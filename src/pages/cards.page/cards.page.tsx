@@ -4,6 +4,7 @@ import { Button } from '../../components/ui/button'
 import { Typography } from '../../components/ui/typography'
 import {
   useCreateCardMutation,
+  useDeleteCardMutation,
   useGetCardsQuery,
   useUpdateCardMutation,
 } from '../../services/cards/cards-endpoints.ts'
@@ -15,6 +16,7 @@ export const CardsPage = () => {
   })
   const [createCard] = useCreateCardMutation({})
   const [updateCard] = useUpdateCardMutation()
+  const [deleteCard] = useDeleteCardMutation()
 
   if (!deckId) return <div>Deck not found</div>
 
@@ -45,6 +47,9 @@ export const CardsPage = () => {
         }
       >
         Update card
+      </Button>
+      <Button onClick={() => deleteCard({ cardId: 'clmwgnzz40neqvo2q43qiuncs' })}>
+        Delete card
       </Button>
     </section>
   )

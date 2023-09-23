@@ -40,4 +40,4 @@ export type CreateCardResponse = Omit<Card, 'grade'> & {
 
 export type UpdateCardArgs = CreateCardDto & { cardId: Card['id'] }
 
-export type DeleteCardArgs = { card: Card['id'] }
+export type DeleteCardArgs = { cardId: Card['id'] }
