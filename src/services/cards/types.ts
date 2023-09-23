@@ -38,4 +38,6 @@ export type CreateCardResponse = Omit<Card, 'grade'> & {
   moreId: Nullable<string>
 }
 
+export type UpdateCardArgs = CreateCardDto & { cardId: Card['id'] }
+
 export type DeleteCardArgs = { card: Card['id'] }
