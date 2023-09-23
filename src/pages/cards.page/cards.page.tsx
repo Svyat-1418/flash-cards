@@ -2,7 +2,11 @@ import { useParams } from 'react-router-dom'
 
 import { Button } from '../../components/ui/button'
 import { Typography } from '../../components/ui/typography'
-import { useCreateCardMutation, useGetCardsQuery } from '../../services/cards/cards-endpoints.ts'
+import {
+  useCreateCardMutation,
+  useGetCardsQuery,
+  useUpdateCardMutation,
+} from '../../services/cards/cards-endpoints.ts'
 
 export const CardsPage = () => {
   const { deckId } = useParams<{ deckId: string }>()
@@ -10,6 +14,7 @@ export const CardsPage = () => {
     deckId: deckId || '',
   })
   const [createCard] = useCreateCardMutation({})
+  const [updateCard] = useUpdateCardMutation()
 
   if (!deckId) return <div>Deck not found</div>
 
@@ -29,6 +34,17 @@ export const CardsPage = () => {
         }
       >
         Create card
+      </Button>
+      <Button
+        onClick={() =>
+          updateCard({
+            cardId: 'clmwgnzz40neqvo2q43qiuncs',
+            question: 'Why did you do it for??',
+            answer: 'It needed to be done',
+          })
+        }
+      >
+        Update card
       </Button>
     </section>
   )

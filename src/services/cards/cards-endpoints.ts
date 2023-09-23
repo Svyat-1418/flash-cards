@@ -2,7 +2,13 @@ import { isEmpty } from 'remeda'
 
 import { baseApi } from '../base-api.ts'
 
-import { CreateCardArgs, CreateCardResponse, GetCardsArgs, GetCardsResponse } from './types.ts'
+import {
+  CreateCardArgs,
+  CreateCardResponse,
+  GetCardsArgs,
+  GetCardsResponse,
+  UpdateCardArgs,
+} from './types.ts'
 
 const cardsEndpoints = baseApi.injectEndpoints({
   endpoints: builder => ({
@@ -23,7 +29,14 @@ const cardsEndpoints = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Cards'],
     }),
+    updateCard: builder.mutation<CreateCardResponse, UpdateCardArgs>({
+      query: ({ cardId, ...body }) => ({
+        url: `cards/${cardId}`,
+        method: 'PATCH',
+        body,
+      }),
+    }),
   }),
 })
 
-export const { useGetCardsQuery, useCreateCardMutation } = cardsEndpoints
+export const { useGetCardsQuery, useCreateCardMutation, useUpdateCardMutation } = cardsEndpoints
