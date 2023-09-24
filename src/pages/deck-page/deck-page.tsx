@@ -9,7 +9,7 @@ import {
   useUpdateCardMutation,
 } from '../../services/cards/cards-endpoints.ts'
 
-export const CardsPage = () => {
+export const DeckPage = () => {
   const { deckId } = useParams<{ deckId: string }>()
   const { data: cardsData } = useGetCardsQuery({
     deckId: deckId || '',
