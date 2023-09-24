@@ -3,8 +3,8 @@ import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom'
 import { Layout } from '../components/layout'
 import { useMeQuery } from '../services/auth/auth-endpoints.ts'
 
-import { CardsPage } from './cards.page'
 import { CheckEmailPage } from './check-email.page/check-email.page.tsx'
+import { DeckPage } from './deck-page'
 import { DecksPage } from './decks.page'
 import Error404Page from './error404.page/error404.page.tsx'
 import { LoginPage } from './login.page'
@@ -28,7 +28,7 @@ export const router = createBrowserRouter([
           },
           {
             path: 'cards/:deckId',
-            element: <CardsPage />,
+            element: <DeckPage />,
           },
           {
             path: 'profile',
