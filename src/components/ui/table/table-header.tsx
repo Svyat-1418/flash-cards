@@ -4,7 +4,7 @@ import { clsx } from 'clsx'
 
 import { ArrowDown } from '../../../assets/icons/arraw-down'
 import { ArrowUp } from '../../../assets/icons/arraw-up'
-import { Sort } from '../../decks/deck-table'
+import { Sort } from '../../decks-list-content/decks-list/deck-table'
 import { Typography } from '../typography'
 
 import { Table } from './table'

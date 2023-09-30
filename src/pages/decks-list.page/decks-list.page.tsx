@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks.ts'
-import { DecksListContent } from '../../components/decks'
+import { DecksListContent } from '../../components/decks-list-content'
 import { useMeQuery } from '../../services/auth/auth-endpoints.ts'
 import {
   setAddPackModalIsOpen,

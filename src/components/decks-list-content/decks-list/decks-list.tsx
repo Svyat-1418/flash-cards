@@ -1,11 +1,11 @@
 import { Deck, PaginationType, UpdateDeckRequestType } from '../../../services/decks/types.ts'
 import { Pagination } from '../../ui/pagination'
 import { Typography } from '../../ui/typography'
-import { DeckTable } from '../deck-table'
-import { DeletePackModal } from '../delete-pack.modal'
-import { EditPackModal } from '../edit-pack.modal'
 
+import { DeckTable } from './deck-table'
 import s from './decks-list.module.scss'
+import { DeletePackModal } from './modal/delete-pack.modal'
+import { EditPackModal } from './modal/edit-pack.modal'
 
 type DecksListPropsType = {
   deckContent: Deck[]
