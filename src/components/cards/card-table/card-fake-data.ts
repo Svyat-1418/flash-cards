@@ -19,25 +19,6 @@ export type Card = {
   updated: string
 }
 
-const cardObj = {
-  id: 'clkpxprfz00d3vy2syvasit3i',
-  deckId: 'clkpwk1p400covy2sgh9pm306',
-  userId: 'b92084f6-6177-48ce-97f5-5d50e968cc82',
-  question: 'What is "ashame"?',
-  answer: 'Стыд',
-  shots: 0,
-  questionImg: null,
-  answerImg: null,
-  answerVideo: null,
-  questionVideo: null,
-  comments: null,
-  type: null,
-  rating: 0,
-  moreId: null,
-  created: '2023-07-30T21:09:36.427Z',
-  updated: '2023-07-30T21:09:36.427Z',
-}
-
 export type CardTableContent = {
   question: string
   answer: string
