@@ -5,7 +5,6 @@ import { useMeQuery } from '../services/auth/auth-endpoints.ts'
 
 import { CheckEmailPage } from './check-email.page/check-email.page.tsx'
 import { DeckPage } from './deck-page'
-import { DecksPage } from './decks.page'
 import { DecksListPage } from './decks-list.page'
 import Error404Page from './error404.page/error404.page.tsx'
 import { LoginPage } from './login.page'
