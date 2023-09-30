@@ -1,12 +1,12 @@
 import { Meta, StoryObj } from '@storybook/react'
 
 import { deckContent } from './deck-table/deck-fake-data.ts'
-import { Decks } from './decks.tsx'
+import { DecksListContent } from './decks-list-content.tsx'
 
 const meta = {
   title: 'Pages/Decks',
-  component: Decks,
-} satisfies Meta<typeof Decks>
+  component: DecksListContent,
+} satisfies Meta<typeof DecksListContent>
 
 export default meta
 type Story = StoryObj<typeof meta>
