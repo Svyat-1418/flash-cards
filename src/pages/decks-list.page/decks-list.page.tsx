@@ -42,6 +42,7 @@ export const DecksListPage = () => {
     dispatch(setCurrentPage({ page }))
   }
   const setShowMyDecksHandle = (value: boolean) => {
+    dispatch(setCurrentPage({ page: 1 }))
     dispatch(setShowMyDecks({ value }))
   }
   const setSliderValuesHandle = (values: number[]) => {
