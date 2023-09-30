@@ -66,7 +66,7 @@ export const Pagination = ({
         )
       })}
       {currentPage + 1 < pageCount && pageCount > 5 && <span>...</span>}
-      {currentPage < pageCount - 1 && (
+      {currentPage < pageCount - 1 && pageCount > 5 && (
         <button className={s.paginationButton} onClick={() => onPageChange(pageCount)}>
           {pageCount}
         </button>
