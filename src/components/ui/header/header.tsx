@@ -76,7 +76,9 @@ export const Header = ({
     <header className={s.header}>
       <ContentContainer>
         <div className={s.headerContainer}>
-          <Logo />
+          <Link to={'/'}>
+            <Logo />
+          </Link>
           {loginOrAvatarContent}
         </div>
       </ContentContainer>

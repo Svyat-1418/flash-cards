@@ -2,10 +2,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { Button } from '../../ui/button'
-import { ControlledCheckbox, ControlledTextField } from '../../ui/controlled'
-import { Modal } from '../../ui/modal'
-import { Typography } from '../../ui/typography'
+import { Button } from '../../../../ui/button'
+import { ControlledCheckbox, ControlledTextField } from '../../../../ui/controlled'
+import { Modal } from '../../../../ui/modal'
+import { Typography } from '../../../../ui/typography'
 
 import s from './edit-pack.model.module.scss'
 

@@ -1,5 +1,5 @@
-import { Deck } from '../../../services/decks/types.ts'
-import { Column } from '../../ui/table/types.ts'
+import { Deck } from '../../../../services/decks/types.ts'
+import { Column } from '../../../ui/table/types.ts'
 
 export const deckContent: Deck[] = [
   {
