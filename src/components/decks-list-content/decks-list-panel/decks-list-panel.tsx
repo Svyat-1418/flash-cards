@@ -5,8 +5,9 @@ import { ButtonGroup, ButtonSwitchType } from '../../ui/button-group'
 import { SliderRange as Slider } from '../../ui/slider'
 import { TextField } from '../../ui/textfield'
 import { Typography } from '../../ui/typography'
-import { AddNewPackModal } from '../add-new-pack.modal'
-import s from '../decks.module.scss'
+
+import s from './decks-list-panel.module.scss'
+import { AddNewPackModal } from './modal/add-new-pack.modal'
 
 type DecksListPanelType = {
   addPackModalIsOpen: boolean

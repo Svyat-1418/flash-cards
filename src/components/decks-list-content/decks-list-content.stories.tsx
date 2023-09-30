@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import { deckContent } from './deck-table/deck-fake-data.ts'
+import { deckContent } from './decks-list/deck-table/deck-fake-data.ts'
 import { DecksListContent } from './decks-list-content.tsx'
 
 const meta = {
-  title: 'Pages/Decks',
+  title: 'Pages/DecksListContent',
   component: DecksListContent,
 } satisfies Meta<typeof DecksListContent>
 
@@ -13,11 +13,24 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
+    userId: '1erf23',
     deckContent,
     showMyDecks: false,
     changeCurrentPage: () => {},
     setSliderValues: () => {},
     setShowMyDecks: () => {},
+    searchDeck: () => {},
+    addPackModalIsOpen: false,
+    editPackModalIsOpen: false,
+    setEditPackModalIsOpen: () => {},
+    setAddPackModalIsOpen: () => {},
+    deletePackModalIsOpen: false,
+    setDeletePackModalIsOpen: () => {},
+    addDeck: () => {},
+    deleteDeck: () => {},
+    updateDeck: () => {},
+    editingDeck: deckContent[0],
+    setEditingDeck: () => {},
     pagination: {
       currentPage: 1,
       itemsPerPage: 10,
