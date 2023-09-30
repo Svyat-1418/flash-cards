@@ -33,7 +33,6 @@ export const DecksListPanel = ({
   setSliderRangeValues,
   showMyDecks,
 }: DecksListPanelType) => {
-  // todo сброс пагинации при показе моих decks
   const showMyCards = () => {
     setShowMyDecks(true)
   }
