@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks.ts'
-import { Decks } from '../../components/decks'
+import { DecksListContent } from '../../components/decks-list-content'
 import { useMeQuery } from '../../services/auth/auth-endpoints.ts'
 import {
   setAddPackModalIsOpen,
@@ -24,7 +24,7 @@ import {
 } from '../../services/decks/decks-endpoints.ts'
 import { AddDeckRequestType, Deck, UpdateDeckRequestType } from '../../services/decks/types.ts'
 
-export const DecksPage = () => {
+export const DecksListPage = () => {
   const dispatch = useAppDispatch()
   const {
     currentPage,
@@ -42,6 +42,7 @@ export const DecksPage = () => {
     dispatch(setCurrentPage({ page }))
   }
   const setShowMyDecksHandle = (value: boolean) => {
+    dispatch(setCurrentPage({ page: 1 }))
     dispatch(setShowMyDecks({ value }))
   }
   const setSliderValuesHandle = (values: number[]) => {
@@ -130,7 +131,7 @@ export const DecksPage = () => {
   }, [decksData?.maxCardsCount])
 
   return (
-    <Decks
+    <DecksListContent
       userId={user?.id}
       deckContent={decksData?.items}
       pagination={decksData?.pagination}

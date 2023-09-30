@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { Table, TableHeader } from '../../ui/table'
 
-import { cardColumns, cardContent } from './card-fake-data.ts'
+import { cardColumns, CardTableContent } from './card-fake-data.ts'
 import { CardTableBody } from './card-table-body.tsx'
 
 export type Sort = {
@@ -10,7 +10,11 @@ export type Sort = {
   direction: 'asc' | 'desc'
 } | null
 
-export const CardTable = () => {
+type CardTablePropsType = {
+  cardContent: CardTableContent[]
+}
+
+export const CardTable = ({ cardContent }: CardTablePropsType) => {
   const [sort, setSort] = useState<Sort>(null)
 
   return (

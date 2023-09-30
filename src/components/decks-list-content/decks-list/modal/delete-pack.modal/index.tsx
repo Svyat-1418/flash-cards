@@ -1,6 +1,6 @@
-import { Button } from '../../ui/button'
-import { Modal } from '../../ui/modal'
-import { Typography } from '../../ui/typography'
+import { Button } from '../../../../ui/button'
+import { Modal } from '../../../../ui/modal'
+import { Typography } from '../../../../ui/typography'
 import s from '../edit-pack.modal/edit-pack.model.module.scss'
 
 type DeletePackModalPropsType = {
