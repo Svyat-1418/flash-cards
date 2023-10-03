@@ -3,7 +3,9 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Edit } from '../../../assets/icons/edit'
+import { UpdateMeArgs } from '../../../services/auth/types.ts'
 import { Avatar } from '../../ui/avatar'
+import { BackToDecksList } from '../../ui/back-to-decks-list'
 import { Button } from '../../ui/button'
 import { Card } from '../../ui/card'
 import { ControlledTextField } from '../../ui/controlled'
@@ -15,12 +17,17 @@ type ProfilePropsType = {
   avatarSrc?: string
   name?: string
   email?: string
+  changeName?: (args: UpdateMeArgs) => void
+  changeAvatar?: (avatar: string) => void
+  logout: () => void
 }
 
 export const Profile = ({
   avatarSrc,
   name = 'Ivan',
   email = 'example@gmail.com',
+  changeName,
+  logout,
 }: ProfilePropsType) => {
   const [editMode, setEditMode] = useState(false)
 
@@ -29,8 +36,9 @@ export const Profile = ({
       name: name,
     },
   })
-  const changeName = handleSubmit(data => {
-    alert(JSON.stringify(data))
+  const changeNameHandle = handleSubmit(data => {
+    // alert(JSON.stringify(data))
+    changeName && changeName(data)
     setEditMode(false)
   })
 
@@ -50,31 +58,34 @@ export const Profile = ({
       <Typography className={s.email} variant={'body2'}>
         {email}
       </Typography>
-      <Button variant={'secondary'} className={s.logoutButton}>
+      <Button variant={'secondary'} className={s.logoutButton} onClick={logout}>
         Logout
       </Button>
     </>
   ) : (
-    <form onSubmit={changeName}>
+    <form onSubmit={changeNameHandle}>
       <ControlledTextField
         label={'Nickname'}
         className={s.changeNameField}
         control={control}
         name={'name'}
       />
-      <Button className={s.changeNameButton} fullWidth type={'submit'} onClick={changeName}>
+      <Button className={s.changeNameButton} fullWidth type={'submit'} onClick={changeNameHandle}>
         Save Changes
       </Button>
     </form>
   )
 
   return (
-    <Card className={s.card}>
-      <Typography as={'h1'} variant={'large'}>
-        Personal Information
-      </Typography>
-      <Avatar src={avatarSrc} size={96} />
-      {profileInfoRender}
-    </Card>
+    <>
+      <BackToDecksList />
+      <Card className={s.card}>
+        <Typography as={'h1'} variant={'large'}>
+          Personal Information
+        </Typography>
+        <Avatar src={avatarSrc} size={96} />
+        {profileInfoRender}
+      </Card>
+    </>
   )
 }
