@@ -57,10 +57,10 @@ export const Header = ({
       dropdownElements={[
         dropdownHeader(name, email, avatarSrc),
         <>
-          <div className={s.dropDownElement}>
+          <Link to={'profile'} className={s.dropDownElement}>
             <Person />
-            <span>Profile</span>
-          </div>
+            <Typography>Profile</Typography>
+          </Link>
         </>,
         <>
           <div onClick={logout} className={s.dropDownElement}>

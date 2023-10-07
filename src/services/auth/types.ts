@@ -18,6 +18,13 @@ export type MeResponse = {
   created: string
   updated: string
 }
+
+export type UpdateMeArgs = {
+  email?: string
+  name?: string
+  avatar?: string
+}
+
 export type SignUpArgs = {
   html?: string
   name?: string

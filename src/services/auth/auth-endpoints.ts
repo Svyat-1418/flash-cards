@@ -9,6 +9,7 @@ import {
   NewPasswordArgs,
   SignUpArgs,
   SignUpResponse,
+  UpdateMeArgs,
 } from './types.ts'
 
 export const authEndpoints = baseApi.injectEndpoints({
@@ -20,6 +21,14 @@ export const authEndpoints = baseApi.injectEndpoints({
         extraOptions: { maxRetries: false },
       }),
       providesTags: ['Me'],
+    }),
+    updateMe: builder.mutation<MeResponse, UpdateMeArgs>({
+      query: args => ({
+        url: `auth/me`,
+        method: 'PATCH',
+        body: args,
+      }),
+      invalidatesTags: ['Me'],
     }),
     login: builder.mutation<LoginResponse, LoginArgs>({
       query: args => ({
@@ -77,6 +86,7 @@ export const authEndpoints = baseApi.injectEndpoints({
 
 export const {
   useMeQuery,
+  useUpdateMeMutation,
   useLoginMutation,
   useLogoutMutation,
   useSignUpMutation,
