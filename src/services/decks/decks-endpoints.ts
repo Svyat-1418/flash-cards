@@ -42,6 +42,12 @@ export const decksEndpoints = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Decks'],
     }),
+    getDeckById: builder.query<DeleteDeckResponseType, DeleteDeckRequestType>({
+      query: ({ id }) => ({
+        url: `decks/${id}`,
+        method: `GET`,
+      }),
+    }),
   }),
 })
 
@@ -50,4 +56,5 @@ export const {
   useCreateDeckMutation,
   useDeleteDeckMutation,
   useUpdateDeckMutation,
+  useGetDeckByIdQuery,
 } = decksEndpoints

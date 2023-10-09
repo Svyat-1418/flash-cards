@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { cardContent } from './card-fake-data.ts'
+import { cardContent } from '../../../cards/card-table/card-fake-data.ts'
+
 import { CardTable } from './card-table.tsx'
 
 const meta = {
@@ -15,5 +16,6 @@ export default meta
 export const Default: Story = {
   args: {
     cardContent: cardContent,
+    isAuthor: true,
   },
 }

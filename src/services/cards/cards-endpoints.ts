@@ -1,21 +1,19 @@
 import { isEmpty } from 'remeda'
 
 import { baseApi } from '../base-api.ts'
-import { PaginatedResponse } from '../common.types.ts'
 
 import {
-  Card,
   CreateCardArgs,
   CreateCardResponse,
-  DeleteCardParams,
-  GetCardsParams,
+  DeleteCardArgs,
+  GetCardsArgs,
+  GetCardsResponse,
   UpdateCardArgs,
-  UpdateCardResponse,
 } from './types.ts'
 
 const cardsEndpoints = baseApi.injectEndpoints({
   endpoints: builder => ({
-    getCards: builder.query<PaginatedResponse<Card>, GetCardsParams>({
+    getCards: builder.query<GetCardsResponse, GetCardsArgs>({
       query: ({ deckId, ...params }) => {
         return {
           url: `decks/${deckId}/cards`,
@@ -32,18 +30,18 @@ const cardsEndpoints = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Cards'],
     }),
-    deleteCard: builder.mutation<void, DeleteCardParams>({
-      query: ({ id }) => ({
-        url: `cards/${id}`,
-        method: 'DELETE',
-      }),
-      invalidatesTags: ['Cards'],
-    }),
-    updateCard: builder.mutation<UpdateCardResponse, UpdateCardArgs>({
+    updateCard: builder.mutation<CreateCardResponse, UpdateCardArgs>({
       query: ({ cardId, ...body }) => ({
         url: `cards/${cardId}`,
         method: 'PATCH',
         body,
+      }),
+      invalidatesTags: ['Cards'],
+    }),
+    deleteCard: builder.mutation<void, DeleteCardArgs>({
+      query: ({ cardId }) => ({
+        url: `cards/${cardId}`,
+        method: 'DELETE',
       }),
       invalidatesTags: ['Cards'],
     }),
@@ -53,6 +51,6 @@ const cardsEndpoints = baseApi.injectEndpoints({
 export const {
   useGetCardsQuery,
   useCreateCardMutation,
-  useDeleteCardMutation,
   useUpdateCardMutation,
+  useDeleteCardMutation,
 } = cardsEndpoints
