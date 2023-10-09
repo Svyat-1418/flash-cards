@@ -1,17 +1,18 @@
 import { FC } from 'react'
 
-import { ControlButtons } from '../../ui/control-buttons'
-import { Rating } from '../../ui/rating'
-import { Table } from '../../ui/table'
-import { Typography } from '../../ui/typography'
+import { ControlButtons } from '../../../ui/control-buttons'
+import { Rating } from '../../../ui/rating'
+import { Table } from '../../../ui/table'
+import { Typography } from '../../../ui/typography'
 
 import { CardTableContent } from './card-fake-data.ts'
 
 type Props = {
   content: CardTableContent[]
+  isAuthor: boolean
 }
 
-export const CardTableBody: FC<Props> = ({ content }) => {
+export const CardTableBody: FC<Props> = ({ content, isAuthor }) => {
   return (
     <Table.Body>
       {content.map(item => (
@@ -31,7 +32,7 @@ export const CardTableBody: FC<Props> = ({ content }) => {
             </Typography>
           </Table.Cell>
           <Table.Cell>
-            <ControlButtons />
+            <ControlButtons isAdmin={isAuthor} />
           </Table.Cell>
         </Table.Row>
       ))}
