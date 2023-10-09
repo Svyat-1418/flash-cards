@@ -8,6 +8,7 @@ type PaginationPropsType = {
   onPageChange: (page: number) => void
 }
 
+//todo исправить пагинацию при выборе предпоследней страницы
 export const Pagination = ({
   currentPage = 1,
   pageCount = 30,
@@ -22,6 +23,7 @@ export const Pagination = ({
       }
     }
     if (pageCount < 5) {
+      pageArray = []
       for (let i = 1; i <= pageCount; i++) {
         pageArray.push(i)
       }
@@ -65,7 +67,7 @@ export const Pagination = ({
           </button>
         )
       })}
-      {currentPage + 1 < pageCount && pageCount > 5 && <span>...</span>}
+      {currentPage + 2 < pageCount && pageCount > 5 && <span>...</span>}
       {currentPage < pageCount - 1 && pageCount > 5 && (
         <button className={s.paginationButton} onClick={() => onPageChange(pageCount)}>
           {pageCount}
