@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
+import { cardColumns, CardTableContent } from '../../../cards/card-table/card-fake-data.ts'
 import { Table, TableHeader } from '../../../ui/table'
 
-import { cardColumns, CardTableContent } from './card-fake-data.ts'
 import { CardTableBody } from './card-table-body.tsx'
 
 export type Sort = {

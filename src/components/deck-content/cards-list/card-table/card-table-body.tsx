@@ -1,11 +1,10 @@
 import { FC } from 'react'
 
+import { CardTableContent } from '../../../cards/card-table/card-fake-data'
 import { ControlButtons } from '../../../ui/control-buttons'
 import { Rating } from '../../../ui/rating'
 import { Table } from '../../../ui/table'
 import { Typography } from '../../../ui/typography'
-
-import { CardTableContent } from './card-fake-data.ts'
 
 type Props = {
   content: CardTableContent[]
