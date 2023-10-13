@@ -1,5 +1,6 @@
 import { Trash } from '../../../assets/icons/trash'
 import { AddDeckRequestType } from '../../../services/decks/types.ts'
+import { AddNewPackModal } from '../../deck-content/deck-panel/modal/add-new-card.modal'
 import { Button } from '../../ui/button'
 import { ButtonGroup, ButtonSwitchType } from '../../ui/button-group'
 import { SliderRange as Slider } from '../../ui/slider'
@@ -7,7 +8,6 @@ import { TextField } from '../../ui/textfield'
 import { Typography } from '../../ui/typography'
 
 import s from './decks-list-panel.module.scss'
-import { AddNewPackModal } from './modal/add-new-pack.modal'
 
 type DecksListPanelType = {
   addPackModalIsOpen: boolean
