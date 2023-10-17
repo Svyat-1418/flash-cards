@@ -130,6 +130,7 @@ export const DecksListPage = () => {
     }
   }, [decksData?.maxCardsCount])
 
+  //todo заменить userId на флаг isAdmin
   return (
     <DecksListContent
       userId={user?.id}
