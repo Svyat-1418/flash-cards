@@ -3,6 +3,7 @@ import { FC } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Deck } from '../../../../services/decks/types.ts'
+import { toLocaleDateString } from '../../../../utils/toLocaleDateString.ts'
 import { ControlButtons } from '../../../ui/control-buttons'
 import { Table } from '../../../ui/table'
 import { Typography } from '../../../ui/typography'
@@ -38,9 +39,7 @@ export const DeckTableBody: FC<Props> = ({ deckContent, userId, editDeck, delete
               <Typography variant={'body2'}>{item.cardsCount}</Typography>
             </Table.Cell>
             <Table.Cell>
-              <Typography variant={'body2'}>
-                {new Date(item.updated).toLocaleDateString('ru')}
-              </Typography>
+              <Typography variant={'body2'}>{toLocaleDateString(item.updated)}</Typography>
             </Table.Cell>
             <Table.Cell>
               <Typography variant={'body2'}>{item.author.name}</Typography>

@@ -23,3 +23,5 @@ export const cardsSlice = createSlice({
     },
   },
 })
+
+export const { setCurrentPage } = cardsSlice.actions
