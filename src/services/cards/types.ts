@@ -23,6 +23,7 @@ export type Card = CreateCardDto & {
 export type GetCardsArgs = {
   deckId: string
   answer?: string
+  question?: string
   currentPage?: number
   itemsPerPage?: number
   orderBy?: Nullable<string>

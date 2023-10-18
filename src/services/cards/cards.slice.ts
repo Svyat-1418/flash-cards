@@ -6,6 +6,7 @@ export const cardsSlice = createSlice({
     itemsPerPage: 10,
     currentPage: 1,
     searchByAnswer: '',
+    searchByQuestion: '',
     orderBy: 'created-desc',
   },
   reducers: {
@@ -18,10 +19,13 @@ export const cardsSlice = createSlice({
     setSearchByAnswer: (state, action: PayloadAction<{ searchByAnswer: string }>) => {
       state.searchByAnswer = action.payload.searchByAnswer
     },
+    setSearchByQuestion: (state, action: PayloadAction<{ searchByQuestion: string }>) => {
+      state.searchByQuestion = action.payload.searchByQuestion
+    },
     setOrderBy: (state, action: PayloadAction<{ orderBy: string }>) => {
       state.orderBy = action.payload.orderBy
     },
   },
 })
 
-export const { setCurrentPage } = cardsSlice.actions
+export const { setCurrentPage, setSearchByQuestion } = cardsSlice.actions
