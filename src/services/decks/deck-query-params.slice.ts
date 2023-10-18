@@ -71,4 +71,3 @@ export const {
   setDeletePackModalIsOpen,
   setEditingDeck,
 } = decksSlice.actions
-export const decksQueryParamsReducer = decksSlice.reducer
