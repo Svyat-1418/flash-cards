@@ -7,7 +7,7 @@ import { ControlledCheckbox, ControlledTextField } from '../../../../ui/controll
 import { Modal } from '../../../../ui/modal'
 import { Typography } from '../../../../ui/typography'
 
-import s from './add-new-pack.modal.module.scss'
+import s from './add-new-deck.modal.module.scss'
 
 const schema = z.object({
   name: z.string().trim().nonempty('Enter pack name'),
@@ -21,7 +21,7 @@ type AddNewPackModalPropsType = {
   setModalIsOpen: (value: boolean) => void
   onSubmit: (data: FormType) => void
 }
-export const AddNewPackModal = ({
+export const AddNewDeckModal = ({
   modalIsOpen,
   setModalIsOpen,
   onSubmit,
