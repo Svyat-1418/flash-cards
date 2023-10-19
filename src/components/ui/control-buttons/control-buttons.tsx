@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import { Edit } from '../../../assets/icons/edit'
 import { OutlinedPlayCircle } from '../../../assets/icons/play-circle-outline'
 import { Trash } from '../../../assets/icons/trash'
@@ -7,24 +9,26 @@ import s from './control-buttons.module.scss'
 type Props = {
   isAdmin?: boolean
   forCards?: boolean
-  handleLearn?: () => void
+  toLearn?: string
   handleEdit?: () => void
   handleDelete?: () => void
 }
 
 export const ControlButtons = ({
   isAdmin = false,
-  handleLearn,
+  toLearn,
   handleEdit,
   handleDelete,
   forCards,
 }: Props) => {
   return (
     <div className={s.controlButtonContainer}>
-      {!forCards && (
-        <button onClick={handleLearn} className={s.controlButton}>
-          <OutlinedPlayCircle />
-        </button>
+      {!forCards && toLearn && (
+        <Link to={toLearn}>
+          <button className={s.controlButton}>
+            <OutlinedPlayCircle />
+          </button>
+        </Link>
       )}
       {isAdmin ? (
         <>

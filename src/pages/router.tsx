@@ -12,6 +12,7 @@ import { NewPasswordPage } from './new-password.page/new-password.page.tsx'
 import { PasswordRecoveryPage } from './password-recovery.page'
 import { ProfilePage } from './profile.page'
 import { SignUpPage } from './sign-up.page'
+
 export const PATH = {
   HOME: '/',
   DECKS_LIST_PAGE: 'decks-list-page',
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
           {
             path: 'cards/:deckId',
             element: <DeckPage />,
+          },
+          {
+            path: 'learn/:deckId',
+            element: <h1>Learn</h1>,
           },
           {
             path: 'profile',

@@ -45,7 +45,12 @@ export const DeckTableBody: FC<Props> = ({ deckContent, userId, editDeck, delete
               <Typography variant={'body2'}>{item.author.name}</Typography>
             </Table.Cell>
             <Table.Cell>
-              <ControlButtons isAdmin={isAdmin} handleDelete={deleteItem} handleEdit={editItem} />
+              <ControlButtons
+                isAdmin={isAdmin}
+                toLearn={`learn/${item.id}`}
+                handleDelete={deleteItem}
+                handleEdit={editItem}
+              />
             </Table.Cell>
           </Table.Row>
         )
