@@ -35,9 +35,11 @@ export const CardTableBody: FC<Props> = ({ content, isAuthor }) => {
               <Rating starCount={5} grade={item.grade} />
             </Typography>
           </Table.Cell>
-          <Table.Cell>
-            <ControlButtons isAdmin={isAuthor} />
-          </Table.Cell>
+          {isAuthor && (
+            <Table.Cell>
+              <ControlButtons isAdmin={isAuthor} forCards />
+            </Table.Cell>
+          )}
         </Table.Row>
       ))}
     </Table.Body>
