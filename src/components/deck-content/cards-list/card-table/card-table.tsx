@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
-import { cardColumns, CardTableContent } from '../../../cards/card-table/card-fake-data.ts'
+import { Card } from '../../../../services/cards/types.ts'
+import { cardColumns } from '../../../cards/card-table/card-fake-data.ts'
 import { Table, TableHeader } from '../../../ui/table'
 
 import { CardTableBody } from './card-table-body.tsx'
@@ -11,7 +12,7 @@ export type Sort = {
 } | null
 
 type CardTablePropsType = {
-  cardContent: CardTableContent[]
+  cardContent: Card[]
   isAuthor: boolean
 }
 

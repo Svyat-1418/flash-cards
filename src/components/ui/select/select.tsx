@@ -27,6 +27,7 @@ type SelectPropsType = {
   values?: Array<string>
   currentValue?: string
   onValueChange?: (value: string) => void
+  fullWidth?: boolean
 }
 
 const defaultSelectItems = ['select1', 'select2', 'select3']
@@ -36,6 +37,7 @@ export const SelectComponent = ({
   optionTextVariant = 'body2',
   currentValue,
   onValueChange,
+  fullWidth,
 }: SelectPropsType) => {
   const [value, setValue] = useState(selectItems[0])
   const localCurrentValue = currentValue ? currentValue : value
@@ -43,7 +45,7 @@ export const SelectComponent = ({
 
   return (
     <Select.Root value={localCurrentValue} onValueChange={localOnValueChange}>
-      <Select.Trigger className={s.selectTrigger}>
+      <Select.Trigger className={`${s.selectTrigger} ${fullWidth ? s.fullWidth : ''}`}>
         <Select.Value defaultValue={localCurrentValue}>
           <Typography variant={optionTextVariant}>{localCurrentValue}</Typography>
         </Select.Value>
