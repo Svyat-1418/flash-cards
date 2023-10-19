@@ -1,10 +1,12 @@
 import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks.ts'
 import { DeckContent } from '../../components/deck-content/deck-content.tsx'
 import { useMeQuery } from '../../services/auth/auth-endpoints.ts'
-import { useGetCardsQuery } from '../../services/cards/cards-endpoints.ts'
+import { useCreateCardMutation, useGetCardsQuery } from '../../services/cards/cards-endpoints.ts'
 import { setCurrentPage, setSearchByQuestion } from '../../services/cards/cards.slice.ts'
+import { CreateCardDto } from '../../services/cards/types.ts'
 import { useGetDeckByIdQuery } from '../../services/decks/decks-endpoints.ts'
 
 export const DeckPage = () => {
@@ -28,10 +30,18 @@ export const DeckPage = () => {
   const { data: deckData } = useGetDeckByIdQuery({
     id: deckId || '',
   })
-  //const [createCard] = useCreateCardMutation({})
+  const [createCard, { isLoading: loadingCreateCard }] = useCreateCardMutation({})
   //const [updateCard] = useUpdateCardMutation()
   //const [deleteCard] = useDeleteCardMutation()
   const { data: meData } = useMeQuery()
+
+  const createCardHandle = async (args: CreateCardDto) => {
+    if (deckId) {
+      return await createCard({ deckId, ...args })
+        .unwrap()
+        .then(() => toast.success('Card created'))
+    }
+  }
 
   if (!deckId) return <div>Deck not found</div>
 
@@ -45,6 +55,8 @@ export const DeckPage = () => {
           cardsData={cardsData.items}
           pagination={cardsData.pagination}
           changeCurrentPage={changeCurrentPage}
+          createCard={createCardHandle}
+          loadingCreateCard={loadingCreateCard}
         />
       )}
     </section>

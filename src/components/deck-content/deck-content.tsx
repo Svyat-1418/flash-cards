@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { Card } from '../../services/cards/types.ts'
+import { Card, CreateCardDto } from '../../services/cards/types.ts'
 import { Pagination as EntityPagination } from '../../services/common.types.ts'
 
 import { CardsList } from './cards-list/cards-list.tsx'
@@ -13,10 +13,18 @@ export const DeckContent: FC<Props> = ({
   pagination,
   searchCard,
   isAuthor,
+  createCard,
+  loadingCreateCard,
 }) => {
   return (
     <div>
-      <DeckPanel name={name} isAuthor={isAuthor} searchCard={searchCard} />
+      <DeckPanel
+        name={name}
+        isAuthor={isAuthor}
+        searchCard={searchCard}
+        createCard={createCard}
+        loadingCreateCard={loadingCreateCard}
+      />
       <CardsList
         cardsData={cardsData}
         isAuthor={isAuthor}
@@ -34,4 +42,6 @@ type Props = {
   pagination: EntityPagination
   searchCard: (cardName: string) => void
   changeCurrentPage: (page: number) => void
+  createCard: (args: CreateCardDto) => Promise<any>
+  loadingCreateCard: boolean
 }
