@@ -1,6 +1,5 @@
 import { Trash } from '../../../assets/icons/trash'
 import { AddDeckRequestType } from '../../../services/decks/types.ts'
-import { AddNewPackModal } from '../../deck-content/deck-panel/modal/add-new-card.modal'
 import { Button } from '../../ui/button'
 import { ButtonGroup, ButtonSwitchType } from '../../ui/button-group'
 import { SliderRange as Slider } from '../../ui/slider'
@@ -8,6 +7,7 @@ import { TextField } from '../../ui/textfield'
 import { Typography } from '../../ui/typography'
 
 import s from './decks-list-panel.module.scss'
+import { AddNewDeckModal } from './modal/add-new-deck.modal'
 
 type DecksListPanelType = {
   addPackModalIsOpen: boolean
@@ -42,12 +42,12 @@ export const DecksListPanel = ({
   }
   const buttonsForFilterCards: ButtonSwitchType[] = [
     {
-      title: 'My Cards',
+      title: 'My Decks',
       active: showMyDecks,
       callback: showMyCards,
     },
     {
-      title: 'All Cards',
+      title: 'All Decks',
       active: !showMyDecks,
       callback: showAllCards,
     },
@@ -55,7 +55,7 @@ export const DecksListPanel = ({
 
   return (
     <>
-      <AddNewPackModal
+      <AddNewDeckModal
         modalIsOpen={addPackModalIsOpen}
         setModalIsOpen={setAddPackModalIsOpen}
         onSubmit={addDeck}
@@ -64,7 +64,7 @@ export const DecksListPanel = ({
         <Typography variant={'large'} as={'h1'}>
           Decks List
         </Typography>
-        <Button onClick={() => setAddPackModalIsOpen(true)}>Add New Pack</Button>
+        <Button onClick={() => setAddPackModalIsOpen(true)}>Add New Deck</Button>
       </div>
       <div className={s.settingContainer}>
         <TextField
@@ -72,7 +72,7 @@ export const DecksListPanel = ({
           placeholder={'Input search'}
           onChange={e => searchDeck(e.currentTarget.value)}
         />
-        <ButtonGroup buttons={buttonsForFilterCards} label={'Show packs cards'} />
+        <ButtonGroup buttons={buttonsForFilterCards} label={'Show decks'} />
         <Slider
           max={sliderValues[1]}
           min={sliderValues[0]}
