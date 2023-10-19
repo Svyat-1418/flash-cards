@@ -19,9 +19,11 @@ type CardTablePropsType = {
 export const CardTable = ({ cardContent, isAuthor }: CardTablePropsType) => {
   const [sort, setSort] = useState<Sort>(null)
 
+  const columns = isAuthor ? cardColumns : cardColumns.filter(el => el.key !== 'actions')
+
   return (
     <Table.Root>
-      <TableHeader columns={cardColumns} sort={sort} onSort={setSort} />
+      <TableHeader columns={columns} sort={sort} onSort={setSort} />
       <CardTableBody content={cardContent} isAuthor={isAuthor} />
     </Table.Root>
   )
