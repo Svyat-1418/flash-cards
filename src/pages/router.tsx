@@ -7,6 +7,7 @@ import { CheckEmailPage } from './check-email.page/check-email.page.tsx'
 import { DeckPage } from './deck-page'
 import { DecksListPage } from './decks-list.page'
 import Error404Page from './error404.page/error404.page.tsx'
+import { LearnPage } from './learn-page/learn-page.tsx'
 import { LoginPage } from './login.page'
 import { NewPasswordPage } from './new-password.page/new-password.page.tsx'
 import { PasswordRecoveryPage } from './password-recovery.page'
@@ -17,14 +18,14 @@ export const PATH = {
   HOME: '/',
   DECKS_LIST_PAGE: 'decks-list-page',
   DECK_PAGE: 'cards/:deckId',
-  LEARN: 'learn',
+  LEARN: 'learn/:deckId',
   PROFILE: 'profile',
   LOGIN: 'login',
   REGISTER: 'sign-up',
   RECOVERY_PASSWORD: 'recover-password',
   CHECK_EMAIL: 'check-email/:email?',
   CREATE_NEW_PASSWORD: 'new-password/:token',
-}
+} as const
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -43,8 +44,8 @@ export const router = createBrowserRouter([
             element: <DeckPage />,
           },
           {
-            path: 'learn/:deckId',
-            element: <h1>Learn</h1>,
+            path: PATH.LEARN,
+            element: <LearnPage />,
           },
           {
             path: 'profile',
