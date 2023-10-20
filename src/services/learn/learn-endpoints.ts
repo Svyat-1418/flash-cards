@@ -10,6 +10,7 @@ const learnEndpoints = baseApi.injectEndpoints({
         url: `decks/${id}/learn`,
         method: 'GET',
       }),
+      providesTags: ['Learn'],
     }),
     saveGrade: builder.mutation<LearnDeckResponse, SaveGradeArds>({
       query: ({ deckId, ...body }) => ({
@@ -17,6 +18,7 @@ const learnEndpoints = baseApi.injectEndpoints({
         method: 'P[ST',
         body,
       }),
+      invalidatesTags: ['Learn'],
     }),
   }),
 })
