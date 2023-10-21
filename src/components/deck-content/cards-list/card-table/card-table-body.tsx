@@ -10,9 +10,10 @@ import { Typography } from '../../../ui/typography'
 type Props = {
   content: Card[]
   isAuthor: boolean
+  editCardHandle: (card: Card) => void
 }
 
-export const CardTableBody: FC<Props> = ({ content, isAuthor }) => {
+export const CardTableBody: FC<Props> = ({ content, isAuthor, editCardHandle }) => {
   return (
     <Table.Body>
       {content.map(item => (
@@ -37,7 +38,7 @@ export const CardTableBody: FC<Props> = ({ content, isAuthor }) => {
           </Table.Cell>
           {isAuthor && (
             <Table.Cell>
-              <ControlButtons isAdmin={isAuthor} forCards />
+              <ControlButtons isAdmin={isAuthor} forCards handleEdit={() => editCardHandle(item)} />
             </Table.Cell>
           )}
         </Table.Row>
