@@ -4,9 +4,13 @@ import { toast } from 'react-toastify'
 import { useAppDispatch, useAppSelector } from '../../app/hooks.ts'
 import { DeckContent } from '../../components/deck-content/deck-content.tsx'
 import { useMeQuery } from '../../services/auth/auth-endpoints.ts'
-import { useCreateCardMutation, useGetCardsQuery } from '../../services/cards/cards-endpoints.ts'
+import {
+  useCreateCardMutation,
+  useGetCardsQuery,
+  useUpdateCardMutation,
+} from '../../services/cards/cards-endpoints.ts'
 import { setCurrentPage, setSearchByQuestion } from '../../services/cards/cards.slice.ts'
-import { CreateCardDto } from '../../services/cards/types.ts'
+import { CreateCardDto, UpdateCardArgs } from '../../services/cards/types.ts'
 import { useGetDeckByIdQuery } from '../../services/decks/decks-endpoints.ts'
 
 export const DeckPage = () => {
@@ -31,15 +35,29 @@ export const DeckPage = () => {
     id: deckId || '',
   })
   const [createCard, { isLoading: loadingCreateCard }] = useCreateCardMutation({})
-  //const [updateCard] = useUpdateCardMutation()
+  const [updateCard] = useUpdateCardMutation()
   //const [deleteCard] = useDeleteCardMutation()
   const { data: meData } = useMeQuery()
 
   const createCardHandle = async (args: CreateCardDto) => {
     if (deckId) {
-      return await createCard({ deckId, ...args })
+      return createCard({ deckId, ...args })
         .unwrap()
         .then(() => toast.success('Card created'))
+        .catch(error => toast.error(error))
+    }
+  }
+  const updateCardHandle = async (args: UpdateCardArgs) => {
+    try {
+      const res = await updateCard(args).unwrap()
+
+      toast.success('Card edited')
+
+      return res
+    } catch (error) {
+      const e = error as Error
+
+      toast.error(e.message)
     }
   }
 
@@ -57,6 +75,7 @@ export const DeckPage = () => {
           changeCurrentPage={changeCurrentPage}
           createCard={createCardHandle}
           loadingCreateCard={loadingCreateCard}
+          updateCard={updateCardHandle}
         />
       )}
     </section>

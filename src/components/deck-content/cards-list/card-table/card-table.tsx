@@ -14,9 +14,10 @@ export type Sort = {
 type CardTablePropsType = {
   cardContent: Card[]
   isAuthor: boolean
+  editCardHandle: (card: Card) => void
 }
 
-export const CardTable = ({ cardContent, isAuthor }: CardTablePropsType) => {
+export const CardTable = ({ cardContent, isAuthor, editCardHandle }: CardTablePropsType) => {
   const [sort, setSort] = useState<Sort>(null)
 
   const columns = isAuthor ? cardColumns : cardColumns.filter(el => el.key !== 'actions')
@@ -24,7 +25,7 @@ export const CardTable = ({ cardContent, isAuthor }: CardTablePropsType) => {
   return (
     <Table.Root>
       <TableHeader columns={columns} sort={sort} onSort={setSort} />
-      <CardTableBody content={cardContent} isAuthor={isAuthor} />
+      <CardTableBody content={cardContent} isAuthor={isAuthor} editCardHandle={editCardHandle} />
     </Table.Root>
   )
 }
