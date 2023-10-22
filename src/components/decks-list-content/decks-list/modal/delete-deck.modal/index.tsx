@@ -1,18 +1,18 @@
 import { Button } from '../../../../ui/button'
 import { Modal } from '../../../../ui/modal'
 import { Typography } from '../../../../ui/typography'
-import s from '../edit-pack.modal/edit-pack.model.module.scss'
+import s from '../edit-deck.modal/edit-deck.modal.module.scss'
 
-type DeletePackModalPropsType = {
+type DeleteDeckModalPropsType = {
   modalIsOpen: boolean
   setModalIsOpen: (value: boolean) => void
   onSubmit: () => void
 }
-export const DeletePackModal = ({
+export const DeleteDeckModal = ({
   modalIsOpen,
   setModalIsOpen,
   onSubmit,
-}: DeletePackModalPropsType) => {
+}: DeleteDeckModalPropsType) => {
   const cancelHandle = () => {
     setModalIsOpen(false)
   }
@@ -20,14 +20,14 @@ export const DeletePackModal = ({
   return (
     <Modal open={modalIsOpen} showCloseButton={true} title={'Delete Pack'} onClose={cancelHandle}>
       <Typography variant={'subtitle1'}>
-        Do you really want to remove Pack Name? All cards will be deleted.
+        Do you really want to remove Deck Name? All cards will be deleted.
       </Typography>
       <div className={s.buttonContainer}>
         <Button variant={'secondary'} onClick={cancelHandle}>
           Cancel
         </Button>
         <Button variant={'primary'} onClick={onSubmit}>
-          Delete Pack
+          Delete Deck
         </Button>
       </div>
     </Modal>

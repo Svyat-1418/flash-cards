@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { Card, CreateCardDto, UpdateCardArgs } from '../../services/cards/types.ts'
+import { Card, CreateCardDto, DeleteCardArgs, UpdateCardArgs } from '../../services/cards/types.ts'
 import { Pagination as EntityPagination } from '../../services/common.types.ts'
 
 import { CardsList } from './cards-list/cards-list.tsx'
@@ -16,6 +16,7 @@ export const DeckContent: FC<Props> = ({
   createCard,
   loadingCreateCard,
   updateCard,
+  deleteCard,
 }) => {
   return (
     <div>
@@ -32,6 +33,7 @@ export const DeckContent: FC<Props> = ({
         pagination={pagination}
         changeCurrentPage={changeCurrentPage}
         updateCard={updateCard}
+        deleteCard={deleteCard}
       />
     </div>
   )
@@ -44,7 +46,8 @@ type Props = {
   pagination: EntityPagination
   searchCard: (cardName: string) => void
   changeCurrentPage: (page: number) => void
-  createCard: (args: CreateCardDto) => Promise<any>
   loadingCreateCard: boolean
+  createCard: (args: CreateCardDto) => Promise<any>
   updateCard: (args: UpdateCardArgs) => Promise<any>
+  deleteCard: (args: DeleteCardArgs) => Promise<any>
 }
