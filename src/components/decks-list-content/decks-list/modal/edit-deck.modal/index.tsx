@@ -7,7 +7,7 @@ import { ControlledCheckbox, ControlledTextField } from '../../../../ui/controll
 import { Modal } from '../../../../ui/modal'
 import { Typography } from '../../../../ui/typography'
 
-import s from './edit-pack.model.module.scss'
+import s from './edit-deck.modal.module.scss'
 
 const schema = z.object({
   name: z.string().trim().nonempty('Enter new title'),

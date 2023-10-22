@@ -13,7 +13,7 @@ export type Card = {
   questionVideo?: any
   comments?: any
   type?: any
-  rating: number
+  grade: number
   moreId?: any
   created: string
   updated: string
@@ -25,35 +25,60 @@ export type CardTableContent = {
   updated: string
   grade: number
 }
-export const cardContent: CardTableContent[] = [
+export const cardContent: Card[] = [
   {
+    deckId: '1',
+    userId: '1',
+    id: '1',
+    shots: 1,
+    created: '2023-07-07',
     question: 'How translate Upbringing into Russian ?',
     answer: 'Воспитание',
     updated: '2023-07-07',
     grade: 3,
   },
   {
+    deckId: '1',
+    id: '1',
+    userId: '1',
+    shots: 1,
     question: 'How translate A glance into Russian ?',
     answer: 'Взгляд',
     updated: '2023-07-07',
-    grade: 4,
+    created: '2023-07-07',
+    grade: 3,
   },
   {
+    deckId: '1',
+    id: '1',
+    shots: 1,
+    userId: '1',
     question: 'How translate To pear at into Russian ?',
     answer: 'Всматриваться в',
     updated: '2023-07-07',
-    grade: 1,
+    created: '2023-07-07',
+    grade: 3,
   },
   {
+    deckId: '1',
+    id: '1',
+    userId: '1',
+    shots: 1,
     question: 'How translate Tears into Russian ?',
     answer: 'Слёзы',
     updated: '2023-07-07',
-    grade: 5,
+    created: '2023-07-07',
+    grade: 3,
   },
   {
+    deckId: '1',
+    id: '1',
+    userId: '1',
+    shots: 1,
     question: 'How translate Modesty into Russian ?',
     answer: 'Скромность',
     updated: '2023-07-07',
+    created: '2023-07-07',
     grade: 3,
   },
 ]
