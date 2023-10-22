@@ -4,8 +4,8 @@ import { Typography } from '../../ui/typography'
 
 import { DeckTable } from './deck-table'
 import s from './decks-list.module.scss'
-import { DeletePackModal } from './modal/delete-pack.modal'
-import { EditPackModal } from './modal/edit-pack.modal'
+import { DeleteDeckModal } from './modal/delete-deck.modal'
+import { EditPackModal } from './modal/edit-deck.modal'
 
 type DecksListPropsType = {
   deckContent: Deck[]
@@ -66,7 +66,7 @@ export const DecksList = ({
             setModalIsOpen={setEditPackModalIsOpen}
             onSubmit={updateDeckHandle}
           />
-          <DeletePackModal
+          <DeleteDeckModal
             modalIsOpen={deletePackModalIsOpen}
             setModalIsOpen={setDeletePackModalIsOpen}
             onSubmit={deleteDeckHandle}

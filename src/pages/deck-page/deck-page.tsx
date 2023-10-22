@@ -6,11 +6,12 @@ import { DeckContent } from '../../components/deck-content/deck-content.tsx'
 import { useMeQuery } from '../../services/auth/auth-endpoints.ts'
 import {
   useCreateCardMutation,
+  useDeleteCardMutation,
   useGetCardsQuery,
   useUpdateCardMutation,
 } from '../../services/cards/cards-endpoints.ts'
 import { setCurrentPage, setSearchByQuestion } from '../../services/cards/cards.slice.ts'
-import { CreateCardDto, UpdateCardArgs } from '../../services/cards/types.ts'
+import { CreateCardDto, DeleteCardArgs, UpdateCardArgs } from '../../services/cards/types.ts'
 import { useGetDeckByIdQuery } from '../../services/decks/decks-endpoints.ts'
 
 export const DeckPage = () => {
@@ -36,7 +37,7 @@ export const DeckPage = () => {
   })
   const [createCard, { isLoading: loadingCreateCard }] = useCreateCardMutation({})
   const [updateCard] = useUpdateCardMutation()
-  //const [deleteCard] = useDeleteCardMutation()
+  const [deleteCard] = useDeleteCardMutation()
   const { data: meData } = useMeQuery()
 
   const createCardHandle = async (args: CreateCardDto) => {
@@ -61,6 +62,20 @@ export const DeckPage = () => {
     }
   }
 
+  const deleteCardHandle = async (args: DeleteCardArgs) => {
+    try {
+      const res = await deleteCard(args)
+
+      toast.success('Card Deleted')
+
+      return res
+    } catch (error) {
+      const e = error as Error
+
+      toast.error(e.message)
+    }
+  }
+
   if (!deckId) return <div>Deck not found</div>
 
   return (
@@ -76,6 +91,7 @@ export const DeckPage = () => {
           createCard={createCardHandle}
           loadingCreateCard={loadingCreateCard}
           updateCard={updateCardHandle}
+          deleteCard={deleteCardHandle}
         />
       )}
     </section>
