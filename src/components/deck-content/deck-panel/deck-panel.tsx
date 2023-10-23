@@ -1,9 +1,7 @@
 import { FC, useState } from 'react'
 
-import { Link } from 'react-router-dom'
-
-import { PATH } from '../../../pages/router.tsx'
 import { CreateCardDto } from '../../../services/cards/types.ts'
+import { BackToDecksList } from '../../ui/back-to-decks-list'
 import { Button } from '../../ui/button'
 import { TextField } from '../../ui/textfield'
 import { Typography } from '../../ui/typography'
@@ -30,9 +28,7 @@ export const DeckPanel: FC<Props> = ({
         onSubmit={createCard}
       />
       <div>
-        <Typography variant={'body2'} as={Link} to={PATH.HOME}>
-          Back to Decks List
-        </Typography>
+        <BackToDecksList />
         <Typography variant={'large'} as={'h1'}>
           {name}
         </Typography>

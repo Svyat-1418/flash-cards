@@ -25,9 +25,7 @@ export const ControlButtons = ({
     <div className={s.controlButtonContainer}>
       {!forCards && toLearn && (
         <Link to={toLearn}>
-          <button className={s.controlButton}>
-            <OutlinedPlayCircle />
-          </button>
+          <OutlinedPlayCircle />
         </Link>
       )}
       {isAdmin ? (
