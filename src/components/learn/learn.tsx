@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 import { Button } from '../ui/button'
 import { Card } from '../ui/card'
@@ -26,13 +26,12 @@ export const Learn: FC<Props> = ({
 }) => {
   const [grade, setGrade] = useState(1)
 
+  useEffect(() => {}, [grade])
   const handleShowAnswer = () => {
     setShowAnswer(true)
   }
-  const handleRateYourself = (e: ChangeEvent<HTMLInputElement>) => {
-    const radioValue = +e.currentTarget.value
-
-    setGrade(radioValue)
+  const handleRateYourself = (value: string) => {
+    setGrade(+value)
   }
   const handleNextAnswer = () => handleSaveGrade(grade)
 
@@ -62,7 +61,7 @@ export const Learn: FC<Props> = ({
             <Typography variant={'h3'} className={s.rateText}>
               Rate yourself:
             </Typography>
-            <RadioGroup options={grades} onChange={handleRateYourself} />
+            <RadioGroup options={grades} onValueChange={handleRateYourself} />
             <Button className={s.btn} onClick={handleNextAnswer}>
               Next Question
             </Button>
