@@ -13,7 +13,6 @@ export const Layout = () => {
   return (
     <div className={s.container}>
       <Header isLoggedIn={!!data} email={data?.email} name={data?.name} logout={logout} />
-      <div aria-hidden className={s.placeholder} />
       <ContentContainer classname={s.outletContainer}>
         <Outlet />
       </ContentContainer>

@@ -31,7 +31,7 @@ RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName
 
 type Option = {
   label: string
-  value: string
+  value: string | number
 }
 export type RadioGroupProps = Omit<
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>,
