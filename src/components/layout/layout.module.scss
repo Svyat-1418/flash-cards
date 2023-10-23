@@ -1,10 +1,10 @@
-.placeholder {
-  height: 36px;
-}
-
 .outletContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 100%;
   max-width: 1008px;
   height: 100%;
-  margin: 0 auto;
+  margin: 2.25rem auto 0;
 }
