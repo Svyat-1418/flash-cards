@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 import { Trash } from '../../../assets/icons/trash'
 import { AddDeckRequestType } from '../../../services/decks/types.ts'
 import { Button } from '../../ui/button'
@@ -20,6 +22,7 @@ type DecksListPanelType = {
   setSliderValues: () => void
   setSliderRangeValues: (values: number[]) => void
   showMyDecks: boolean
+  setClearFilter: () => void
 }
 
 export const DecksListPanel = ({
@@ -33,6 +36,7 @@ export const DecksListPanel = ({
   setSliderValues,
   setSliderRangeValues,
   showMyDecks,
+  setClearFilter,
 }: DecksListPanelType) => {
   const showMyCards = () => {
     setShowMyDecks(true)
@@ -53,6 +57,18 @@ export const DecksListPanel = ({
     },
   ]
 
+  const [search, setSearch] = useState('')
+  const clearFilterHandle = () => {
+    setClearFilter()
+    setSearch('')
+  }
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => searchDeck(search), 2000)
+
+    return () => clearTimeout(timeoutId)
+  }, [search])
+
   return (
     <>
       <AddNewDeckModal
@@ -70,7 +86,8 @@ export const DecksListPanel = ({
         <TextField
           type={'search'}
           placeholder={'Input search'}
-          onChange={e => searchDeck(e.currentTarget.value)}
+          value={search}
+          onChange={e => setSearch(e.currentTarget.value)}
         />
         <ButtonGroup buttons={buttonsForFilterCards} label={'Show decks'} />
         <Slider
@@ -82,7 +99,7 @@ export const DecksListPanel = ({
           setSliderValues={setSliderValues}
           setSliderRangeValues={setSliderRangeValues}
         />
-        <Button variant={'secondary'}>
+        <Button variant={'secondary'} onClick={clearFilterHandle}>
           <>
             <Trash />
             Clear Filter

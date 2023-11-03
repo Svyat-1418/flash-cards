@@ -32,6 +32,7 @@ export type DecksPropsType = {
   updateDeck: (args: UpdateDeckRequestType) => void
   editingDeck: Deck | null
   setEditingDeck: (item: Deck | null) => void
+  setClearFilter: () => void
 }
 
 export const DecksListContent = ({
@@ -57,6 +58,7 @@ export const DecksListContent = ({
   updateDeck,
   editingDeck,
   setEditingDeck,
+  setClearFilter,
 }: DecksPropsType) => {
   return (
     <ContentContainer>
@@ -71,6 +73,7 @@ export const DecksListContent = ({
         sliderRangeValues={sliderRangeValues}
         addPackModalIsOpen={addPackModalIsOpen}
         showMyDecks={showMyDecks}
+        setClearFilter={setClearFilter}
       />
       <DecksList
         deckContent={deckContent}
