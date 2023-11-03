@@ -13,7 +13,7 @@ import s from './add-new-card.modal.module.scss'
 type AddNewCardModalPropsType = {
   modalIsOpen: boolean
   closeModal: () => void
-  onSubmit: (args: FormType) => Promise<any>
+  onSubmit: <T>(args: FormType) => Promise<T>
 }
 const schema = z.object({
   question: z.string().trim().nonempty('Enter question'),

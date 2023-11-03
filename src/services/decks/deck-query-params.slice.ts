@@ -57,6 +57,9 @@ export const decksSlice = createSlice({
     setEditingDeck: (state, action: PayloadAction<{ deck: null | Deck }>) => {
       state.editingDeck = action.payload.deck
     },
+    setClearFilter: () => {
+      return initialState
+    },
   },
 })
 
@@ -70,4 +73,5 @@ export const {
   setEditPackModalIsOpen,
   setDeletePackModalIsOpen,
   setEditingDeck,
+  setClearFilter,
 } = decksSlice.actions

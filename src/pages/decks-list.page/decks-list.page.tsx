@@ -7,6 +7,7 @@ import { DecksListContent } from '../../components/decks-list-content'
 import { useMeQuery } from '../../services/auth/auth-endpoints.ts'
 import {
   setAddPackModalIsOpen,
+  setClearFilter,
   setCurrentPage,
   setDecksName,
   setDeletePackModalIsOpen,
@@ -65,6 +66,9 @@ export const DecksListPage = () => {
   }
   const setEditingDeckHandle = (deck: Deck | null) => {
     dispatch(setEditingDeck({ deck }))
+  }
+  const setClearFilterHandle = () => {
+    dispatch(setClearFilter())
   }
 
   const searchDeck = (name: string) => {
@@ -155,6 +159,7 @@ export const DecksListPage = () => {
       updateDeck={updateDeckHandle}
       editingDeck={editingDeck}
       setEditingDeck={setEditingDeckHandle}
+      setClearFilter={setClearFilterHandle}
     />
   )
 }
