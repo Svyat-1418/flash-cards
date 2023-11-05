@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import { Deck } from '../../../../services/decks/types.ts'
 import { Table, TableHeader } from '../../../ui/table'
 
@@ -11,6 +9,8 @@ export type DeckTablePropsType = {
   deckContent: Deck[]
   editDeck: (item: Deck) => void
   deleteDeck: (item: Deck) => void
+  sort: Sort
+  handleSort: (sort: Sort) => void
 }
 
 export type Sort = {
@@ -18,12 +18,17 @@ export type Sort = {
   direction: 'asc' | 'desc'
 } | null
 
-export const DeckTable = ({ deckContent, userId, editDeck, deleteDeck }: DeckTablePropsType) => {
-  const [sort, setSort] = useState<Sort>(null)
-
+export const DeckTable = ({
+  deckContent,
+  userId,
+  editDeck,
+  deleteDeck,
+  sort,
+  handleSort,
+}: DeckTablePropsType) => {
   return (
     <Table.Root>
-      <TableHeader columns={deckColumns} sort={sort} onSort={setSort} />
+      <TableHeader columns={deckColumns} sort={sort} onSort={handleSort} />
       <DeckTableBody
         deckContent={deckContent}
         userId={userId}

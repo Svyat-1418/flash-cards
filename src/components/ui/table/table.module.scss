@@ -23,15 +23,13 @@
   text-align: left;
   background-color: var(--color-dark-500);
 
-  > span {
+  > span.sortLabel {
+    cursor: pointer;
     user-select: none;
+
     display: flex;
     gap: 0.25rem;
     align-items: center;
-  }
-
-  &.sortable > span {
-    cursor: pointer;
   }
 }
 

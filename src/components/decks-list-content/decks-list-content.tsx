@@ -4,12 +4,15 @@ import {
   PaginationType,
   UpdateDeckRequestType,
 } from '../../services/decks/types.ts'
+import { Sort } from '../deck-content/cards-list/card-table'
 import { ContentContainer } from '../ui/content-container'
 
 import { DecksList } from './decks-list/decks-list.tsx'
 import { DecksListPanel } from './decks-list-panel/decks-list-panel.tsx'
 
 export type DecksPropsType = {
+  sort: Sort
+  handleSort: (sort: Sort) => void
   userId: string | undefined
   deckContent: Deck[] | undefined
   pagination: PaginationType | undefined
@@ -36,6 +39,8 @@ export type DecksPropsType = {
 }
 
 export const DecksListContent = ({
+  sort,
+  handleSort,
   userId,
   deckContent = [],
   pagination,
@@ -76,6 +81,8 @@ export const DecksListContent = ({
         setClearFilter={setClearFilter}
       />
       <DecksList
+        sort={sort}
+        handleSort={handleSort}
         deckContent={deckContent}
         userId={userId}
         pagination={pagination}

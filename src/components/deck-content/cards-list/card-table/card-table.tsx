@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import { Card } from '../../../../services/cards/types.ts'
 import { cardColumns } from '../../../cards/card-table/card-fake-data.ts'
 import { Table, TableHeader } from '../../../ui/table'
@@ -16,16 +14,23 @@ type CardTablePropsType = {
   isAuthor: boolean
   editCard: (card: Card) => void
   deleteCard: (card: Card) => void
+  sort: Sort
+  handleSort: (sort: Sort) => void
 }
 
-export const CardTable = ({ cardContent, isAuthor, editCard, deleteCard }: CardTablePropsType) => {
-  const [sort, setSort] = useState<Sort>(null)
-
+export const CardTable = ({
+  cardContent,
+  isAuthor,
+  editCard,
+  deleteCard,
+  sort,
+  handleSort,
+}: CardTablePropsType) => {
   const columns = isAuthor ? cardColumns : cardColumns.filter(el => el.key !== 'actions')
 
   return (
     <Table.Root>
-      <TableHeader columns={columns} sort={sort} onSort={setSort} />
+      <TableHeader columns={columns} sort={sort} onSort={handleSort} />
       <CardTableBody
         content={cardContent}
         isAuthor={isAuthor}
