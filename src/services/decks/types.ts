@@ -36,7 +36,7 @@ export type DecksRequestType = {
   maxCardsCount?: string
   name?: string
   authorId?: string
-  orderBy?: `${OrderByProp}-asc` | `${OrderByProp}-desc`
+  orderBy?: string //`${OrderByProp}-asc` | `${OrderByProp}-desc`
   currentPage?: number
   itemsPerPage?: number
 }
