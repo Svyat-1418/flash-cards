@@ -1,4 +1,5 @@
 import { Deck, PaginationType, UpdateDeckRequestType } from '../../../services/decks/types.ts'
+import { Sort } from '../../deck-content/cards-list/card-table'
 import { Pagination } from '../../ui/pagination'
 import { Typography } from '../../ui/typography'
 
@@ -8,6 +9,8 @@ import { DeleteDeckModal } from './modal/delete-deck.modal'
 import { EditPackModal } from './modal/edit-deck.modal'
 
 type DecksListPropsType = {
+  sort: Sort
+  handleSort: (sort: Sort) => void
   deckContent: Deck[]
   userId: string | undefined
   pagination: PaginationType | undefined
@@ -22,6 +25,8 @@ type DecksListPropsType = {
   setEditingDeck: (item: Deck | null) => void
 }
 export const DecksList = ({
+  sort,
+  handleSort,
   deckContent,
   userId,
   pagination,
@@ -72,6 +77,8 @@ export const DecksList = ({
             onSubmit={deleteDeckHandle}
           />
           <DeckTable
+            sort={sort}
+            handleSort={handleSort}
             deckContent={deckContent}
             userId={userId}
             editDeck={openEditDeckModal}

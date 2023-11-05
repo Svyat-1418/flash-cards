@@ -3,9 +3,11 @@ import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks.ts'
+import { Sort } from '../../components/deck-content/cards-list/card-table'
 import { DecksListContent } from '../../components/decks-list-content'
 import { useMeQuery } from '../../services/auth/auth-endpoints.ts'
 import {
+  decksActions,
   setAddPackModalIsOpen,
   setClearFilter,
   setCurrentPage,
@@ -24,6 +26,7 @@ import {
   useUpdateDeckMutation,
 } from '../../services/decks/decks-endpoints.ts'
 import { AddDeckRequestType, Deck, UpdateDeckRequestType } from '../../services/decks/types.ts'
+import { getSortString } from '../../shared/utils/getSortString.ts'
 
 export const DecksListPage = () => {
   const dispatch = useAppDispatch()
@@ -37,6 +40,7 @@ export const DecksListPage = () => {
     editPackModalIsOpen,
     deletePackModalIsOpen,
     editingDeck,
+    sort,
   } = useAppSelector(state => state.decksQueryParams)
 
   const setCurrentPageHandle = (page: number) => {
@@ -80,6 +84,9 @@ export const DecksListPage = () => {
     setCurrentPageHandle(1)
     setSliderValuesHandle(sliderRangeValues)
   }
+  const handleSort = (sort: Sort) => {
+    dispatch(decksActions.setSort({ sort }))
+  }
 
   const { data: user } = useMeQuery()
   const { data: decksData } = useGetDecksQuery({
@@ -88,6 +95,7 @@ export const DecksListPage = () => {
     minCardsCount: sliderValues[0].toString(),
     maxCardsCount: sliderValues[1].toString(),
     name: decksName,
+    orderBy: getSortString(sort),
   })
   const [addDeck] = useCreateDeckMutation()
   const [deleteDeck] = useDeleteDeckMutation()
@@ -137,6 +145,8 @@ export const DecksListPage = () => {
   //todo заменить userId на флаг isAdmin
   return (
     <DecksListContent
+      sort={sort}
+      handleSort={handleSort}
       userId={user?.id}
       deckContent={decksData?.items}
       pagination={decksData?.pagination}
