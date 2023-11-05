@@ -5,12 +5,14 @@ import type { Pagination as EntityPagination } from '../../../services/common.ty
 import { Pagination } from '../../ui/pagination'
 import { Empty } from '../../ui/table'
 
-import { CardTable } from './card-table'
+import { CardTable, Sort } from './card-table'
 import { DeleteCardModal } from './modal/delete-card.modal'
 import { EditCardModal } from './modal/edit-card.modal'
 
 export const CardsList: FC<Props> = ({
   cardsData,
+  sort,
+  handleSort,
   changeCurrentPage,
   pagination,
   isAuthor,
@@ -57,6 +59,8 @@ export const CardsList: FC<Props> = ({
             deleteCard={deleteCard}
           />
           <CardTable
+            sort={sort}
+            handleSort={handleSort}
             cardContent={cardsData}
             isAuthor={isAuthor}
             editCard={openEditCardModalHandle}
@@ -82,4 +86,6 @@ type Props = {
   changeCurrentPage: (page: number) => void
   updateCard: (args: UpdateCardArgs) => Promise<any>
   deleteCard: (args: DeleteCardArgs) => Promise<any>
+  sort: Sort
+  handleSort: (sort: Sort) => void
 }
