@@ -1,5 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+import { Sort } from '../../components/deck-content/cards-list/card-table'
+import { Nullable } from '../../types/common.types.ts'
+
 import { Deck } from './types.ts'
 
 type initialStateType = {
@@ -12,6 +15,7 @@ type initialStateType = {
   editPackModalIsOpen: boolean
   deletePackModalIsOpen: boolean
   editingDeck: null | Deck
+  sort: Nullable<Sort>
 }
 
 const initialState: initialStateType = {
@@ -24,6 +28,7 @@ const initialState: initialStateType = {
   editPackModalIsOpen: false,
   deletePackModalIsOpen: false,
   editingDeck: null,
+  sort: null as Nullable<Sort>,
 }
 
 export const decksSlice = createSlice({
@@ -60,6 +65,9 @@ export const decksSlice = createSlice({
     setClearFilter: () => {
       return initialState
     },
+    setSort: (state, action: PayloadAction<{ sort: Sort }>) => {
+      state.sort = action.payload.sort
+    },
   },
 })
 
@@ -75,3 +83,4 @@ export const {
   setEditingDeck,
   setClearFilter,
 } = decksSlice.actions
+export const { actions: decksActions } = decksSlice
