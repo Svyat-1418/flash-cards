@@ -24,7 +24,7 @@ const dataAttributes = {
 
 export const TableHeader: FC<Props> = ({ columns, sort, onSort, ...restProps }) => {
   const handleSorting: MouseEventHandler<HTMLTableRowElement> = e => {
-    if (!(e.target instanceof HTMLTableCellElement)) return
+    if (!(e.target instanceof HTMLSpanElement)) return
 
     const isSortable = e.target.getAttribute(dataAttributes.sortable)
     const key = e.target.getAttribute(dataAttributes.name)
@@ -51,18 +51,19 @@ export const TableHeader: FC<Props> = ({ columns, sort, onSort, ...restProps }) 
           const showSort = column.isSortable && sort && sort.key === column.key
 
           return (
-            <Table.HeadCell
-              className={clsx(column.isSortable, s.sortable)}
-              {...{
-                [dataAttributes.sortable]: column.isSortable,
-                [dataAttributes.name]: column.key,
-              }}
-              key={column.title}
-            >
-              <span>
-                <Typography variant={'subtitle2'}>{column.title}</Typography>
-                {showSort && <span>{sort.direction === 'asc' ? <ArrowUp /> : <ArrowDown />}</span>}
-              </span>
+            <Table.HeadCell key={column.title}>
+              <Typography
+                variant={'subtitle2'}
+                className={clsx(column.isSortable, s.sortLabel)}
+                as={'span'}
+                {...{
+                  [dataAttributes.sortable]: column.isSortable,
+                  [dataAttributes.name]: column.key,
+                }}
+              >
+                {column.title}
+                {showSort && <>{sort.direction === 'asc' ? <ArrowUp /> : <ArrowDown />}</>}
+              </Typography>
             </Table.HeadCell>
           )
         })}
