@@ -1,50 +1,31 @@
+@import '../../../styles/mixins';
+
 .card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include flex($direction: column, $align: center, $justify: center);
 
-  max-width: 420px;
+  width: 100%;
+  max-width: 26.25rem;
   margin: 0 auto;
-  padding: 33px 36px 41px;
+  padding: 3.3rem 3.6rem 4.1rem;
 
-  & > h1 {
-    margin-bottom: 27px;
+  .title {
+    margin-bottom: 2.7rem;
   }
 
-  & > div,
-  form {
-    align-self: stretch;
+  .avatarUploader {
+    margin-bottom: 0.6rem;
   }
-}
 
-.nameContainer {
-  display: flex;
-  gap: 9px;
-  align-items: baseline;
-  justify-content: center;
-}
+  .profileInfoBlock {
+    text-align: center;
 
-.name {
-  margin-top: 6px;
-}
+    .userNameWrapper {
+      @include flex($align: center, $justify: center, $gap: 0.9rem);
+    }
 
-.edit {
-  cursor: pointer;
-}
-
-.email {
-  color: var(--color-dark-100);
-}
-
-.logoutButton {
-  margin-top: 13px;
-}
-
-.changeNameField {
-  align-self: stretch;
-  margin-top: 12px;
-}
-
-.changeNameButton {
-  margin-top: 36px;
+    .email {
+      margin-bottom: 1.3rem;
+      color: var(--color-dark-100);
+    }
+  }
 }
