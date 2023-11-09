@@ -26,7 +26,7 @@ import {
   useUpdateDeckMutation,
 } from '../../services/decks/decks-endpoints.ts'
 import { AddDeckRequestType, Deck, UpdateDeckRequestType } from '../../services/decks/types.ts'
-import { getSortString } from '../../shared/utils/getSortString.ts'
+import { getSortString } from '../../shared/utils/get-sort-string.ts'
 
 export const DecksListPage = () => {
   const dispatch = useAppDispatch()
