@@ -20,12 +20,10 @@ export const Dropdown = ({ trigger, dropdownElements }: DropdownPropsType) => {
           {dropdownElements.map((el, i) => {
             if (el !== dropdownElements.at(-1)) {
               return (
-                <>
-                  <DropdownMenu.Item key={i} className={s.element}>
-                    {el}
-                  </DropdownMenu.Item>
+                <div key={i}>
+                  <DropdownMenu.Item className={s.element}>{el}</DropdownMenu.Item>
                   <DropdownMenu.Separator className={s.separator} />
-                </>
+                </div>
               )
             } else {
               return (
