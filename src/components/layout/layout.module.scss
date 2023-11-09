@@ -1,10 +1,5 @@
-.outletContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@import '../../styles/mixins';
 
-  width: 100%;
-  max-width: 1008px;
-  height: 100%;
-  margin: 2.25rem auto 0;
+.outletContainer {
+  @include container;
 }
