@@ -18,7 +18,7 @@ import {
 } from '../../services/cards/cards.slice.ts'
 import { CreateCardDto, DeleteCardArgs, UpdateCardArgs } from '../../services/cards/types.ts'
 import { useGetDeckByIdQuery } from '../../services/decks/decks-endpoints.ts'
-import { getSortString } from '../../shared/utils/getSortString.ts'
+import { getSortString } from '../../shared/utils/get-sort-string.ts'
 
 export const DeckPage = () => {
   const { deckId } = useParams<{ deckId: string }>()
