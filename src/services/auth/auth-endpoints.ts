@@ -23,7 +23,7 @@ export const authEndpoints = baseApi.injectEndpoints({
       }),
       providesTags: ['Me'],
     }),
-     : builder.mutation<MeResponse, FormData>({
+    updateMe: builder.mutation<MeResponse, FormData>({
       query: body => ({
         url: `auth/me`,
         method: 'PATCH',
