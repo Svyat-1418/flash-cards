@@ -1,3 +1,5 @@
+import { getFileFromFormData } from '../../shared/utils/get-file-from-form-data'
+import { getTextFromFormData } from '../../shared/utils/get-text-from-form-data'
 import { Nullable } from '../../types/common.types.ts'
 import { baseApi } from '../base-api.ts'
 
@@ -9,7 +11,6 @@ import {
   NewPasswordArgs,
   SignUpArgs,
   SignUpResponse,
-  UpdateMeArgs,
 } from './types.ts'
 
 export const authEndpoints = baseApi.injectEndpoints({
@@ -22,13 +23,42 @@ export const authEndpoints = baseApi.injectEndpoints({
       }),
       providesTags: ['Me'],
     }),
-    updateMe: builder.mutation<MeResponse, UpdateMeArgs>({
-      query: args => ({
+     : builder.mutation<MeResponse, FormData>({
+      query: body => ({
         url: `auth/me`,
         method: 'PATCH',
-        body: args,
+        body,
       }),
-      invalidatesTags: ['Me'],
+      async onQueryStarted(body, { dispatch, queryFulfilled }) {
+        let avatar = ''
+
+        const patchResult = dispatch(
+          authEndpoints.util.updateQueryData('me', undefined, draft => {
+            const name = getTextFromFormData(body, 'name')
+            const avatarBlob = getFileFromFormData(body, 'avatar')
+
+            if (avatarBlob instanceof Blob) {
+              avatar = URL.createObjectURL(avatarBlob)
+            }
+
+            if (draft && avatar) {
+              draft.avatar = avatar
+            }
+
+            if (draft && name) {
+              draft.name = name
+            }
+          })
+        )
+
+        try {
+          await queryFulfilled
+        } catch {
+          patchResult.undo()
+        } finally {
+          URL.revokeObjectURL(avatar)
+        }
+      },
     }),
     login: builder.mutation<LoginResponse, LoginArgs>({
       query: args => ({
