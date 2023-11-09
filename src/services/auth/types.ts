@@ -22,7 +22,7 @@ export type MeResponse = {
 export type UpdateMeArgs = {
   email?: string
   name?: string
-  avatar?: string
+  avatar?: Blob
 }
 
 export type SignUpArgs = {
