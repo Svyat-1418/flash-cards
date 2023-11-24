@@ -6,6 +6,7 @@ import {
   useUpdateMeMutation,
 } from '../../services/auth/auth-endpoints.ts'
 import { UpdateMeArgs } from '../../services/auth/types.ts'
+import { appendDataToFormData } from '../../shared/utils/append-data-to-form-data.ts'
 
 export const ProfilePage = () => {
   const { data: me } = useMeQuery()
@@ -13,16 +14,7 @@ export const ProfilePage = () => {
   const [logout] = useLogoutMutation()
 
   const handleUpdateMe = (data: Pick<UpdateMeArgs, 'name' | 'avatar'>) => {
-    debugger
-    const formData = new FormData()
-
-    Object.keys(data).forEach(key => {
-      formData.append(key, data[key as keyof Omit<UpdateMeArgs, 'email'>])
-    })
-
-    console.log(formData)
-
-    updateMe(formData)
+    updateMe(appendDataToFormData(data))
   }
 
   return (
