@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Logo } from '../../../assets/icons/logo'
 import { Logout } from '../../../assets/icons/logout'
 import { Person } from '../../../assets/icons/person'
+import { Nullable } from '../../../types/common.types.ts'
 import { Avatar } from '../avatar'
 import { Button } from '../button'
 import { ContentContainer } from '../content-container'
@@ -14,22 +15,22 @@ import s from './header.module.scss'
 type HeaderPropsType = {
   isLoggedIn: boolean
   name?: string
-  avatarSrc?: string
+  avatarSrc?: Nullable<string>
   email?: string
   logout: () => void
 }
 
 export const Header = ({
   isLoggedIn = true,
-  name = 'Ivan',
+  name,
   avatarSrc,
   email = '',
   logout,
 }: HeaderPropsType) => {
-  const dropdownHeader = (name: string, email: string, avatarSrc?: string) => {
+  const dropdownHeader = (name?: string, email?: string, avatarSrc?: Nullable<string>) => {
     return (
       <div className={s.dropDownHeader}>
-        <Avatar src={avatarSrc} />
+        <Avatar src={avatarSrc ?? ''} />
         <div>
           <Typography variant={'subtitle2'}>{name}</Typography>
           <Typography variant={'caption'} className={s.email}>
@@ -51,7 +52,7 @@ export const Header = ({
           <Typography className={s.name} variant={'subtitle1'}>
             {name}
           </Typography>
-          <Avatar src={avatarSrc} />
+          <Avatar src={avatarSrc ?? ''} />
         </div>
       }
       dropdownElements={[

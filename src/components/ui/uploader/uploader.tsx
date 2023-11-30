@@ -10,7 +10,7 @@ import s from './uploader.module.scss'
 
 type Props = {
   children: ReactNode
-  onLoadCover: (file: UploaderPayload) => void
+  onLoadCover: (value: { avatar: UploaderPayload }) => void
   onLoadError: (error: string) => void
 } & ComponentPropsWithoutRef<'input'>
 
