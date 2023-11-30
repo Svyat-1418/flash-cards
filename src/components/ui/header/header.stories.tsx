@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import avatar from '../../../assets/avatar-test/Avatar-test.svg'
+
 import { Header } from './header.tsx'
 
 const meta = {
@@ -16,5 +18,6 @@ export const Default: Story = {
     name: 'Zakk Wylde',
     isLoggedIn: true,
     email: 'zanzi@zanzi.by',
+    avatarSrc: avatar,
   },
 }
