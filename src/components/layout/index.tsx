@@ -12,7 +12,13 @@ export const Layout = () => {
 
   return (
     <div className={s.container}>
-      <Header isLoggedIn={!!data} email={data?.email} name={data?.name} logout={logout} />
+      <Header
+        isLoggedIn={!!data}
+        email={data?.email}
+        name={data?.name}
+        logout={logout}
+        avatarSrc={data?.avatar}
+      />
       <ContentContainer classname={s.outletContainer}>
         <Outlet />
       </ContentContainer>
