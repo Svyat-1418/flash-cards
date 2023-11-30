@@ -22,7 +22,7 @@ export const ProfileInfo = ({ email, name, activateEditMode, logout }: Props): J
         <Typography className={s.user} variant={'h2'} as="h3">
           {name}
         </Typography>
-        <Button onClick={handleActivateEditMode}>
+        <Button onClick={handleActivateEditMode} asChild>
           <Edit />
         </Button>
       </div>

@@ -30,7 +30,7 @@ export const AvatarUploader = ({
       <Avatar image={avatar} userName={name} size="large" />
       {isEditable && (
         <Uploader className={s.uploader} onLoadCover={handleLoadImage} onLoadError={() => {}}>
-          <Button>
+          <Button asChild className={s.editIcon}>
             <Edit />
           </Button>
         </Uploader>
