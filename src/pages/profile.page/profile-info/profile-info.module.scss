@@ -4,7 +4,7 @@
   text-align: center;
 
   .userNameWrapper {
-    @include flex($align: center, $justify: center, $gap: 0.9rem);
+    @include flex($align: end, $justify: center, $gap: 0.56rem);
   }
 
   .email {

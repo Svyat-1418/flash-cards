@@ -81,3 +81,19 @@
 .fullWidth {
   width: 100%;
 }
+
+.asChild {
+  cursor: pointer;
+
+  margin: 0;
+  padding: 0;
+
+  background: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
