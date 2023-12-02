@@ -5,8 +5,11 @@ import { Link } from 'react-router-dom'
 import { Deck } from '../../../../services/decks/types.ts'
 import { toLocaleDateString } from '../../../../utils/toLocaleDateString.ts'
 import { ControlButtons } from '../../../ui/control-buttons'
+import { Cover } from '../../../ui/cover/cover.tsx'
 import { Table } from '../../../ui/table'
 import { Typography } from '../../../ui/typography'
+
+import s from './deck-table-body.module.scss'
 
 type Props = {
   deckContent: Deck[]
@@ -30,7 +33,8 @@ export const DeckTableBody: FC<Props> = ({ deckContent, userId, editDeck, delete
 
         return (
           <Table.Row key={item.id}>
-            <Table.Cell>
+            <Table.Cell className={s.nameAndCover}>
+              {item.cover && <Cover src={item.cover} />}
               <Typography variant={'body2'} as={Link} to={`cards/${item.id}`}>
                 {item.name}
               </Typography>
