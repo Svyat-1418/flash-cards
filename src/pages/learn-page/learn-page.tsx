@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { Learn } from '../../components/learn/learn.tsx'
-import { BackToDecksList } from '../../components/ui/back-to-decks-list/index.tsx'
+import { GoBack } from '../../components/ui/go-back'
 import { useGetDeckByIdQuery } from '../../services/decks/decks-endpoints.ts'
 import { useLearnDeckQuery, useSaveGradeMutation } from '../../services/learn/learn-endpoints.ts'
 
@@ -36,7 +36,7 @@ export const LearnPage = () => {
 
   return (
     <div>
-      <BackToDecksList />
+      <GoBack title={'Back to Deck Page'} />
       {deckData && cardData && (
         <Learn
           setShowAnswer={setShowAnswer}
