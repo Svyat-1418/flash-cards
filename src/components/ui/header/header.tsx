@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 import { Link } from 'react-router-dom'
 
 import { Logo } from '../../../assets/icons/logo'
@@ -6,7 +8,7 @@ import { Person } from '../../../assets/icons/person'
 import { Nullable } from '../../../types/common.types.ts'
 import { Avatar } from '../avatar'
 import { Button } from '../button'
-import { ContentContainer } from '../content-container'
+import { Container } from '../container'
 import { Dropdown } from '../dropdown/dropdown.tsx'
 import { Typography } from '../typography'
 
@@ -27,6 +29,17 @@ export const Header = ({
   email = '',
   logout,
 }: HeaderPropsType) => {
+  const [headerHeight, setHeaderHeight] = useState(0)
+
+  useEffect(() => {
+    console.log(document.querySelector('header')?.offsetHeight)
+    setHeaderHeight(document.querySelector('header')?.offsetHeight || 0)
+
+    document.documentElement.style.setProperty('--header-height', `${headerHeight}px`)
+  }, [headerHeight])
+
+  console.log(headerHeight)
+
   const dropdownHeader = (name?: string, email?: string, avatarSrc?: Nullable<string>) => {
     return (
       <div className={s.dropDownHeader}>
@@ -75,14 +88,12 @@ export const Header = ({
 
   return (
     <header className={s.header}>
-      <ContentContainer>
-        <div className={s.headerContainer}>
-          <Link to={'/'}>
-            <Logo />
-          </Link>
-          {loginOrAvatarContent}
-        </div>
-      </ContentContainer>
+      <Container className={s.headerContainer}>
+        <Link to={'/'}>
+          <Logo />
+        </Link>
+        {loginOrAvatarContent}
+      </Container>
     </header>
   )
 }
