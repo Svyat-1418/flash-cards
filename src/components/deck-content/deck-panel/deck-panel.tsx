@@ -3,6 +3,7 @@ import { FC, useState } from 'react'
 import { CreateCardDto } from '../../../services/cards/types.ts'
 import { BackToDecksList } from '../../ui/back-to-decks-list'
 import { Button } from '../../ui/button'
+import { Cover } from '../../ui/cover/cover.tsx'
 import { TextField } from '../../ui/textfield'
 import { Typography } from '../../ui/typography'
 
@@ -11,6 +12,7 @@ import { AddNewCardModal } from './modal/add-new-card.modal'
 export const DeckPanel: FC<Props> = ({
   isAuthor,
   name,
+  cover,
   searchCard,
   createCard,
   loadingCreateCard,
@@ -32,6 +34,7 @@ export const DeckPanel: FC<Props> = ({
         <Typography variant={'large'} as={'h1'}>
           {name}
         </Typography>
+        <Cover src={cover} />
         {isAuthor ? (
           <Button onClick={() => setAddNewCardModalIsOpen(true)}>Add New Card</Button>
         ) : (
@@ -49,6 +52,7 @@ export const DeckPanel: FC<Props> = ({
 
 type Props = {
   name: string
+  cover: string
   isAuthor: boolean
   searchCard: (cardName: string) => void
   createCard: (args: CreateCardDto) => Promise<any>

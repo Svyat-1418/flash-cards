@@ -9,6 +9,7 @@ import { DeckPanel } from './deck-panel/deck-panel.tsx'
 
 export const DeckContent: FC<Props> = ({
   name,
+  cover,
   cardsData,
   changeCurrentPage,
   pagination,
@@ -25,6 +26,7 @@ export const DeckContent: FC<Props> = ({
     <div>
       <DeckPanel
         name={name}
+        cover={cover}
         isAuthor={isAuthor}
         searchCard={searchCard}
         createCard={createCard}
@@ -46,6 +48,7 @@ export const DeckContent: FC<Props> = ({
 
 type Props = {
   name: string
+  cover: string
   cardsData: Card[]
   isAuthor: boolean
   pagination: EntityPagination
