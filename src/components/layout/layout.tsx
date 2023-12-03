@@ -1,17 +1,15 @@
 import { Outlet } from 'react-router-dom'
 
 import { useLogoutMutation, useMeQuery } from '../../services/auth/auth-endpoints.ts'
-import { ContentContainer } from '../ui/content-container'
 import { Header } from '../ui/header'
-
-import s from './layout.module.scss'
+import { MainWrapper } from '../ui/main-wrapper'
 
 export const Layout = () => {
   const { data } = useMeQuery()
   const [logout] = useLogoutMutation()
 
   return (
-    <div className={s.container}>
+    <>
       <Header
         isLoggedIn={!!data}
         email={data?.email}
@@ -19,9 +17,9 @@ export const Layout = () => {
         logout={logout}
         avatarSrc={data?.avatar}
       />
-      <ContentContainer classname={s.outletContainer}>
+      <MainWrapper>
         <Outlet />
-      </ContentContainer>
-    </div>
+      </MainWrapper>
+    </>
   )
 }
