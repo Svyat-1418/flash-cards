@@ -62,13 +62,13 @@ export const Learn: FC<Props> = ({
               Rate yourself:
             </Typography>
             <RadioGroup options={grades} onValueChange={handleRateYourself} />
-            <Button className={s.btn} onClick={handleNextAnswer}>
+            <Button fullWidth className={s.btn} onClick={handleNextAnswer}>
               Next Question
             </Button>
           </>
         ) : (
           <>
-            <Button className={s.btn} onClick={handleShowAnswer}>
+            <Button fullWidth className={s.btn} onClick={handleShowAnswer}>
               Show Answer
             </Button>
           </>
