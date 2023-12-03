@@ -54,6 +54,7 @@ export const Uploader = ({
         ref={ref}
         className={s.fileInput}
         type="file"
+        accept={'image/*'}
         onChange={onChangeHandler}
         {...restProps}
       />
