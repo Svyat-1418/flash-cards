@@ -54,6 +54,7 @@ export const AddNewDeckModal = ({
       }
     >
       <form onSubmit={addNewPack}>
+        <div></div>
         <ControlledTextField control={control} name={'name'} label={'Add new pack'} />
         <ControlledCheckbox
           control={control}
