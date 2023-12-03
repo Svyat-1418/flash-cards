@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom'
 
-import { Layout } from '../components/layout'
+import { Layout } from '../components/layout/layout.tsx'
 import { useMeQuery } from '../services/auth/auth-endpoints.ts'
 
 import { CheckEmailPage } from './check-email.page/check-email.page.tsx'
