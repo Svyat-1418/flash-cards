@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom'
 
 import { useLogoutMutation, useMeQuery } from '../../services/auth/auth-endpoints.ts'
-import { MainWrapper } from '../ui/content-container'
 import { Header } from '../ui/header'
+import { MainWrapper } from '../ui/main-wrapper'
 
 export const Layout = () => {
   const { data } = useMeQuery()
