@@ -5,7 +5,7 @@ import {
   UpdateDeckRequestType,
 } from '../../services/decks/types.ts'
 import { Sort } from '../deck-content/cards-list/card-table'
-import { ContentContainer } from '../ui/content-container'
+import { Container } from '../ui/container'
 
 import { DecksList } from './decks-list/decks-list.tsx'
 import { DecksListPanel } from './decks-list-panel/decks-list-panel.tsx'
@@ -66,7 +66,7 @@ export const DecksListContent = ({
   setClearFilter,
 }: DecksPropsType) => {
   return (
-    <ContentContainer>
+    <Container>
       <DecksListPanel
         addDeck={addDeck}
         searchDeck={searchDeck}
@@ -96,6 +96,6 @@ export const DecksListContent = ({
         deleteDeck={deleteDeck}
         setEditingDeck={setEditingDeck}
       />
-    </ContentContainer>
+    </Container>
   )
 }
