@@ -99,6 +99,7 @@ export const DeckPage = () => {
           isAuthor={deckData.userId === meData?.id}
           searchCard={searchCardByQuestion}
           name={deckData.name}
+          cover={deckData.cover}
           cardsData={cardsData.items}
           pagination={cardsData.pagination}
           changeCurrentPage={changeCurrentPage}
