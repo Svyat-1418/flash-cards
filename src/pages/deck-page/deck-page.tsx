@@ -91,7 +91,7 @@ export const DeckPage = () => {
   if (!deckId) return <div>Deck not found</div>
 
   return (
-    <section>
+    <>
       {deckData && cardsData && (
         <DeckContent
           sort={sort}
@@ -109,6 +109,6 @@ export const DeckPage = () => {
           deleteCard={deleteCardHandle}
         />
       )}
-    </section>
+    </>
   )
 }
