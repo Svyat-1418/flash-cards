@@ -1,7 +1,6 @@
 import { FC, useState } from 'react'
 
 import { CreateCardDto } from '../../../services/cards/types.ts'
-import { BackToDecksList } from '../../ui/back-to-decks-list'
 import { Button } from '../../ui/button'
 import { Cover } from '../../ui/cover/cover.tsx'
 import { TextField } from '../../ui/textfield'
@@ -30,7 +29,6 @@ export const DeckPanel: FC<Props> = ({
         onSubmit={createCard}
       />
       <div>
-        <BackToDecksList />
         <Typography variant={'large'} as={'h1'}>
           {name}
         </Typography>
