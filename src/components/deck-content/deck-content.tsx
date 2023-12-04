@@ -2,6 +2,7 @@ import { FC } from 'react'
 
 import { Card, CreateCardDto, DeleteCardArgs, UpdateCardArgs } from '../../services/cards/types.ts'
 import { Pagination as EntityPagination } from '../../services/common.types.ts'
+import { Container } from '../ui/container'
 import { GoBack } from '../ui/go-back'
 
 import { Sort } from './cards-list/card-table'
@@ -24,7 +25,7 @@ export const DeckContent: FC<Props> = ({
   handleSort,
 }) => {
   return (
-    <div>
+    <Container>
       <GoBack title={'Back to Decks List'} />
       <DeckPanel
         name={name}
@@ -44,7 +45,7 @@ export const DeckContent: FC<Props> = ({
         updateCard={updateCard}
         deleteCard={deleteCard}
       />
-    </div>
+    </Container>
   )
 }
 
