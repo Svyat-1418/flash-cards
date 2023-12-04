@@ -2,6 +2,7 @@ import { FC } from 'react'
 
 import { Card, CreateCardDto, DeleteCardArgs, UpdateCardArgs } from '../../services/cards/types.ts'
 import { Pagination as EntityPagination } from '../../services/common.types.ts'
+import { GoBack } from '../ui/go-back'
 
 import { Sort } from './cards-list/card-table'
 import { CardsList } from './cards-list/cards-list.tsx'
@@ -24,6 +25,7 @@ export const DeckContent: FC<Props> = ({
 }) => {
   return (
     <div>
+      <GoBack title={'Back to Decks List'} />
       <DeckPanel
         name={name}
         cover={cover}
