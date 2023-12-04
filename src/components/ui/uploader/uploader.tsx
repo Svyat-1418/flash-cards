@@ -10,7 +10,7 @@ import s from './uploader.module.scss'
 
 type Props = {
   children: ReactNode
-  onLoadCover: (value: { avatar: UploaderPayload }) => void
+  onLoadCover: (file: UploaderPayload) => void
   onLoadError: (error: string) => void
 } & ComponentPropsWithoutRef<'input'>
 
@@ -28,7 +28,7 @@ export const Uploader = ({
     try {
       uploaderSchema.parse(file)
       if (file) {
-        onLoadCover({ avatar: file })
+        onLoadCover(file)
       }
     } catch (e) {
       const err = e as Error | ZodError
@@ -54,6 +54,7 @@ export const Uploader = ({
         ref={ref}
         className={s.fileInput}
         type="file"
+        accept={'image/*'}
         onChange={onChangeHandler}
         {...restProps}
       />

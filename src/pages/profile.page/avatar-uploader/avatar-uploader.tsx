@@ -29,7 +29,11 @@ export const AvatarUploader = ({
     <div className={avatarUploaderClasses}>
       <Avatar image={avatar} userName={name} size="large" />
       {isEditable && (
-        <Uploader className={s.uploader} onLoadCover={handleLoadImage} onLoadError={() => {}}>
+        <Uploader
+          className={s.uploader}
+          onLoadCover={(file: File) => handleLoadImage({ avatar: file })}
+          onLoadError={() => {}}
+        >
           <Button asChild className={s.editIcon}>
             <Edit />
           </Button>
