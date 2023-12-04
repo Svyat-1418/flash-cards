@@ -1,11 +1,10 @@
 import { useState } from 'react'
 
 //import { useForm } from 'react-hook-form'
-
 //import { Edit } from '../../../assets/icons/edit'
 import { AvatarUploader } from '../../../pages/profile.page/avatar-uploader'
 import { EditProfile, EditProfileValues } from '../../../pages/profile.page/edit-profile'
-import { ProfileInfo } from '../../../pages/profile.page/profile-info/index.ts'
+import { ProfileInfo } from '../../../pages/profile.page/profile-info'
 import { UpdateMeArgs } from '../../../services/auth/types.ts'
 //import { Button } from '../../ui/button'
 import { Card } from '../../ui/card'

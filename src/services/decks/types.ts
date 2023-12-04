@@ -41,11 +41,12 @@ export type DecksRequestType = {
   itemsPerPage?: number
 }
 
-export type AddDeckRequestType = {
-  cover?: File | undefined
-  name: string
-  isPrivate?: boolean
-}
+export type AddDeckRequestType = FormData
+// {
+//   cover?: File
+//   name: string
+//   isPrivate?: boolean
+// }
 
 export type UpdateDeckRequestType = AddDeckRequestType & { id?: string }
 
