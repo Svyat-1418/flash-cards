@@ -36,45 +36,41 @@ export const Learn: FC<Props> = ({
   const handleNextAnswer = () => handleSaveGrade(grade)
 
   return (
-    <div className={s.container}>
-      <Card className={s.card}>
-        <Typography variant={'large'} className={s.title}>
-          {`Learn "${deckName}"`}
+    <Card className={s.learnCard}>
+      <Typography variant={'large'} className={s.title}>
+        {`Learn "${deckName}"`}
+      </Typography>
+      <Typography variant={'h3'} className={s.question}>
+        Question:{' '}
+        <Typography variant={'body2'} as={'span'}>
+          {question}
         </Typography>
-        <Typography variant={'h3'} className={s.question}>
-          Question:{' '}
-          <Typography variant={'body2'} as={'span'}>
-            {question}
+      </Typography>
+      <Typography variant={'body2'}>Number of attempts to answer the question: {shots}</Typography>
+      {showAnswer ? (
+        <>
+          <Typography variant={'h3'} className={s.answer}>
+            Answer:{' '}
+            <Typography variant={'body2'} as={'span'}>
+              {answer}
+            </Typography>
           </Typography>
-        </Typography>
-        <Typography variant={'body2'}>
-          Number of attempts to answer the question: {shots}
-        </Typography>
-        {showAnswer ? (
-          <>
-            <Typography variant={'h3'} className={s.answer}>
-              Answer:{' '}
-              <Typography variant={'body2'} as={'span'}>
-                {answer}
-              </Typography>
-            </Typography>
-            <Typography variant={'h3'} className={s.rateText}>
-              Rate yourself:
-            </Typography>
-            <RadioGroup options={grades} onValueChange={handleRateYourself} />
-            <Button fullWidth className={s.btn} onClick={handleNextAnswer}>
-              Next Question
-            </Button>
-          </>
-        ) : (
-          <>
-            <Button fullWidth className={s.btn} onClick={handleShowAnswer}>
-              Show Answer
-            </Button>
-          </>
-        )}
-      </Card>
-    </div>
+          <Typography variant={'h3'} className={s.rateText}>
+            Rate yourself:
+          </Typography>
+          <RadioGroup options={grades} onValueChange={handleRateYourself} />
+          <Button fullWidth className={s.btn} onClick={handleNextAnswer}>
+            Next Question
+          </Button>
+        </>
+      ) : (
+        <>
+          <Button fullWidth className={s.btn} onClick={handleShowAnswer}>
+            Show Answer
+          </Button>
+        </>
+      )}
+    </Card>
   )
 }
 
