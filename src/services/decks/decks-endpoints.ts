@@ -1,3 +1,5 @@
+import { RootState } from '../../app/store.ts'
+import { selectDeckQueryArgs } from '../../shared/utils/selectDeckQueryArgs.ts'
 import { baseApi } from '../base-api.ts'
 
 import {
@@ -19,13 +21,24 @@ export const decksEndpoints = baseApi.injectEndpoints({
       }),
       providesTags: ['Decks'],
     }),
-    createDeck: builder.mutation<Deck, AddDeckRequestType>({
+    createDeck: builder.mutation<Deck, AddDeckRequestType | DecksResponseType>({
       query: body => ({
         url: `decks`,
         method: 'POST',
         body: body,
       }),
       invalidatesTags: ['Decks'],
+      async onQueryStarted(_, { dispatch, getState, queryFulfilled }) {
+        const state = getState() as RootState
+
+        const { data: createdDeck } = await queryFulfilled
+
+        dispatch(
+          decksEndpoints.util.updateQueryData('getDecks', selectDeckQueryArgs(state), draft => {
+            draft.items.unshift(createdDeck)
+          })
+        )
+      },
     }),
     deleteDeck: builder.mutation<DeleteDeckResponseType, DeleteDeckRequestType>({
       query: body => ({
