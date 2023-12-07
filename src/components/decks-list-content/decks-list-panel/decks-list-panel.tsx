@@ -17,12 +17,14 @@ type DecksListPanelType = {
   addDeck: (args: AddDeckRequestType) => void
   searchDeck: (decksName: string) => void
   setShowMyDecks: (value: boolean) => void
+  handleSetAuthorId: (authorId: string | undefined) => void
   sliderValues: number[]
   sliderRangeValues: number[]
   setSliderValues: () => void
   setSliderRangeValues: (values: number[]) => void
   showMyDecks: boolean
   setClearFilter: () => void
+  userId: string | undefined
 }
 
 export const DecksListPanel = ({
@@ -37,12 +39,16 @@ export const DecksListPanel = ({
   setSliderRangeValues,
   showMyDecks,
   setClearFilter,
+  userId,
+  handleSetAuthorId,
 }: DecksListPanelType) => {
   const showMyCards = () => {
     setShowMyDecks(true)
+    handleSetAuthorId(userId)
   }
   const showAllCards = () => {
     setShowMyDecks(false)
+    handleSetAuthorId(undefined)
   }
   const buttonsForFilterCards: ButtonSwitchType[] = [
     {

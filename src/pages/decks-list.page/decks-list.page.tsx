@@ -46,6 +46,9 @@ export const DecksListPage = () => {
   const setCurrentPageHandle = (page: number) => {
     dispatch(setCurrentPage({ page }))
   }
+  const handleSetAuthorId = (authorId: string | undefined) => {
+    dispatch(decksActions.setAuthorId({ authorId }))
+  }
   const setShowMyDecksHandle = (value: boolean) => {
     dispatch(setCurrentPage({ page: 1 }))
     dispatch(setShowMyDecks({ value }))
@@ -89,7 +92,7 @@ export const DecksListPage = () => {
   }
 
   const { data: user } = useMeQuery()
-  const { data: decksData } = useGetDecksQuery({
+  const { currentData: currentDecksData, data: decksData } = useGetDecksQuery({
     currentPage: currentPage,
     authorId: showMyDecks ? user?.id : undefined,
     minCardsCount: sliderValues[0].toString(),
@@ -100,6 +103,8 @@ export const DecksListPage = () => {
   const [addDeck] = useCreateDeckMutation()
   const [deleteDeck] = useDeleteDeckMutation()
   const [updateDeck] = useUpdateDeckMutation()
+
+  const actualDecksData = currentDecksData ?? decksData
 
   const addDeckHandle = async (args: AddDeckRequestType) => {
     try {
@@ -148,7 +153,7 @@ export const DecksListPage = () => {
       sort={sort}
       handleSort={handleSort}
       userId={user?.id}
-      deckContent={decksData?.items}
+      deckContent={actualDecksData?.items}
       pagination={decksData?.pagination}
       changeCurrentPage={setCurrentPageHandle}
       showMyDecks={showMyDecks}
@@ -170,6 +175,7 @@ export const DecksListPage = () => {
       editingDeck={editingDeck}
       setEditingDeck={setEditingDeckHandle}
       setClearFilter={setClearFilterHandle}
+      handleSetAuthorId={handleSetAuthorId}
     />
   )
 }
