@@ -45,7 +45,6 @@ export const AddNewDeckModal = ({
   const [coverFile, setCoverFile] = useState<Blob | string>('')
 
   const onSubmitHandle = (args: FormType) => {
-    debugger
     onSubmit(appendDataToFormData({ ...args, cover: coverFile }))
     reset()
     setCoverFile('')
