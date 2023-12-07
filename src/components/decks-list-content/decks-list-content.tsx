@@ -11,6 +11,7 @@ import { DecksList } from './decks-list/decks-list.tsx'
 import { DecksListPanel } from './decks-list-panel/decks-list-panel.tsx'
 
 export type DecksPropsType = {
+  handleSetAuthorId: (authorId: string | undefined) => void
   sort: Sort
   handleSort: (sort: Sort) => void
   userId: string | undefined
@@ -64,6 +65,7 @@ export const DecksListContent = ({
   editingDeck,
   setEditingDeck,
   setClearFilter,
+  handleSetAuthorId,
 }: DecksPropsType) => {
   return (
     <Container>
@@ -79,6 +81,8 @@ export const DecksListContent = ({
         addPackModalIsOpen={addPackModalIsOpen}
         showMyDecks={showMyDecks}
         setClearFilter={setClearFilter}
+        userId={userId}
+        handleSetAuthorId={handleSetAuthorId}
       />
       <DecksList
         sort={sort}
