@@ -46,6 +46,25 @@ export const decksEndpoints = baseApi.injectEndpoints({
         method: `DELETE`,
       }),
       invalidatesTags: ['Decks'],
+      async onQueryStarted({ id }, { dispatch, getState, queryFulfilled }) {
+        const state = getState() as RootState
+
+        const patchResult = dispatch(
+          decksEndpoints.util.updateQueryData('getDecks', selectDeckQueryArgs(state), draft => {
+            const index = draft?.items?.findIndex(deck => deck.id === id)
+
+            if (index !== -1) {
+              draft?.items?.splice(index, 1)
+            }
+          })
+        )
+
+        try {
+          await queryFulfilled
+        } catch {
+          patchResult.undo()
+        }
+      },
     }),
     updateDeck: builder.mutation<Deck, UpdateDeckRequestType>({
       query: ({ id, ...body }) => ({
