@@ -6,6 +6,7 @@ import { Nullable } from '../../types/common.types.ts'
 import { Deck } from './types.ts'
 
 type initialStateType = {
+  authorId: string | undefined
   currentPage: number
   showMyDecks: boolean
   sliderValues: number[]
@@ -19,6 +20,7 @@ type initialStateType = {
 }
 
 const initialState: initialStateType = {
+  authorId: undefined as string | undefined,
   currentPage: 1,
   showMyDecks: false,
   sliderValues: [0, 100],
@@ -37,6 +39,9 @@ export const decksSlice = createSlice({
   reducers: {
     setCurrentPage: (state, action: PayloadAction<{ page: number }>) => {
       state.currentPage = action.payload.page
+    },
+    setAuthorId: (state, action: PayloadAction<{ authorId: string | undefined }>) => {
+      state.authorId = action.payload.authorId
     },
     setShowMyDecks: (state, action: PayloadAction<{ value: boolean }>) => {
       state.showMyDecks = action.payload.value
