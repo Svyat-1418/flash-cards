@@ -73,6 +73,40 @@ export const decksEndpoints = baseApi.injectEndpoints({
         body,
       }),
       invalidatesTags: ['Decks'],
+      async onQueryStarted({ id, body }, { dispatch, getState, queryFulfilled }) {
+        const state = getState() as RootState
+
+        let cover = ''
+        const patchResult = dispatch(
+          decksEndpoints.util.updateQueryData('getDecks', selectDeckQueryArgs(state), draft => {
+            const deck = draft.items.find(deck => deck.id === id)
+
+            const name = body.get('name')
+            const isPrivate = body.get('isPrivate')
+            const coverBlob = body.get('cover')
+
+            if (coverBlob instanceof Blob) {
+              cover = URL.createObjectURL(coverBlob)
+            }
+
+            if (deck) {
+              Object.assign(deck, {
+                name: typeof name === 'string' ? name : '',
+                isPrivate: !!isPrivate,
+                cover,
+              })
+            }
+          })
+        )
+
+        try {
+          await queryFulfilled
+        } catch {
+          patchResult.undo()
+        } finally {
+          URL.revokeObjectURL(cover)
+        }
+      },
     }),
     getDeckById: builder.query<DeleteDeckResponseType, DeleteDeckRequestType>({
       query: ({ id }) => ({
