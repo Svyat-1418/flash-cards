@@ -32,7 +32,7 @@ export type GetCardsResponse = PaginatedEntity<Card>
 
 export type CreateCardArgs = CreateCardDto & Pick<Card, 'deckId'>
 
-export type CreateCardResponse = Omit<Card, 'grade'> & {
+export type CreateCardResponse = Card & {
   comments: Nullable<string[]>
   type: Nullable<string>
   rating: number
