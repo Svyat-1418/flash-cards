@@ -1,5 +1,7 @@
 import { isEmpty } from 'remeda'
 
+import { RootState } from '../../app/store.ts'
+import { selectCardsQueryArgs } from '../../shared/utils/selectCardsQueryArgs.ts'
 import { baseApi } from '../base-api.ts'
 
 import {
@@ -29,6 +31,19 @@ const cardsEndpoints = baseApi.injectEndpoints({
         body,
       }),
       invalidatesTags: ['Cards'],
+      async onQueryStarted({ deckId }, { dispatch, getState, queryFulfilled }) {
+        const state = getState() as RootState
+
+        const { data: createdCard } = await queryFulfilled
+
+        const cardsQueryArgs = selectCardsQueryArgs(state)
+
+        dispatch(
+          cardsEndpoints.util.updateQueryData('getCards', { deckId, ...cardsQueryArgs }, draft => {
+            draft.items.unshift(createdCard)
+          })
+        )
+      },
     }),
     updateCard: builder.mutation<CreateCardResponse, UpdateCardArgs>({
       query: ({ cardId, ...body }) => ({
