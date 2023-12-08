@@ -48,7 +48,10 @@ export type AddDeckRequestType = FormData
 //   isPrivate?: boolean
 // }
 
-export type UpdateDeckRequestType = AddDeckRequestType & { id?: string }
+export type UpdateDeckRequestType = {
+  id: string
+  body: FormData
+}
 
 export type DeleteDeckResponseType = Omit<Deck, 'author'>
 
