@@ -21,7 +21,7 @@ export const decksEndpoints = baseApi.injectEndpoints({
       }),
       providesTags: ['Decks'],
     }),
-    createDeck: builder.mutation<Deck, AddDeckRequestType | DecksResponseType>({
+    createDeck: builder.mutation<Deck, AddDeckRequestType>({
       query: body => ({
         url: `decks`,
         method: 'POST',
