@@ -18,6 +18,7 @@ import {
 } from '../../services/cards/cards.slice.ts'
 import { CreateCardDto, DeleteCardArgs, UpdateCardArgs } from '../../services/cards/types.ts'
 import { useGetDeckByIdQuery } from '../../services/decks/decks-endpoints.ts'
+import { appendDataToFormData } from '../../shared/utils/append-data-to-form-data.ts'
 import { getSortString } from '../../shared/utils/get-sort-string.ts'
 
 export const DeckPage = () => {
@@ -29,7 +30,7 @@ export const DeckPage = () => {
   const sort = useAppSelector(state => state.cardsQueryParams.sort)
 
   const { data: meData } = useMeQuery()
-  const { data: cardsData } = useGetCardsQuery({
+  const { currentData: currentCardsData, data: cardsData } = useGetCardsQuery({
     deckId: deckId || '',
     currentPage: currentPage,
     question: searchByQuestion,
@@ -41,6 +42,8 @@ export const DeckPage = () => {
   const [createCard, { isLoading: loadingCreateCard }] = useCreateCardMutation({})
   const [updateCard] = useUpdateCardMutation()
   const [deleteCard] = useDeleteCardMutation()
+
+  const actualCardsData = currentCardsData ?? cardsData
 
   const handleSort = (sort: Sort) => {
     dispatch(cardsActions.setSort({ sort }))
@@ -54,7 +57,7 @@ export const DeckPage = () => {
 
   const createCardHandle = async (args: CreateCardDto) => {
     if (deckId) {
-      return createCard({ deckId, ...args })
+      return createCard({ deckId, body: appendDataToFormData(args) })
         .unwrap()
         .then(() => toast.success('Card created'))
         .catch(error => toast.error(error))
@@ -92,7 +95,7 @@ export const DeckPage = () => {
 
   return (
     <>
-      {deckData && cardsData && (
+      {deckData && actualCardsData && (
         <DeckContent
           sort={sort}
           handleSort={handleSort}
@@ -100,8 +103,8 @@ export const DeckPage = () => {
           searchCard={searchCardByQuestion}
           name={deckData.name}
           cover={deckData.cover}
-          cardsData={cardsData.items}
-          pagination={cardsData.pagination}
+          cardsData={actualCardsData.items}
+          pagination={actualCardsData.pagination}
           changeCurrentPage={changeCurrentPage}
           createCard={createCardHandle}
           loadingCreateCard={loadingCreateCard}
