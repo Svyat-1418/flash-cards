@@ -41,4 +41,4 @@ export type CreateCardResponse = Card & {
 
 export type UpdateCardArgs = CreateCardDto & { cardId: Card['id'] }
 
-export type DeleteCardArgs = { cardId: Card['id'] }
+export type DeleteCardArgs = { cardId: Card['id'] } & Pick<Card, 'deckId'>

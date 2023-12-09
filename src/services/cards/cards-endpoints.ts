@@ -59,6 +59,27 @@ const cardsEndpoints = baseApi.injectEndpoints({
         method: 'DELETE',
       }),
       invalidatesTags: ['Cards'],
+      async onQueryStarted({ cardId, deckId }, { dispatch, getState, queryFulfilled }) {
+        const state = getState() as RootState
+
+        const cardsQueryArgs = selectCardsQueryArgs(state)
+
+        const patchResult = dispatch(
+          cardsEndpoints.util.updateQueryData('getCards', { deckId, ...cardsQueryArgs }, draft => {
+            const index = draft.items.findIndex(card => card.id === cardId)
+
+            if (index !== -1) {
+              draft.items.splice(index, 1)
+            }
+          })
+        )
+
+        try {
+          await queryFulfilled
+        } catch {
+          patchResult.undo
+        }
+      },
     }),
   }),
 })
