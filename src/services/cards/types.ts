@@ -30,7 +30,7 @@ export type GetCardsArgs = {
 }
 export type GetCardsResponse = PaginatedEntity<Card>
 
-export type CreateCardArgs = CreateCardDto & Pick<Card, 'deckId'>
+export type CreateCardArgs = FormData & Pick<Card, 'deckId'>
 
 export type CreateCardResponse = Card & {
   comments: Nullable<string[]>
@@ -39,6 +39,9 @@ export type CreateCardResponse = Card & {
   moreId: Nullable<string>
 }
 
-export type UpdateCardArgs = CreateCardDto & { cardId: Card['id'] }
+export type UpdateCardArgs = Pick<Card, 'deckId'> & {
+  body: FormData
+  cardId: Card['id']
+}
 
-export type DeleteCardArgs = { cardId: Card['id'] }
+export type DeleteCardArgs = { cardId: Card['id'] } & Pick<Card, 'deckId'>
