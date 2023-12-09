@@ -1,6 +1,8 @@
 import { isEmpty } from 'remeda'
 
 import { RootState } from '../../app/store.ts'
+import { getFileFromFormData } from '../../shared/utils/get-file-from-form-data'
+import { getTextFromFormData } from '../../shared/utils/get-text-from-form-data'
 import { selectCardsQueryArgs } from '../../shared/utils/selectCardsQueryArgs.ts'
 import { baseApi } from '../base-api.ts'
 
@@ -52,6 +54,50 @@ const cardsEndpoints = baseApi.injectEndpoints({
         body,
       }),
       invalidatesTags: ['Cards'],
+      async onQueryStarted({ cardId, deckId, body }, { dispatch, getState, queryFulfilled }) {
+        const state = getState() as RootState
+
+        let questionImageUrl = ''
+        let answerImageUrl = ''
+
+        const cardsQueryArgs = selectCardsQueryArgs(state)
+
+        const patchResult = dispatch(
+          cardsEndpoints.util.updateQueryData('getCards', { deckId, ...cardsQueryArgs }, draft => {
+            const card = draft.items.find(card => card.id === cardId)
+
+            if (card) {
+              const question = getTextFromFormData(body, 'question')
+              const answer = getTextFromFormData(body, 'answer')
+              const questionImgBlob = getFileFromFormData(body, 'questionImg')
+              const answerImgBlob = getFileFromFormData(body, 'answerImg')
+
+              if (questionImgBlob instanceof Blob) {
+                questionImageUrl = URL.createObjectURL(questionImgBlob)
+              }
+              if (answerImgBlob instanceof Blob) {
+                answerImageUrl = URL.createObjectURL(answerImgBlob)
+              }
+
+              Object.assign(card, {
+                question,
+                answer,
+                questionImageUrl,
+                answerImageUrl,
+              })
+            }
+          })
+        )
+
+        try {
+          await queryFulfilled
+        } catch (e) {
+          patchResult.undo()
+        } finally {
+          URL.revokeObjectURL(questionImageUrl)
+          URL.revokeObjectURL(answerImageUrl)
+        }
+      },
     }),
     deleteCard: builder.mutation<void, DeleteCardArgs>({
       query: ({ cardId }) => ({
