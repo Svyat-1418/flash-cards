@@ -14,6 +14,7 @@ type DecksListPropsType = {
   deckContent: Deck[]
   userId: string | undefined
   pagination: PaginationType | undefined
+  setItemsPerPage: (value: string) => void
   changeCurrentPage: (page: number) => void
   editingDeck: Deck | null
   editPackModalIsOpen: boolean
@@ -39,6 +40,7 @@ export const DecksList = ({
   setDeletePackModalIsOpen,
   deleteDeck,
   setEditingDeck,
+  setItemsPerPage,
 }: DecksListPropsType) => {
   const openEditDeckModal = (item: Deck) => {
     setEditingDeck(item)
@@ -89,6 +91,8 @@ export const DecksList = ({
               currentPage={pagination?.currentPage}
               pageCount={pagination?.totalPages}
               onPageChange={changeCurrentPage}
+              currentItemsValue={pagination?.itemsPerPage.toString()}
+              onChangeItemsValue={setItemsPerPage}
             />
           </div>
         </>

@@ -15,6 +15,7 @@ import {
   setDeletePackModalIsOpen,
   setEditingDeck,
   setEditPackModalIsOpen,
+  setItemsPerPage,
   setShowMyDecks,
   setSliderRangeValues,
   setSliderValues,
@@ -41,10 +42,15 @@ export const DecksListPage = () => {
     deletePackModalIsOpen,
     editingDeck,
     sort,
+    itemsPerPage,
   } = useAppSelector(state => state.decksQueryParams)
 
   const setCurrentPageHandle = (page: number) => {
     dispatch(setCurrentPage({ page }))
+  }
+
+  const setItemsPerPageHandle = (value: string) => {
+    dispatch(setItemsPerPage({ value }))
   }
   const handleSetAuthorId = (authorId: string | undefined) => {
     dispatch(decksActions.setAuthorId({ authorId }))
@@ -99,6 +105,7 @@ export const DecksListPage = () => {
     maxCardsCount: sliderValues[1].toString(),
     name: decksName,
     orderBy: getSortString(sort),
+    itemsPerPage: +itemsPerPage,
   })
   const [addDeck] = useCreateDeckMutation()
   const [deleteDeck] = useDeleteDeckMutation()
@@ -155,6 +162,7 @@ export const DecksListPage = () => {
       userId={user?.id}
       deckContent={actualDecksData?.items}
       pagination={decksData?.pagination}
+      setItemsPerPage={setItemsPerPageHandle}
       changeCurrentPage={setCurrentPageHandle}
       showMyDecks={showMyDecks}
       setShowMyDecks={setShowMyDecksHandle}

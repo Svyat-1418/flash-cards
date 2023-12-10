@@ -17,6 +17,7 @@ export type DecksPropsType = {
   userId: string | undefined
   deckContent: Deck[] | undefined
   pagination: PaginationType | undefined
+  setItemsPerPage: (value: string) => void
   changeCurrentPage: (page: number) => void
   setShowMyDecks: (value: boolean) => void
   showMyDecks: boolean
@@ -66,6 +67,7 @@ export const DecksListContent = ({
   setEditingDeck,
   setClearFilter,
   handleSetAuthorId,
+  setItemsPerPage,
 }: DecksPropsType) => {
   return (
     <Container>
@@ -90,6 +92,7 @@ export const DecksListContent = ({
         deckContent={deckContent}
         userId={userId}
         pagination={pagination}
+        setItemsPerPage={setItemsPerPage}
         changeCurrentPage={changeCurrentPage}
         editingDeck={editingDeck}
         deletePackModalIsOpen={deletePackModalIsOpen}

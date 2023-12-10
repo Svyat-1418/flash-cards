@@ -17,6 +17,7 @@ type initialStateType = {
   deletePackModalIsOpen: boolean
   editingDeck: null | Deck
   sort: Nullable<Sort>
+  itemsPerPage: string
 }
 
 const initialState: initialStateType = {
@@ -31,6 +32,7 @@ const initialState: initialStateType = {
   deletePackModalIsOpen: false,
   editingDeck: null,
   sort: null as Nullable<Sort>,
+  itemsPerPage: '10',
 }
 
 export const decksSlice = createSlice({
@@ -73,6 +75,9 @@ export const decksSlice = createSlice({
     setSort: (state, action: PayloadAction<{ sort: Sort }>) => {
       state.sort = action.payload.sort
     },
+    setItemsPerPage: (state, action: PayloadAction<{ value: string }>) => {
+      state.itemsPerPage = action.payload.value
+    },
   },
 })
 
@@ -87,5 +92,6 @@ export const {
   setDeletePackModalIsOpen,
   setEditingDeck,
   setClearFilter,
+  setItemsPerPage,
 } = decksSlice.actions
 export const { actions: decksActions } = decksSlice
