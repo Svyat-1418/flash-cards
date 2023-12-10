@@ -85,7 +85,7 @@ export const Header = ({
   return (
     <header className={s.header}>
       <Container className={s.headerContainer}>
-        <Link to={'/'}>
+        <Link to={'/'} className={s.logoLink}>
           <NewLogo1 />
         </Link>
         {loginOrAvatarContent}
