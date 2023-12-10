@@ -15,5 +15,10 @@ export default meta
 export const Default: Story = {
   args: {
     deckContent,
+    userId: '',
+    sort: { key: 'name', direction: 'asc' },
+    handleSort: () => {},
+    deleteDeck: () => {},
+    editDeck: () => {},
   },
 }

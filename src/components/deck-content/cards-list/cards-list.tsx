@@ -67,6 +67,7 @@ export const CardsList: FC<Props> = ({
             deleteCard={openDeleteCardModalHandle}
           />
           <Pagination
+            onChangeItemsValue={() => {}}
             onPageChange={changeCurrentPage}
             currentPage={pagination.currentPage}
             pageCount={pagination.totalPages}
