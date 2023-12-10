@@ -17,5 +17,9 @@ export const Default: Story = {
   args: {
     cardContent: cardContent,
     isAuthor: true,
+    deleteCard: () => {},
+    editCard: () => {},
+    handleSort: () => {},
+    sort: { key: 'question', direction: 'asc' },
   },
 }
