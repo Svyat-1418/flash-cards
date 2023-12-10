@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-
 import { Link } from 'react-router-dom'
 
 import { NewLogo1 } from '../../../assets/icons/logo/version/new-logo1/NewLogo1.tsx'
@@ -29,13 +27,6 @@ export const Header = ({
   email = '',
   logout,
 }: HeaderPropsType) => {
-  useEffect(() => {
-    document.documentElement.style.setProperty(
-      '--header-height',
-      `${document.querySelector('header')?.offsetHeight}px`
-    )
-  }, [])
-
   const dropdownHeader = (name?: string, email?: string, avatarSrc?: Nullable<string>) => {
     return (
       <div className={s.dropDownHeader}>
