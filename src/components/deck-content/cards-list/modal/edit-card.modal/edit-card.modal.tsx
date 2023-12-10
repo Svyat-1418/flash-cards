@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { Card, UpdateCardArgs } from '../../../../../services/cards/types.ts'
+import { appendDataToFormData } from '../../../../../shared/utils/append-data-to-form-data.ts'
 import { Button } from '../../../../ui/button'
 import { ControlledTextField } from '../../../../ui/controlled'
 import { Modal } from '../../../../ui/modal'
@@ -41,8 +42,11 @@ export const EditCardModal = ({
 
   const onSubmitHandle = (args: FormType) => {
     editingCard?.id &&
-      onSubmit({ cardId: editingCard.id, ...args }).then(() => {
-        reset()
+      onSubmit({
+        deckId: editingCard.deckId,
+        cardId: editingCard.id,
+        body: appendDataToFormData(args),
+      }).then(() => {
         closeModal()
       })
   }

@@ -40,5 +40,10 @@ export const Default: Story = {
     sliderRangeValues: [0, 100],
     sliderValues: [0, 100],
     setSliderRangeValues: () => {},
+    handleSort: () => {},
+    setItemsPerPage: () => {},
+    handleSetAuthorId: () => {},
+    setClearFilter: () => {},
+    sort: { key: 'name', direction: 'asc' },
   },
 }

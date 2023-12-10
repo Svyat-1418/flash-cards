@@ -77,7 +77,7 @@ export const DecksListPage = () => {
   const setDeletePackModalIsOpenHandle = (isOpen: boolean) => {
     dispatch(setDeletePackModalIsOpen({ isOpen }))
   }
-  const setEditingDeckHandle = (deck: Deck | null) => {
+  const setEditingDeckHandle = (deck: Deck) => {
     dispatch(setEditingDeck({ deck }))
   }
   const setClearFilterHandle = () => {
@@ -130,7 +130,7 @@ export const DecksListPage = () => {
       await deleteDeck({ id }).unwrap()
       toast.success('Deck deleted successfully')
       setDeletePackModalIsOpenHandle(false)
-      setEditingDeckHandle(null)
+      //setEditingDeckHandle(null)
     } catch (err) {
       const error = err as { data: { message: string } }
 
@@ -143,7 +143,7 @@ export const DecksListPage = () => {
       .unwrap()
       .then(() => {
         setEditPackModalIsOpenHandle(false)
-        setEditingDeckHandle(null)
+        //setEditingDeckHandle(null)
       })
   }
 
@@ -156,34 +156,38 @@ export const DecksListPage = () => {
 
   //todo заменить userId на флаг isAdmin
   return (
-    <DecksListContent
-      sort={sort}
-      handleSort={handleSort}
-      userId={user?.id}
-      deckContent={actualDecksData?.items}
-      pagination={decksData?.pagination}
-      setItemsPerPage={setItemsPerPageHandle}
-      changeCurrentPage={setCurrentPageHandle}
-      showMyDecks={showMyDecks}
-      setShowMyDecks={setShowMyDecksHandle}
-      sliderValues={[0, decksData ? decksData.maxCardsCount : 20]}
-      sliderRangeValues={sliderRangeValues}
-      setSliderValues={filteringByNumberOfCards}
-      setSliderRangeValues={setSliderRangeValuesHandle}
-      searchDeck={searchDeck}
-      addPackModalIsOpen={addPackModalIsOpen}
-      setAddPackModalIsOpen={setAddPackModalIsOpenHandle}
-      editPackModalIsOpen={editPackModalIsOpen}
-      setEditPackModalIsOpen={setEditPackModalIsOpenHandle}
-      deletePackModalIsOpen={deletePackModalIsOpen}
-      setDeletePackModalIsOpen={setDeletePackModalIsOpenHandle}
-      addDeck={addDeckHandle}
-      deleteDeck={deleteDeckHandle}
-      updateDeck={updateDeckHandle}
-      editingDeck={editingDeck}
-      setEditingDeck={setEditingDeckHandle}
-      setClearFilter={setClearFilterHandle}
-      handleSetAuthorId={handleSetAuthorId}
-    />
+    <>
+      {actualDecksData && user && (
+        <DecksListContent
+          sort={sort}
+          handleSort={handleSort}
+          userId={user?.id}
+          deckContent={actualDecksData?.items}
+          pagination={decksData?.pagination}
+          setItemsPerPage={setItemsPerPageHandle}
+          changeCurrentPage={setCurrentPageHandle}
+          showMyDecks={showMyDecks}
+          setShowMyDecks={setShowMyDecksHandle}
+          sliderValues={[0, decksData ? decksData.maxCardsCount : 20]}
+          sliderRangeValues={sliderRangeValues}
+          setSliderValues={filteringByNumberOfCards}
+          setSliderRangeValues={setSliderRangeValuesHandle}
+          searchDeck={searchDeck}
+          addPackModalIsOpen={addPackModalIsOpen}
+          setAddPackModalIsOpen={setAddPackModalIsOpenHandle}
+          editPackModalIsOpen={editPackModalIsOpen}
+          setEditPackModalIsOpen={setEditPackModalIsOpenHandle}
+          deletePackModalIsOpen={deletePackModalIsOpen}
+          setDeletePackModalIsOpen={setDeletePackModalIsOpenHandle}
+          addDeck={addDeckHandle}
+          deleteDeck={deleteDeckHandle}
+          updateDeck={updateDeckHandle}
+          editingDeck={editingDeck}
+          setEditingDeck={setEditingDeckHandle}
+          setClearFilter={setClearFilterHandle}
+          handleSetAuthorId={handleSetAuthorId}
+        />
+      )}
+    </>
   )
 }
