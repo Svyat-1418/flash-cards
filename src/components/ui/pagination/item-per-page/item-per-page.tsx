@@ -8,7 +8,7 @@ type ItemPerPagePropsType = {
   onValueChange: (value: string) => void
 }
 export const ItemPerPage = ({ currentValue, onValueChange }: ItemPerPagePropsType) => {
-  const items = ['10', '20', '50']
+  const items = ['10', '20', '30']
 
   return (
     <div className={s.container}>
