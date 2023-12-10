@@ -15,7 +15,7 @@ type initialStateType = {
   addPackModalIsOpen: boolean
   editPackModalIsOpen: boolean
   deletePackModalIsOpen: boolean
-  editingDeck: null | Deck
+  editingDeck: Deck
   sort: Nullable<Sort>
   itemsPerPage: string
 }
@@ -30,7 +30,7 @@ const initialState: initialStateType = {
   addPackModalIsOpen: false,
   editPackModalIsOpen: false,
   deletePackModalIsOpen: false,
-  editingDeck: null,
+  editingDeck: {} as Deck,
   sort: null as Nullable<Sort>,
   itemsPerPage: '10',
 }
@@ -66,7 +66,7 @@ export const decksSlice = createSlice({
     setDeletePackModalIsOpen: (state, action: PayloadAction<{ isOpen: boolean }>) => {
       state.deletePackModalIsOpen = action.payload.isOpen
     },
-    setEditingDeck: (state, action: PayloadAction<{ deck: null | Deck }>) => {
+    setEditingDeck: (state, action: PayloadAction<{ deck: Deck }>) => {
       state.editingDeck = action.payload.deck
     },
     setClearFilter: () => {
