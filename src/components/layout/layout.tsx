@@ -4,12 +4,14 @@ import { useLogoutMutation, useMeQuery } from '../../services/auth/auth-endpoint
 import { Header } from '../ui/header'
 import { MainWrapper } from '../ui/main-wrapper'
 
+import s from './layout.module.scss'
+
 export const Layout = () => {
   const { data } = useMeQuery()
   const [logout] = useLogoutMutation()
 
   return (
-    <>
+    <div className={s.appWrapper}>
       <Header
         isLoggedIn={!!data}
         email={data?.email}
@@ -20,6 +22,6 @@ export const Layout = () => {
       <MainWrapper>
         <Outlet />
       </MainWrapper>
-    </>
+    </div>
   )
 }
