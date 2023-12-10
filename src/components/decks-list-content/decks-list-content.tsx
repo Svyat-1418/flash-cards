@@ -35,8 +35,8 @@ export type DecksPropsType = {
   addDeck: (args: AddDeckRequestType) => void
   deleteDeck: (id: string) => void
   updateDeck: (args: UpdateDeckRequestType) => void
-  editingDeck: Deck | null
-  setEditingDeck: (item: Deck | null) => void
+  editingDeck: Deck
+  setEditingDeck: (item: Deck) => void
   setClearFilter: () => void
 }
 

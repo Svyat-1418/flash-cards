@@ -1,4 +1,5 @@
 import { Deck, PaginationType, UpdateDeckRequestType } from '../../../services/decks/types.ts'
+import { appendDataToFormData } from '../../../shared/utils/append-data-to-form-data.ts'
 import { Sort } from '../../deck-content/cards-list/card-table'
 import { Pagination } from '../../ui/pagination'
 import { Typography } from '../../ui/typography'
@@ -16,14 +17,14 @@ type DecksListPropsType = {
   pagination: PaginationType | undefined
   setItemsPerPage: (value: string) => void
   changeCurrentPage: (page: number) => void
-  editingDeck: Deck | null
+  editingDeck: Deck
   editPackModalIsOpen: boolean
   setEditPackModalIsOpen: (value: boolean) => void
   updateDeck: (args: UpdateDeckRequestType) => void
   deletePackModalIsOpen: boolean
   setDeletePackModalIsOpen: (value: boolean) => void
   deleteDeck: (id: string) => void
-  setEditingDeck: (item: Deck | null) => void
+  setEditingDeck: (item: Deck) => void
 }
 export const DecksList = ({
   sort,
@@ -53,7 +54,7 @@ export const DecksList = ({
   }
 
   const updateDeckHandle = (args: { name: string; isPrivate: boolean }) => {
-    updateDeck({ id: editingDeck?.id, name: args.name, isPrivate: args.isPrivate })
+    updateDeck({ id: editingDeck?.id, body: appendDataToFormData(args) })
   }
 
   const deleteDeckHandle = () => {

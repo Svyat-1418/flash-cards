@@ -20,7 +20,10 @@ export const DeleteCardModal = ({
 }: DeleteCardModalPropsType) => {
   const deleteCardHandle = () => {
     deletingCard?.id &&
-      deleteCard({ cardId: deletingCard.id }).then(() => {
+      deleteCard({
+        deckId: deletingCard.deckId,
+        cardId: deletingCard.id,
+      }).then(() => {
         closeModal()
       })
   }
