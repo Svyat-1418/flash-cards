@@ -1,5 +1,6 @@
 import { Typography } from '../typography'
 
+import { ItemPerPage } from './item-per-page/item-per-page.tsx'
 import s from './pagination.module.scss'
 
 type PaginationPropsType = {
@@ -40,49 +41,52 @@ export const Pagination = ({
   }
 
   return (
-    <div className={s.pageList}>
-      <button
-        className={s.paginationButton}
-        onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-      >
-        {'<'}
-      </button>
-      {currentPage >= 5 && (
-        <>
-          <button className={s.paginationButton} onClick={() => onPageChange(1)}>
-            1
-          </button>{' '}
-          <span>...</span>
-        </>
-      )}
-      {pageArray.map(p => {
-        const paginationButtonClassname = `${s.paginationButton} ${
-          p === currentPage ? s.active : ''
-        }`
-
-        return (
-          <button className={paginationButtonClassname} key={p} onClick={() => onPageChange(p)}>
-            <Typography variant={'body2'}>{p}</Typography>
-          </button>
-        )
-      })}
-      {currentPage + 2 < pageCount && pageCount > 5 && <span>...</span>}
-      {currentPage < pageCount - 1 && pageCount > 5 && (
-        <button className={s.paginationButton} onClick={() => onPageChange(pageCount)}>
-          {pageCount}
+    <div className={s.container}>
+      <div className={s.pageList}>
+        <button
+          className={s.paginationButton}
+          onClick={() => onPageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          {'<'}
         </button>
-      )}
-      <button
-        className={s.paginationButton}
-        onClick={() => onPageChange(currentPage + 1)}
-        disabled={currentPage === pageCount}
-      >
-        {'>'}
-      </button>
-      {/*<button className={s.paginationButton} onClick={() => onPageChange(pageCount)}>*/}
-      {/*  {pageCount}*/}
-      {/*</button>*/}
+        {currentPage >= 5 && (
+          <>
+            <button className={s.paginationButton} onClick={() => onPageChange(1)}>
+              1
+            </button>{' '}
+            <span>...</span>
+          </>
+        )}
+        {pageArray.map(p => {
+          const paginationButtonClassname = `${s.paginationButton} ${
+            p === currentPage ? s.active : ''
+          }`
+
+          return (
+            <button className={paginationButtonClassname} key={p} onClick={() => onPageChange(p)}>
+              <Typography variant={'body2'}>{p}</Typography>
+            </button>
+          )
+        })}
+        {currentPage + 2 < pageCount && pageCount > 5 && <span>...</span>}
+        {currentPage < pageCount - 1 && pageCount > 5 && (
+          <button className={s.paginationButton} onClick={() => onPageChange(pageCount)}>
+            {pageCount}
+          </button>
+        )}
+        <button
+          className={s.paginationButton}
+          onClick={() => onPageChange(currentPage + 1)}
+          disabled={currentPage === pageCount}
+        >
+          {'>'}
+        </button>
+        {/*<button className={s.paginationButton} onClick={() => onPageChange(pageCount)}>*/}
+        {/*  {pageCount}*/}
+        {/*</button>*/}
+      </div>
+      <ItemPerPage />
     </div>
   )
 }
