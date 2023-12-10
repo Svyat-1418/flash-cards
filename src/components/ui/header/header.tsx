@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 import { Link } from 'react-router-dom'
 
-import { Logo } from '../../../assets/icons/logo'
+import { NewLogo1 } from '../../../assets/icons/logo/version/new-logo1/NewLogo1.tsx'
 import { Logout } from '../../../assets/icons/logout'
 import { Person } from '../../../assets/icons/person'
 import { Nullable } from '../../../types/common.types.ts'
@@ -86,7 +86,7 @@ export const Header = ({
     <header className={s.header}>
       <Container className={s.headerContainer}>
         <Link to={'/'}>
-          <Logo />
+          <NewLogo1 />
         </Link>
         {loginOrAvatarContent}
       </Container>
