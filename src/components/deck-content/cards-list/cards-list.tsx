@@ -15,6 +15,7 @@ export const CardsList: FC<Props> = ({
   handleSort,
   changeCurrentPage,
   pagination,
+  changeItemsPerPage,
   isAuthor,
   updateCard,
   deleteCard,
@@ -67,6 +68,8 @@ export const CardsList: FC<Props> = ({
             deleteCard={openDeleteCardModalHandle}
           />
           <Pagination
+            onChangeItemsValue={changeItemsPerPage}
+            currentItemsValue={pagination.itemsPerPage.toString()}
             onPageChange={changeCurrentPage}
             currentPage={pagination.currentPage}
             pageCount={pagination.totalPages}
@@ -83,6 +86,7 @@ type Props = {
   cardsData: Card[]
   isAuthor: boolean
   pagination: EntityPagination
+  changeItemsPerPage: (value: string) => void
   changeCurrentPage: (page: number) => void
   updateCard: (args: UpdateCardArgs) => Promise<any>
   deleteCard: (args: DeleteCardArgs) => Promise<any>
