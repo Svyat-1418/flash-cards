@@ -1,5 +1,7 @@
 import { FC, useState } from 'react'
 
+import { Link } from 'react-router-dom'
+
 import { CreateCardDto } from '../../../services/cards/types.ts'
 import { Button } from '../../ui/button'
 import { Cover } from '../../ui/cover/cover.tsx'
@@ -10,6 +12,7 @@ import s from './deck-panel.module.scss'
 import { AddNewCardModal } from './modal/add-new-card.modal'
 
 export const DeckPanel: FC<Props> = ({
+  deckId,
   isAuthor,
   name,
   cover,
@@ -38,7 +41,9 @@ export const DeckPanel: FC<Props> = ({
           {isAuthor ? (
             <Button onClick={() => setAddNewCardModalIsOpen(true)}>Add New Card</Button>
           ) : (
-            <Button>Learn</Button>
+            <Button as={Link} to={`/learn/${deckId}`}>
+              Learn
+            </Button>
           )}
         </div>
         <Cover src={cover} className={s.cover} />
@@ -54,6 +59,7 @@ export const DeckPanel: FC<Props> = ({
 }
 
 type Props = {
+  deckId: string
   name: string
   cover: string
   isAuthor: boolean

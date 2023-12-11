@@ -10,6 +10,7 @@ import { CardsList } from './cards-list/cards-list.tsx'
 import { DeckPanel } from './deck-panel/deck-panel.tsx'
 
 export const DeckContent: FC<Props> = ({
+  deckId,
   name,
   cover,
   cardsData,
@@ -29,6 +30,7 @@ export const DeckContent: FC<Props> = ({
     <Container>
       <GoBack title={'Back to Decks List'} />
       <DeckPanel
+        deckId={deckId}
         name={name}
         cover={cover}
         isAuthor={isAuthor}
@@ -52,6 +54,7 @@ export const DeckContent: FC<Props> = ({
 }
 
 type Props = {
+  deckId: string
   name: string
   cover: string
   cardsData: Card[]
