@@ -103,6 +103,7 @@ export const DeckPage = () => {
     <>
       {deckData && actualCardsData && (
         <DeckContent
+          deckId={deckId}
           sort={sort}
           handleSort={handleSort}
           isAuthor={deckData.userId === meData?.id}
