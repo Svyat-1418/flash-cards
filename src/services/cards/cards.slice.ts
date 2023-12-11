@@ -3,16 +3,18 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Sort } from '../../components/deck-content/cards-list/card-table'
 import { Nullable } from '../../types/common.types.ts'
 
+const initialState = {
+  itemsPerPage: 10,
+  currentPage: 1,
+  searchByAnswer: '',
+  searchByQuestion: '',
+  orderBy: 'created-desc',
+  sort: null as Nullable<Sort>,
+}
+
 export const cardsSlice = createSlice({
   name: 'cardsQueryParams',
-  initialState: {
-    itemsPerPage: 10,
-    currentPage: 1,
-    searchByAnswer: '',
-    searchByQuestion: '',
-    orderBy: 'created-desc',
-    sort: null as Nullable<Sort>,
-  },
+  initialState: initialState,
   reducers: {
     setItemsPerPage: (state, action: PayloadAction<{ itemsPerPage: number }>) => {
       state.itemsPerPage = action.payload.itemsPerPage
@@ -35,5 +37,5 @@ export const cardsSlice = createSlice({
   },
 })
 
-export const { setCurrentPage, setSearchByQuestion } = cardsSlice.actions
+export const { setCurrentPage, setSearchByQuestion, setItemsPerPage } = cardsSlice.actions
 export const { actions: cardsActions } = cardsSlice

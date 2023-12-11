@@ -6,6 +6,7 @@ import { Pagination } from '../../ui/pagination'
 import { Empty } from '../../ui/table'
 
 import { CardTable, Sort } from './card-table'
+import s from './cards-list.module.scss'
 import { DeleteCardModal } from './modal/delete-card.modal'
 import { EditCardModal } from './modal/edit-card.modal'
 
@@ -15,6 +16,7 @@ export const CardsList: FC<Props> = ({
   handleSort,
   changeCurrentPage,
   pagination,
+  changeItemsPerPage,
   isAuthor,
   updateCard,
   deleteCard,
@@ -45,7 +47,7 @@ export const CardsList: FC<Props> = ({
   return (
     <>
       {cardsData.length ? (
-        <>
+        <div className={s.cardsList}>
           <EditCardModal
             editingCard={editingCard}
             modalIsOpen={openEditCardModal}
@@ -67,12 +69,14 @@ export const CardsList: FC<Props> = ({
             deleteCard={openDeleteCardModalHandle}
           />
           <Pagination
-            onChangeItemsValue={() => {}}
+            onChangeItemsValue={changeItemsPerPage}
+            currentItemsValue={pagination.itemsPerPage.toString()}
             onPageChange={changeCurrentPage}
             currentPage={pagination.currentPage}
             pageCount={pagination.totalPages}
+            className={s.pagination}
           />
-        </>
+        </div>
       ) : (
         <Empty />
       )}
@@ -84,6 +88,7 @@ type Props = {
   cardsData: Card[]
   isAuthor: boolean
   pagination: EntityPagination
+  changeItemsPerPage: (value: string) => void
   changeCurrentPage: (page: number) => void
   updateCard: (args: UpdateCardArgs) => Promise<any>
   deleteCard: (args: DeleteCardArgs) => Promise<any>

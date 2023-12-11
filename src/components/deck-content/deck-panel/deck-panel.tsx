@@ -6,6 +6,7 @@ import { Cover } from '../../ui/cover/cover.tsx'
 import { TextField } from '../../ui/textfield'
 import { Typography } from '../../ui/typography'
 
+import s from './deck-panel.module.scss'
 import { AddNewCardModal } from './modal/add-new-card.modal'
 
 export const DeckPanel: FC<Props> = ({
@@ -29,19 +30,23 @@ export const DeckPanel: FC<Props> = ({
         onSubmit={createCard}
       />
       <div>
-        <Typography variant={'large'} as={'h1'}>
-          {name}
-        </Typography>
-        <Cover src={cover} />
-        {isAuthor ? (
-          <Button onClick={() => setAddNewCardModalIsOpen(true)}>Add New Card</Button>
-        ) : (
-          <Button>Learn</Button>
-        )}
+        <div className={s.titleAndButton}>
+          <Typography variant={'large'} as={'h1'}>
+            {name}
+          </Typography>
+
+          {isAuthor ? (
+            <Button onClick={() => setAddNewCardModalIsOpen(true)}>Add New Card</Button>
+          ) : (
+            <Button>Learn</Button>
+          )}
+        </div>
+        <Cover src={cover} className={s.cover} />
         <TextField
           type={'search'}
           placeholder={'Input search'}
           onChange={e => searchCard(e.currentTarget.value)}
+          containerProps={{ className: s.textField }}
         />
       </div>
     </>

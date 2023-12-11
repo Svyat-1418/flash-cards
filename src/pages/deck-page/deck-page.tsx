@@ -14,6 +14,7 @@ import {
 import {
   cardsActions,
   setCurrentPage,
+  setItemsPerPage,
   setSearchByQuestion,
 } from '../../services/cards/cards.slice.ts'
 import { CreateCardDto, DeleteCardArgs, UpdateCardArgs } from '../../services/cards/types.ts'
@@ -28,6 +29,7 @@ export const DeckPage = () => {
   const currentPage = useAppSelector(state => state.cardsQueryParams.currentPage)
   const searchByQuestion = useAppSelector(state => state.cardsQueryParams.searchByQuestion)
   const sort = useAppSelector(state => state.cardsQueryParams.sort)
+  const itemsPerPage = useAppSelector(state => state.cardsQueryParams.itemsPerPage)
 
   const { data: meData } = useMeQuery()
   const { currentData: currentCardsData, data: cardsData } = useGetCardsQuery({
@@ -35,6 +37,7 @@ export const DeckPage = () => {
     currentPage: currentPage,
     question: searchByQuestion,
     orderBy: getSortString(sort),
+    itemsPerPage: itemsPerPage,
   })
   const { data: deckData } = useGetDeckByIdQuery({
     id: deckId || '',
@@ -53,6 +56,9 @@ export const DeckPage = () => {
   }
   const searchCardByQuestion = (title: string) => {
     dispatch(setSearchByQuestion({ searchByQuestion: title }))
+  }
+  const changeItemsPerPage = (value: string) => {
+    dispatch(setItemsPerPage({ itemsPerPage: +value }))
   }
 
   const createCardHandle = async (args: CreateCardDto) => {
@@ -105,6 +111,7 @@ export const DeckPage = () => {
           cover={deckData.cover}
           cardsData={actualCardsData.items}
           pagination={actualCardsData.pagination}
+          changeItemsPerPage={changeItemsPerPage}
           changeCurrentPage={changeCurrentPage}
           createCard={createCardHandle}
           loadingCreateCard={loadingCreateCard}

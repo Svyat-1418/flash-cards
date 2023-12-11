@@ -9,6 +9,7 @@ type PaginationPropsType = {
   onPageChange: (page: number) => void
   currentItemsValue?: string
   onChangeItemsValue: (value: string) => void
+  className?: string
 }
 
 //todo исправить пагинацию при выборе предпоследней страницы
@@ -18,6 +19,7 @@ export const Pagination = ({
   onPageChange,
   currentItemsValue = '10',
   onChangeItemsValue,
+  className,
 }: PaginationPropsType) => {
   let pageArray: Array<number> = []
 
@@ -45,7 +47,7 @@ export const Pagination = ({
   }
 
   return (
-    <div className={s.container}>
+    <div className={`${s.container} ${className ? className : ''}`}>
       <div className={s.pageList}>
         <button
           className={s.paginationButton}

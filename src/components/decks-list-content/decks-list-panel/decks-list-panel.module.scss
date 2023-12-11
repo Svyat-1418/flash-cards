@@ -5,11 +5,11 @@
 
 .settingContainer {
   display: flex;
-  gap: 25px;
+  gap: var(--line-height-m);
   align-items: end;
   justify-content: space-between;
 
-  margin-bottom: 36px;
+  margin-bottom: var(--line-height-l);
 }
 
 .sliderContainer {

@@ -11,6 +11,7 @@ import { DecksList } from './decks-list/decks-list.tsx'
 import { DecksListPanel } from './decks-list-panel/decks-list-panel.tsx'
 
 export type DecksPropsType = {
+  decksLoading: boolean
   handleSetAuthorId: (authorId: string | undefined) => void
   sort: Sort
   handleSort: (sort: Sort) => void
@@ -41,6 +42,7 @@ export type DecksPropsType = {
 }
 
 export const DecksListContent = ({
+  decksLoading,
   sort,
   handleSort,
   userId,
@@ -87,6 +89,7 @@ export const DecksListContent = ({
         handleSetAuthorId={handleSetAuthorId}
       />
       <DecksList
+        decksLoading={decksLoading}
         sort={sort}
         handleSort={handleSort}
         deckContent={deckContent}
