@@ -2,6 +2,7 @@ import { Deck, PaginationType, UpdateDeckRequestType } from '../../../services/d
 import { appendDataToFormData } from '../../../shared/utils/append-data-to-form-data.ts'
 import { Sort } from '../../deck-content/cards-list/card-table'
 import { Pagination } from '../../ui/pagination'
+import { SkeletonTable } from '../../ui/skeleton/skeleton-table.tsx'
 import { Typography } from '../../ui/typography'
 
 import { DeckTable } from './deck-table'
@@ -10,6 +11,7 @@ import { DeleteDeckModal } from './modal/delete-deck.modal'
 import { EditPackModal } from './modal/edit-deck.modal'
 
 type DecksListPropsType = {
+  decksLoading: boolean
   sort: Sort
   handleSort: (sort: Sort) => void
   deckContent: Deck[]
@@ -27,6 +29,7 @@ type DecksListPropsType = {
   setEditingDeck: (item: Deck) => void
 }
 export const DecksList = ({
+  decksLoading,
   sort,
   handleSort,
   deckContent,
@@ -61,6 +64,10 @@ export const DecksList = ({
     if (editingDeck?.id) {
       deleteDeck(editingDeck?.id)
     }
+  }
+
+  if (decksLoading) {
+    return <SkeletonTable />
   }
 
   return (
