@@ -46,7 +46,7 @@ export const DeckPanel: FC<Props> = ({
             </Button>
           )}
         </div>
-        <Cover src={cover} className={s.cover} />
+        {cover && <Cover src={cover} className={s.cover} />}
         <TextField
           type={'search'}
           placeholder={'Input search'}
