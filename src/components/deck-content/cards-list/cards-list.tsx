@@ -6,6 +6,7 @@ import { Pagination } from '../../ui/pagination'
 import { Empty } from '../../ui/table'
 
 import { CardTable, Sort } from './card-table'
+import s from './cards-list.module.scss'
 import { DeleteCardModal } from './modal/delete-card.modal'
 import { EditCardModal } from './modal/edit-card.modal'
 
@@ -46,7 +47,7 @@ export const CardsList: FC<Props> = ({
   return (
     <>
       {cardsData.length ? (
-        <>
+        <div className={s.cardsList}>
           <EditCardModal
             editingCard={editingCard}
             modalIsOpen={openEditCardModal}
@@ -73,8 +74,9 @@ export const CardsList: FC<Props> = ({
             onPageChange={changeCurrentPage}
             currentPage={pagination.currentPage}
             pageCount={pagination.totalPages}
+            className={s.pagination}
           />
-        </>
+        </div>
       ) : (
         <Empty />
       )}
