@@ -15,6 +15,7 @@ export const DeckContent: FC<Props> = ({
   cardsData,
   changeCurrentPage,
   pagination,
+  changeItemsPerPage,
   searchCard,
   isAuthor,
   createCard,
@@ -41,6 +42,7 @@ export const DeckContent: FC<Props> = ({
         cardsData={cardsData}
         isAuthor={isAuthor}
         pagination={pagination}
+        changeItemsPerPage={changeItemsPerPage}
         changeCurrentPage={changeCurrentPage}
         updateCard={updateCard}
         deleteCard={deleteCard}
@@ -55,6 +57,7 @@ type Props = {
   cardsData: Card[]
   isAuthor: boolean
   pagination: EntityPagination
+  changeItemsPerPage: (value: string) => void
   searchCard: (cardName: string) => void
   changeCurrentPage: (page: number) => void
   loadingCreateCard: boolean
