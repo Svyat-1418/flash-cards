@@ -11,4 +11,9 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Buttons: Story = {}
+export const Buttons: Story = {
+  args: {
+    toLearn: 'https://www.learn.com',
+    isAdmin: true,
+  },
+}
