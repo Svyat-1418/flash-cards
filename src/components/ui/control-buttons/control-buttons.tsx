@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Edit } from '../../../assets/icons/edit'
 import { OutlinedPlayCircle } from '../../../assets/icons/play-circle-outline'
 import { Trash } from '../../../assets/icons/trash'
+import { Button } from '../button'
 
 import s from './control-buttons.module.scss'
 
@@ -24,18 +25,18 @@ export const ControlButtons = ({
   return (
     <div className={s.controlButtonContainer}>
       {!forCards && toLearn && (
-        <Link to={toLearn}>
+        <Button as={Link} asChild to={toLearn} className={s.controlButton}>
           <OutlinedPlayCircle />
-        </Link>
+        </Button>
       )}
       {isAdmin ? (
         <>
-          <button onClick={handleEdit} className={s.controlButton}>
+          <Button asChild onClick={handleEdit} className={s.controlButton}>
             <Edit />
-          </button>
-          <button onClick={handleDelete} className={s.controlButton}>
+          </Button>
+          <Button asChild onClick={handleDelete} className={s.controlButton}>
             <Trash />
-          </button>
+          </Button>
         </>
       ) : (
         <div className={s.emptyBox}></div>

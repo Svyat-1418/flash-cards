@@ -1,11 +1,15 @@
 .controlButtonContainer {
   display: flex;
+  gap: 8px;
   align-items: center;
   justify-content: end;
 }
 
 .controlButton {
   cursor: pointer;
+
+  display: flex;
+
   background: none;
   border: none;
   box-shadow: none;
