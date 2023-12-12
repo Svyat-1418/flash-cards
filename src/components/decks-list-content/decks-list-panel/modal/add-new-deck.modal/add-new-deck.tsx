@@ -76,7 +76,7 @@ export const AddNewDeckModal = ({
       showCloseButton
       title={
         <Typography variant={'h2'} as={'h2'}>
-          Add New Pack
+          Add New Deck
         </Typography>
       }
     >

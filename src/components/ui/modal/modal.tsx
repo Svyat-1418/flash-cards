@@ -24,7 +24,7 @@ export const Modal = ({
 }: DialogsPropsType) => {
   return (
     <Dialog.Root open={open} onOpenChange={onClose}>
-      <Dialog.Portal>
+      <Dialog.Portal className={s.root}>
         <Dialog.Overlay className={s.overlay}>
           <Dialog.Content className={s.content}>
             {showCloseButton ? (
