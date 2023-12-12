@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks.ts'
@@ -18,18 +18,23 @@ import {
   setSearchByQuestion,
 } from '../../services/cards/cards.slice.ts'
 import { CreateCardDto, DeleteCardArgs, UpdateCardArgs } from '../../services/cards/types.ts'
-import { useGetDeckByIdQuery } from '../../services/decks/decks-endpoints.ts'
+import { setDeletePackModalIsOpen } from '../../services/decks/deck-query-params.slice.ts'
+import { useDeleteDeckMutation, useGetDeckByIdQuery } from '../../services/decks/decks-endpoints.ts'
 import { appendDataToFormData } from '../../shared/utils/append-data-to-form-data.ts'
 import { getSortString } from '../../shared/utils/get-sort-string.ts'
 
 export const DeckPage = () => {
   const { deckId } = useParams<{ deckId: string }>()
+  const navigate = useNavigate()
 
   const dispatch = useAppDispatch()
   const currentPage = useAppSelector(state => state.cardsQueryParams.currentPage)
   const searchByQuestion = useAppSelector(state => state.cardsQueryParams.searchByQuestion)
   const sort = useAppSelector(state => state.cardsQueryParams.sort)
   const itemsPerPage = useAppSelector(state => state.cardsQueryParams.itemsPerPage)
+  const deleteDeckModalIsOpen = useAppSelector(
+    state => state.decksQueryParams.deletePackModalIsOpen
+  )
 
   const { data: meData } = useMeQuery()
   const { currentData: currentCardsData, data: cardsData } = useGetCardsQuery({
@@ -45,6 +50,7 @@ export const DeckPage = () => {
   const [createCard, { isLoading: loadingCreateCard }] = useCreateCardMutation({})
   const [updateCard] = useUpdateCardMutation()
   const [deleteCard] = useDeleteCardMutation()
+  const [deleteDeck] = useDeleteDeckMutation()
 
   const actualCardsData = currentCardsData ?? cardsData
 
@@ -59,6 +65,10 @@ export const DeckPage = () => {
   }
   const changeItemsPerPage = (value: string) => {
     dispatch(setItemsPerPage({ itemsPerPage: +value }))
+  }
+
+  const setDeletePackModalIsOpenHandle = (isOpen: boolean) => {
+    dispatch(setDeletePackModalIsOpen({ isOpen }))
   }
 
   const createCardHandle = async (args: CreateCardDto) => {
@@ -97,6 +107,22 @@ export const DeckPage = () => {
     }
   }
 
+  const deleteDeckHandle = async (id: string) => {
+    try {
+      await deleteDeck({ id }).unwrap()
+
+      toast.success('Deck deleted successfully')
+      setDeletePackModalIsOpenHandle(false)
+      navigate('/')
+
+      //setEditingDeckHandle(null)
+    } catch (err) {
+      const error = err as { data: { message: string } }
+
+      toast.error(error.data.message)
+    }
+  }
+
   if (!deckId) return <div>Deck not found</div>
 
   return (
@@ -118,6 +144,9 @@ export const DeckPage = () => {
           loadingCreateCard={loadingCreateCard}
           updateCard={updateCardHandle}
           deleteCard={deleteCardHandle}
+          deleteDeckModalIsOpen={deleteDeckModalIsOpen}
+          setDeletePackModalIsOpen={setDeletePackModalIsOpenHandle}
+          deleteDeck={deleteDeckHandle}
         />
       )}
     </>
