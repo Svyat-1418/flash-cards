@@ -9,7 +9,7 @@ import { TextField } from '../../ui/textfield'
 import { Typography } from '../../ui/typography'
 
 import s from './decks-list-panel.module.scss'
-import { AddNewDeckModal } from './modal/add-new-deck.modal'
+import { AddNewDeckModal } from './modal/add-new-deck.modal/add-new-deck.tsx'
 
 type DecksListPanelType = {
   addPackModalIsOpen: boolean
