@@ -7,6 +7,7 @@ import { MoreIcon } from '../../../assets/icons/more/more.tsx'
 import { OutlinedPlayCircle } from '../../../assets/icons/play-circle-outline'
 import { Trash } from '../../../assets/icons/trash'
 import { CreateCardDto } from '../../../services/cards/types.ts'
+import { DeleteDeckModal } from '../../decks-list-content/decks-list/modal/delete-deck.modal'
 import { Button } from '../../ui/button'
 import { Cover } from '../../ui/cover/cover.tsx'
 import { Dropdown } from '../../ui/dropdown/dropdown.tsx'
@@ -24,6 +25,9 @@ export const DeckPanel: FC<Props> = ({
   searchCard,
   createCard,
   loadingCreateCard,
+  deleteDeckModalIsOpen,
+  setDeletePackModalIsOpen,
+  deleteDeck,
 }) => {
   const [addNewCardModalIsOpen, setAddNewCardModalIsOpen] = useState(false)
   const closeModal = () => {
@@ -31,7 +35,7 @@ export const DeckPanel: FC<Props> = ({
   }
 
   const dropdownElements: ReactNode[] = [
-    <Link to={'/'} key={'learn'} className={s.dropdownElements}>
+    <Link to={`/learn/${deckId}`} key={'learn'} className={s.dropdownElements}>
       <OutlinedPlayCircle />
       <Typography variant={'caption'}>Learn</Typography>
     </Link>,
@@ -39,10 +43,15 @@ export const DeckPanel: FC<Props> = ({
       <Edit />
       <Typography variant={'caption'}>Edit</Typography>
     </Link>,
-    <Link to={'/'} key={'Delete'} className={s.dropdownElements}>
+    <Button
+      asChild
+      key={'Delete'}
+      className={s.dropdownElements}
+      onClick={() => setDeletePackModalIsOpen(true)}
+    >
       <Trash />
       <Typography variant={'caption'}>Delete</Typography>
-    </Link>,
+    </Button>,
   ]
 
   return (
@@ -51,6 +60,11 @@ export const DeckPanel: FC<Props> = ({
         modalIsOpen={addNewCardModalIsOpen}
         closeModal={closeModal}
         onSubmit={createCard}
+      />
+      <DeleteDeckModal
+        modalIsOpen={deleteDeckModalIsOpen}
+        setModalIsOpen={setDeletePackModalIsOpen}
+        onSubmit={() => deleteDeck(deckId)}
       />
       <div>
         <div className={s.titleAndButton}>
@@ -89,4 +103,7 @@ type Props = {
   searchCard: (cardName: string) => void
   createCard: (args: CreateCardDto) => Promise<any>
   loadingCreateCard: boolean
+  deleteDeckModalIsOpen: boolean
+  setDeletePackModalIsOpen: (isOpen: boolean) => void
+  deleteDeck: (id: string) => void
 }
