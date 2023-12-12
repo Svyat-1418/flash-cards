@@ -67,7 +67,7 @@ export const decksEndpoints = baseApi.injectEndpoints({
       },
     }),
     updateDeck: builder.mutation<Deck, UpdateDeckRequestType>({
-      query: ({ id, ...body }) => ({
+      query: ({ id, body }) => ({
         url: `decks/${id}`,
         method: `PATCH`,
         body,
