@@ -2,6 +2,7 @@ import { FC } from 'react'
 
 import { Card, CreateCardDto, DeleteCardArgs, UpdateCardArgs } from '../../services/cards/types.ts'
 import { Pagination as EntityPagination } from '../../services/common.types.ts'
+import { UpdateDeckRequestType } from '../../services/decks/types.ts'
 import { Container } from '../ui/container'
 import { GoBack } from '../ui/go-back'
 
@@ -28,6 +29,9 @@ export const DeckContent: FC<Props> = ({
   deleteDeckModalIsOpen,
   setDeletePackModalIsOpen,
   deleteDeck,
+  updateDeck,
+  setEditPackModalIsOpen,
+  editPackModalIsOpen,
 }) => {
   return (
     <Container>
@@ -43,6 +47,9 @@ export const DeckContent: FC<Props> = ({
         deleteDeckModalIsOpen={deleteDeckModalIsOpen}
         setDeletePackModalIsOpen={setDeletePackModalIsOpen}
         deleteDeck={deleteDeck}
+        updateDeck={updateDeck}
+        setEditPackModalIsOpen={setEditPackModalIsOpen}
+        editPackModalIsOpen={editPackModalIsOpen}
       />
       <CardsList
         sort={sort}
@@ -78,4 +85,7 @@ type Props = {
   deleteDeckModalIsOpen: boolean
   setDeletePackModalIsOpen: (isOpen: boolean) => void
   deleteDeck: (id: string) => void
+  updateDeck: (args: UpdateDeckRequestType) => void
+  setEditPackModalIsOpen: (isOpen: boolean) => void
+  editPackModalIsOpen: boolean
 }
