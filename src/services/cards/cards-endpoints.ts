@@ -48,7 +48,7 @@ const cardsEndpoints = baseApi.injectEndpoints({
       },
     }),
     updateCard: builder.mutation<CreateCardResponse, UpdateCardArgs>({
-      query: ({ cardId, ...body }) => ({
+      query: ({ cardId, body }) => ({
         url: `cards/${cardId}`,
         method: 'PATCH',
         body,
