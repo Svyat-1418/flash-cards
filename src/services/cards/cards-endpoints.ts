@@ -27,7 +27,7 @@ const cardsEndpoints = baseApi.injectEndpoints({
       providesTags: ['Cards'],
     }),
     createCard: builder.mutation<CreateCardResponse, CreateCardArgs>({
-      query: ({ deckId, ...body }) => ({
+      query: ({ deckId, body }) => ({
         url: `decks/${deckId}/cards`,
         method: 'POST',
         body,
