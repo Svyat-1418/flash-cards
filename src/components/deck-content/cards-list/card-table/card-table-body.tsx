@@ -3,6 +3,7 @@ import { FC } from 'react'
 import { Card } from '../../../../services/cards/types.ts'
 import { toLocaleDateString } from '../../../../utils/toLocaleDateString.ts'
 import { ControlButtons } from '../../../ui/control-buttons'
+import { Cover } from '../../../ui/cover/cover.tsx'
 import { Rating } from '../../../ui/rating'
 import { Table } from '../../../ui/table'
 import { Typography } from '../../../ui/typography'
@@ -20,6 +21,7 @@ export const CardTableBody: FC<Props> = ({ content, isAuthor, editCard, deleteCa
       {content.map(item => (
         <Table.Row key={item.id}>
           <Table.Cell>
+            {item.questionImg && <Cover src={item.questionImg} />}
             <Typography variant={'body2'}>
               {item.question.length > 20 ? `${item.question.slice(0, 20)} ...` : item.question}
             </Typography>
