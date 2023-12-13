@@ -1,7 +1,7 @@
 import { Button } from '../../../../ui/button'
 import { Modal } from '../../../../ui/modal'
 import { Typography } from '../../../../ui/typography'
-import s from '../edit-deck.modal/edit-deck.modal.module.scss'
+import s from '../update-deck/update-deck.module.scss'
 
 type DeleteDeckModalPropsType = {
   modalIsOpen: boolean
