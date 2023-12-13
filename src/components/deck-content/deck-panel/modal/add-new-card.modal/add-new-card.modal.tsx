@@ -1,12 +1,16 @@
+import { useState } from 'react'
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import AddPicture from '../../../../../assets/icons/add-picture/add-picture.tsx'
 import { Button } from '../../../../ui/button'
 import { ControlledTextField } from '../../../../ui/controlled'
+import { Cover } from '../../../../ui/cover/cover.tsx'
 import { Modal } from '../../../../ui/modal'
-import { SelectComponent } from '../../../../ui/select'
 import { Typography } from '../../../../ui/typography'
+import { Uploader } from '../../../../ui/uploader'
 
 import s from './add-new-card.modal.module.scss'
 
@@ -27,14 +31,25 @@ export const AddNewCardModal = ({
   closeModal,
   onSubmit,
 }: AddNewCardModalPropsType) => {
+  const [questionImg, setQuestionImg] = useState<File | null>(null)
+
+  let questionImageUrl = ''
+
   const { handleSubmit, control, reset } = useForm<FormType>({
     resolver: zodResolver(schema),
     mode: 'onTouched',
   })
 
   const onSubmitHandle = (args: FormType) => {
-    onSubmit(args).then(() => {
-      reset()
+    const addCardPayload = questionImg
+      ? {
+          questionImg: questionImg,
+          ...args,
+        }
+      : args
+
+    onSubmit(addCardPayload).then(() => {
+      URL.revokeObjectURL(questionImageUrl)
       closeModal()
     })
   }
@@ -46,20 +61,36 @@ export const AddNewCardModal = ({
 
   const addNewCard = handleSubmit(onSubmitHandle)
 
+  const onLoadQuestionImage = (data: File) => {
+    setQuestionImg(data)
+  }
+
+  if (questionImg) {
+    questionImageUrl = URL.createObjectURL(questionImg)
+  }
+
   return (
     <Modal
       open={modalIsOpen}
       showCloseButton
       title={
         <Typography variant={'h2'} as={'h2'}>
-          Add New Pack
+          Add New Card
         </Typography>
       }
       onClose={cancelHandle}
     >
       <form onSubmit={addNewCard}>
+        <div>
+          {questionImg && <Cover src={questionImageUrl} className={s.cover} />}
+          <Uploader onLoadCover={onLoadQuestionImage} onLoadError={() => {}}>
+            <Button variant={'secondary'} fullWidth type={'button'}>
+              <AddPicture />
+              <span>Add Question Image</span>
+            </Button>
+          </Uploader>
+        </div>
         <div className={s.fields}>
-          <SelectComponent selectItems={['Text', 'Picture']} fullWidth />
           <ControlledTextField control={control} name={'question'} label={'Question'} />
           <ControlledTextField control={control} name={'answer'} label={'Answer'} />
         </div>
