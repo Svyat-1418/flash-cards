@@ -26,7 +26,7 @@ type Props = {
   isPrivate?: boolean
   modalIsOpen: boolean
   setModalIsOpen: (value: boolean) => void
-  onSubmit: <T>(data: FormType) => Promise<T>
+  onSubmit: (data: FormType) => void
 }
 export const UpdateDeckModal: FC<Props> = ({
   name = '',
@@ -51,9 +51,8 @@ export const UpdateDeckModal: FC<Props> = ({
   const onSubmitHandle = (args: FormType) => {
     const updateDeckPayload = cover ? { cover, ...args } : args
 
-    onSubmit(updateDeckPayload).then(() => {
-      URL.revokeObjectURL(coverUrl)
-    })
+    onSubmit(updateDeckPayload)
+    URL.revokeObjectURL(coverUrl)
   }
 
   const cancelHandle = () => {
