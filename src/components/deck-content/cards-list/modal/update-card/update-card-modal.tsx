@@ -1,16 +1,20 @@
+import { useState } from 'react'
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import AddPicture from '../../../../../assets/icons/add-picture/add-picture.tsx'
 import { Card, UpdateCardArgs } from '../../../../../services/cards/types.ts'
 import { appendDataToFormData } from '../../../../../shared/utils/append-data-to-form-data.ts'
 import { Button } from '../../../../ui/button'
 import { ControlledTextField } from '../../../../ui/controlled'
+import { Cover } from '../../../../ui/cover/cover.tsx'
 import { Modal } from '../../../../ui/modal'
-import { SelectComponent } from '../../../../ui/select'
 import { Typography } from '../../../../ui/typography'
+import { Uploader } from '../../../../ui/uploader'
 
-import s from './edit-card.modal.module.scss'
+import s from './update-card.module.scss'
 
 type EditCardModalPropsType = {
   editingCard: Card | null
@@ -25,12 +29,16 @@ const schema = z.object({
 
 type FormType = z.infer<typeof schema>
 
-export const EditCardModal = ({
+export const UpdateCardModal = ({
   editingCard,
   modalIsOpen,
   closeModal,
   onSubmit,
 }: EditCardModalPropsType) => {
+  const [questionImg, setQuestionImg] = useState<File | null>(null)
+
+  let questionImageUrl = ''
+
   const { handleSubmit, control, reset } = useForm<FormType>({
     resolver: zodResolver(schema),
     mode: 'onTouched',
@@ -41,12 +49,20 @@ export const EditCardModal = ({
   })
 
   const onSubmitHandle = (args: FormType) => {
+    const updateCardPayload = questionImg
+      ? {
+          questionImg: questionImg,
+          ...args,
+        }
+      : args
+
     editingCard?.id &&
       onSubmit({
         deckId: editingCard.deckId,
         cardId: editingCard.id,
-        body: appendDataToFormData(args),
+        body: appendDataToFormData(updateCardPayload),
       }).then(() => {
+        URL.revokeObjectURL(questionImageUrl)
         closeModal()
       })
   }
@@ -54,6 +70,14 @@ export const EditCardModal = ({
   const cancelHandle = () => {
     closeModal()
     reset()
+  }
+
+  const onLoadQuestionImage = (data: File) => {
+    setQuestionImg(data)
+  }
+
+  if (questionImg) {
+    questionImageUrl = URL.createObjectURL(questionImg)
   }
 
   const addNewCard = handleSubmit(onSubmitHandle)
@@ -70,8 +94,16 @@ export const EditCardModal = ({
       onClose={cancelHandle}
     >
       <form onSubmit={addNewCard}>
+        <div>
+          {questionImg && <Cover src={questionImageUrl} className={s.cover} />}
+          <Uploader onLoadCover={onLoadQuestionImage} onLoadError={() => {}}>
+            <Button variant={'secondary'} fullWidth type={'button'}>
+              <AddPicture />
+              <span>Update Question Image</span>
+            </Button>
+          </Uploader>
+        </div>
         <div className={s.fields}>
-          <SelectComponent selectItems={['Text', 'Picture']} fullWidth />
           <ControlledTextField control={control} name={'question'} label={'Question'} />
           <ControlledTextField control={control} name={'answer'} label={'Answer'} />
         </div>
