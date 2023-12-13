@@ -7,7 +7,10 @@ import { MoreIcon } from '../../../assets/icons/more/more.tsx'
 import { OutlinedPlayCircle } from '../../../assets/icons/play-circle-outline'
 import { Trash } from '../../../assets/icons/trash'
 import { CreateCardDto } from '../../../services/cards/types.ts'
+import { UpdateDeckRequestType } from '../../../services/decks/types.ts'
+import { appendDataToFormData } from '../../../shared/utils/append-data-to-form-data.ts'
 import { DeleteDeckModal } from '../../decks-list-content/decks-list/modal/delete-deck.modal'
+import { UpdateDeckModal } from '../../decks-list-content/decks-list/modal/update-deck/update-deck.tsx'
 import { Button } from '../../ui/button'
 import { Cover } from '../../ui/cover/cover.tsx'
 import { Dropdown } from '../../ui/dropdown/dropdown.tsx'
@@ -28,10 +31,17 @@ export const DeckPanel: FC<Props> = ({
   deleteDeckModalIsOpen,
   setDeletePackModalIsOpen,
   deleteDeck,
+  updateDeck,
+  setEditPackModalIsOpen,
+  editPackModalIsOpen,
 }) => {
   const [addNewCardModalIsOpen, setAddNewCardModalIsOpen] = useState(false)
   const closeModal = () => {
     !loadingCreateCard && setAddNewCardModalIsOpen(false)
+  }
+
+  const updateDeckHandle = (args: { name: string; isPrivate: boolean }) => {
+    updateDeck({ id: deckId, body: appendDataToFormData(args) })
   }
 
   const dropdownElements: ReactNode[] = [
@@ -39,10 +49,15 @@ export const DeckPanel: FC<Props> = ({
       <OutlinedPlayCircle />
       <Typography variant={'caption'}>Learn</Typography>
     </Link>,
-    <Link to={'/'} key={'Edit'} className={s.dropdownElements}>
+    <Button
+      asChild
+      key={'Edit'}
+      className={s.dropdownElements}
+      onClick={() => setEditPackModalIsOpen(true)}
+    >
       <Edit />
       <Typography variant={'caption'}>Edit</Typography>
-    </Link>,
+    </Button>,
     <Button
       asChild
       key={'Delete'}
@@ -65,6 +80,12 @@ export const DeckPanel: FC<Props> = ({
         modalIsOpen={deleteDeckModalIsOpen}
         setModalIsOpen={setDeletePackModalIsOpen}
         onSubmit={() => deleteDeck(deckId)}
+      />
+      <UpdateDeckModal
+        name={name}
+        modalIsOpen={editPackModalIsOpen}
+        setModalIsOpen={setEditPackModalIsOpen}
+        onSubmit={updateDeckHandle}
       />
       <div>
         <div className={s.titleAndButton}>
@@ -106,4 +127,7 @@ type Props = {
   deleteDeckModalIsOpen: boolean
   setDeletePackModalIsOpen: (isOpen: boolean) => void
   deleteDeck: (id: string) => void
+  updateDeck: (args: UpdateDeckRequestType) => void
+  setEditPackModalIsOpen: (isOpen: boolean) => void
+  editPackModalIsOpen: boolean
 }

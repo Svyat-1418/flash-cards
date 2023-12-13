@@ -18,8 +18,16 @@ import {
   setSearchByQuestion,
 } from '../../services/cards/cards.slice.ts'
 import { CreateCardDto, DeleteCardArgs, UpdateCardArgs } from '../../services/cards/types.ts'
-import { setDeletePackModalIsOpen } from '../../services/decks/deck-query-params.slice.ts'
-import { useDeleteDeckMutation, useGetDeckByIdQuery } from '../../services/decks/decks-endpoints.ts'
+import {
+  setDeletePackModalIsOpen,
+  setEditPackModalIsOpen,
+} from '../../services/decks/deck-query-params.slice.ts'
+import {
+  useDeleteDeckMutation,
+  useGetDeckByIdQuery,
+  useUpdateDeckMutation,
+} from '../../services/decks/decks-endpoints.ts'
+import { UpdateDeckRequestType } from '../../services/decks/types.ts'
 import { appendDataToFormData } from '../../shared/utils/append-data-to-form-data.ts'
 import { getSortString } from '../../shared/utils/get-sort-string.ts'
 
@@ -35,6 +43,7 @@ export const DeckPage = () => {
   const deleteDeckModalIsOpen = useAppSelector(
     state => state.decksQueryParams.deletePackModalIsOpen
   )
+  const editPackModalIsOpen = useAppSelector(state => state.decksQueryParams.editPackModalIsOpen)
 
   const { data: meData } = useMeQuery()
   const { currentData: currentCardsData, data: cardsData } = useGetCardsQuery({
@@ -44,13 +53,15 @@ export const DeckPage = () => {
     orderBy: getSortString(sort),
     itemsPerPage: itemsPerPage,
   })
-  const { data: deckData } = useGetDeckByIdQuery({
+  //todo уточнить!!!!!
+  const { data: deckData, refetch: refetchData } = useGetDeckByIdQuery({
     id: deckId || '',
   })
   const [createCard, { isLoading: loadingCreateCard }] = useCreateCardMutation({})
   const [updateCard] = useUpdateCardMutation()
   const [deleteCard] = useDeleteCardMutation()
   const [deleteDeck] = useDeleteDeckMutation()
+  const [updateDeck] = useUpdateDeckMutation()
 
   const actualCardsData = currentCardsData ?? cardsData
 
@@ -69,6 +80,10 @@ export const DeckPage = () => {
 
   const setDeletePackModalIsOpenHandle = (isOpen: boolean) => {
     dispatch(setDeletePackModalIsOpen({ isOpen }))
+  }
+
+  const setEditPackModalIsOpenHandle = (isOpen: boolean) => {
+    dispatch(setEditPackModalIsOpen({ isOpen }))
   }
 
   const createCardHandle = async (args: CreateCardDto) => {
@@ -122,6 +137,20 @@ export const DeckPage = () => {
       toast.error(error.data.message)
     }
   }
+  const updateDeckHandle = (args: UpdateDeckRequestType) => {
+    updateDeck(args)
+      .unwrap()
+      .then(() => {
+        setEditPackModalIsOpenHandle(false)
+        toast.success('Deck updated successfully')
+        //todo обязательно исправить
+        refetchData()
+        //setEditingDeckHandle(null)
+      })
+      .catch(e => {
+        toast.error(e.data.message)
+      })
+  }
 
   if (!deckId) return <div>Deck not found</div>
 
@@ -146,6 +175,9 @@ export const DeckPage = () => {
           deleteCard={deleteCardHandle}
           deleteDeckModalIsOpen={deleteDeckModalIsOpen}
           setDeletePackModalIsOpen={setDeletePackModalIsOpenHandle}
+          setEditPackModalIsOpen={setEditPackModalIsOpenHandle}
+          editPackModalIsOpen={editPackModalIsOpen}
+          updateDeck={updateDeckHandle}
           deleteDeck={deleteDeckHandle}
         />
       )}
