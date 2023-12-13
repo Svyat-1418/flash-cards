@@ -1,11 +1,11 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import { EditCardModal } from './edit-card.modal.tsx'
+import { UpdateCardModal } from './update-card-modal.tsx'
 
 const meta = {
   title: 'Modals/EditCardModal',
-  component: EditCardModal,
-} satisfies Meta<typeof EditCardModal>
+  component: UpdateCardModal,
+} satisfies Meta<typeof UpdateCardModal>
 
 export default meta
 type Story = StoryObj<typeof meta>

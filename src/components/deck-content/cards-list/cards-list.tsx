@@ -8,7 +8,7 @@ import { Empty } from '../../ui/table'
 import { CardTable, Sort } from './card-table'
 import s from './cards-list.module.scss'
 import { DeleteCardModal } from './modal/delete-card.modal'
-import { EditCardModal } from './modal/edit-card.modal'
+import { UpdateCardModal } from './modal/update-card'
 
 export const CardsList: FC<Props> = ({
   cardsData,
@@ -48,7 +48,7 @@ export const CardsList: FC<Props> = ({
     <>
       {cardsData.length ? (
         <div className={s.cardsList}>
-          <EditCardModal
+          <UpdateCardModal
             editingCard={editingCard}
             modalIsOpen={openEditCardModal}
             closeModal={closeEditCardModal}
