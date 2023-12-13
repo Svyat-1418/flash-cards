@@ -1,13 +1,18 @@
+import { FC, useState } from 'react'
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import AddPicture from '../../../../../assets/icons/add-picture/add-picture.tsx'
 import { Button } from '../../../../ui/button'
 import { ControlledCheckbox, ControlledTextField } from '../../../../ui/controlled'
+import { Cover } from '../../../../ui/cover/cover.tsx'
 import { Modal } from '../../../../ui/modal'
 import { Typography } from '../../../../ui/typography'
+import { Uploader } from '../../../../ui/uploader'
 
-import s from './edit-deck.modal.module.scss'
+import s from './update-deck.module.scss'
 
 const schema = z.object({
   name: z.string().trim().nonempty('Enter new title'),
@@ -16,20 +21,24 @@ const schema = z.object({
 
 type FormType = z.infer<typeof schema>
 
-type EditPackModalPropsType = {
+type Props = {
   name?: string
   isPrivate?: boolean
   modalIsOpen: boolean
   setModalIsOpen: (value: boolean) => void
-  onSubmit: (data: FormType) => void
+  onSubmit: <T>(data: FormType) => Promise<T>
 }
-export const EditPackModal = ({
+export const UpdateDeckModal: FC<Props> = ({
   name = '',
   isPrivate = false,
   modalIsOpen,
   setModalIsOpen,
   onSubmit,
-}: EditPackModalPropsType) => {
+}) => {
+  const [cover, setCover] = useState<File | null>(null)
+
+  let coverUrl = ''
+
   const { handleSubmit, control, reset } = useForm<FormType>({
     resolver: zodResolver(schema),
     mode: 'onTouched',
@@ -40,12 +49,24 @@ export const EditPackModal = ({
   })
 
   const onSubmitHandle = (args: FormType) => {
-    onSubmit(args)
+    const updateDeckPayload = cover ? { cover, ...args } : args
+
+    onSubmit(updateDeckPayload).then(() => {
+      URL.revokeObjectURL(coverUrl)
+    })
   }
 
   const cancelHandle = () => {
     reset()
     setModalIsOpen(false)
+  }
+
+  const onLoadCover = (data: File) => {
+    setCover(data)
+  }
+
+  if (cover) {
+    coverUrl = URL.createObjectURL(cover)
   }
 
   const editPack = handleSubmit(onSubmitHandle)
@@ -57,11 +78,20 @@ export const EditPackModal = ({
       showCloseButton
       title={
         <Typography variant={'h2'} as={'h2'}>
-          Edit Pack
+          Edit Deck
         </Typography>
       }
     >
       <form onSubmit={editPack}>
+        <div>
+          {cover && <Cover src={coverUrl} className={s.cover} />}
+          <Uploader onLoadCover={onLoadCover} onLoadError={() => {}}>
+            <Button variant={'secondary'} fullWidth type={'button'}>
+              <AddPicture />
+              <span>Update Cover</span>
+            </Button>
+          </Uploader>
+        </div>
         <ControlledTextField control={control} name={'name'} label={'Name Pack'} />
         <ControlledCheckbox
           control={control}
