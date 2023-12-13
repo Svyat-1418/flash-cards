@@ -45,5 +45,6 @@ export const Default: Story = {
     handleSetAuthorId: () => {},
     setClearFilter: () => {},
     sort: { key: 'name', direction: 'asc' },
+    decksLoading: false,
   },
 }
