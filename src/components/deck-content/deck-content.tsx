@@ -25,6 +25,9 @@ export const DeckContent: FC<Props> = ({
   deleteCard,
   sort,
   handleSort,
+  deleteDeckModalIsOpen,
+  setDeletePackModalIsOpen,
+  deleteDeck,
 }) => {
   return (
     <Container>
@@ -37,6 +40,9 @@ export const DeckContent: FC<Props> = ({
         searchCard={searchCard}
         createCard={createCard}
         loadingCreateCard={loadingCreateCard}
+        deleteDeckModalIsOpen={deleteDeckModalIsOpen}
+        setDeletePackModalIsOpen={setDeletePackModalIsOpen}
+        deleteDeck={deleteDeck}
       />
       <CardsList
         sort={sort}
@@ -69,4 +75,7 @@ type Props = {
   deleteCard: (args: DeleteCardArgs) => Promise<any>
   sort: Sort
   handleSort: (sort: Sort) => void
+  deleteDeckModalIsOpen: boolean
+  setDeletePackModalIsOpen: (isOpen: boolean) => void
+  deleteDeck: (id: string) => void
 }
