@@ -8,7 +8,7 @@ import { Typography } from '../../ui/typography'
 import { DeckTable } from './deck-table'
 import s from './decks-list.module.scss'
 import { DeleteDeckModal } from './modal/delete-deck.modal'
-import { EditPackModal } from './modal/edit-deck.modal'
+import { UpdateDeckModal } from './modal/update-deck/update-deck.tsx'
 
 type DecksListPropsType = {
   decksLoading: boolean
@@ -74,7 +74,7 @@ export const DecksList = ({
     <>
       {deckContent.length ? (
         <>
-          <EditPackModal
+          <UpdateDeckModal
             name={editingDeck?.name}
             isPrivate={editingDeck?.isPrivate}
             modalIsOpen={editPackModalIsOpen}
