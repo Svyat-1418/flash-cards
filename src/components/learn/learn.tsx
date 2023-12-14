@@ -42,7 +42,7 @@ export const Learn: FC<Props> = ({
       </Typography>
       <Typography variant={'h3'} className={s.question}>
         Question:{' '}
-        <Typography variant={'body2'} as={'span'}>
+        <Typography variant={'body2'} as={'span'} className={s.questionText}>
           {question}
         </Typography>
       </Typography>
@@ -51,7 +51,7 @@ export const Learn: FC<Props> = ({
         <>
           <Typography variant={'h3'} className={s.answer}>
             Answer:{' '}
-            <Typography variant={'body2'} as={'span'}>
+            <Typography variant={'body2'} as={'span'} className={s.answerTex}>
               {answer}
             </Typography>
           </Typography>
