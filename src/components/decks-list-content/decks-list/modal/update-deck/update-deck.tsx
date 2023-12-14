@@ -27,6 +27,7 @@ type Props = {
   modalIsOpen: boolean
   setModalIsOpen: (value: boolean) => void
   onSubmit: (data: FormType) => void
+  cover: string
 }
 export const UpdateDeckModal: FC<Props> = ({
   name = '',
@@ -34,8 +35,9 @@ export const UpdateDeckModal: FC<Props> = ({
   modalIsOpen,
   setModalIsOpen,
   onSubmit,
+  cover,
 }) => {
-  const [cover, setCover] = useState<File | null>(null)
+  const [localCover, setLocalCover] = useState<File | null>(null)
 
   let coverUrl = ''
 
@@ -49,7 +51,7 @@ export const UpdateDeckModal: FC<Props> = ({
   })
 
   const onSubmitHandle = (args: FormType) => {
-    const updateDeckPayload = cover ? { cover, ...args } : args
+    const updateDeckPayload = localCover ? { cover: localCover, ...args } : args
 
     onSubmit(updateDeckPayload)
     URL.revokeObjectURL(coverUrl)
@@ -61,12 +63,10 @@ export const UpdateDeckModal: FC<Props> = ({
   }
 
   const onLoadCover = (data: File) => {
-    setCover(data)
+    setLocalCover(data)
   }
 
-  if (cover) {
-    coverUrl = URL.createObjectURL(cover)
-  }
+  coverUrl = localCover ? URL.createObjectURL(localCover) : cover
 
   const editPack = handleSubmit(onSubmitHandle)
 
