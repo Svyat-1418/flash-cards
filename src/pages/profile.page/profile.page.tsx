@@ -1,4 +1,5 @@
 import { Profile } from '../../components/auth/profile'
+import { Container } from '../../components/ui/container'
 import { GoBack } from '../../components/ui/go-back'
 import {
   useLogoutMutation,
@@ -18,7 +19,7 @@ export const ProfilePage = () => {
   }
 
   return (
-    <>
+    <Container>
       <GoBack title={'Back to Decks List'} />
       {me && (
         <Profile
@@ -29,6 +30,6 @@ export const ProfilePage = () => {
           logout={logout}
         />
       )}
-    </>
+    </Container>
   )
 }
