@@ -80,6 +80,7 @@ export const DecksList = ({
             modalIsOpen={editPackModalIsOpen}
             setModalIsOpen={setEditPackModalIsOpen}
             onSubmit={updateDeckHandle}
+            cover={editingDeck.cover}
           />
           <DeleteDeckModal
             modalIsOpen={deletePackModalIsOpen}

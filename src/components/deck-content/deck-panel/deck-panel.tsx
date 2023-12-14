@@ -86,6 +86,7 @@ export const DeckPanel: FC<Props> = ({
         modalIsOpen={editPackModalIsOpen}
         setModalIsOpen={setEditPackModalIsOpen}
         onSubmit={updateDeckHandle}
+        cover={cover}
       />
       <div>
         <div className={s.titleAndButton}>
