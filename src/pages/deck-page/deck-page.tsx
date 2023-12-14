@@ -53,8 +53,7 @@ export const DeckPage = () => {
     orderBy: getSortString(sort),
     itemsPerPage: itemsPerPage,
   })
-  //todo уточнить!!!!!
-  const { data: deckData, refetch: refetchData } = useGetDeckByIdQuery({
+  const { data: deckData } = useGetDeckByIdQuery({
     id: deckId || '',
   })
   const [createCard, { isLoading: loadingCreateCard }] = useCreateCardMutation({})
@@ -130,7 +129,7 @@ export const DeckPage = () => {
       setDeletePackModalIsOpenHandle(false)
       navigate('/')
 
-      //setEditingDeckHandle(null)
+      //todo setEditingDeckHandle(null)
     } catch (err) {
       const error = err as { data: { message: string } }
 
@@ -143,9 +142,7 @@ export const DeckPage = () => {
       .then(() => {
         setEditPackModalIsOpenHandle(false)
         toast.success('Deck updated successfully')
-        //todo обязательно исправить
-        refetchData()
-        //setEditingDeckHandle(null)
+        //todo setEditingDeckHandle(null)
       })
       .catch(e => {
         toast.error(e.data.message)

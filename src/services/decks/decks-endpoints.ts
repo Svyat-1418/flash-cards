@@ -72,7 +72,7 @@ export const decksEndpoints = baseApi.injectEndpoints({
         method: `PATCH`,
         body,
       }),
-      invalidatesTags: ['Decks'],
+      invalidatesTags: ['Decks', 'DeckById'],
       async onQueryStarted({ id, body }, { dispatch, getState, queryFulfilled }) {
         const state = getState() as RootState
 
@@ -113,6 +113,7 @@ export const decksEndpoints = baseApi.injectEndpoints({
         url: `decks/${id}`,
         method: `GET`,
       }),
+      providesTags: ['DeckById'],
     }),
   }),
 })
