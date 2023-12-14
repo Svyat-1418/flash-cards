@@ -2,6 +2,7 @@ import { getFileFromFormData } from '../../shared/utils/get-file-from-form-data'
 import { getTextFromFormData } from '../../shared/utils/get-text-from-form-data'
 import { Nullable } from '../../types/common.types.ts'
 import { baseApi } from '../base-api.ts'
+import { setClearFilter } from '../decks/deck-query-params.slice.ts'
 
 import {
   ForgotPasswordArgs,
@@ -80,6 +81,7 @@ export const authEndpoints = baseApi.injectEndpoints({
           })
         )
 
+        dispatch(setClearFilter())
         try {
           await queryFulfilled
         } catch {
