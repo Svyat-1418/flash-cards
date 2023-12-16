@@ -1,9 +1,8 @@
-import { FC, ReactNode, useState } from 'react'
+import { FC, useState } from 'react'
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { Edit } from '../../../assets/icons/edit'
-import { MoreIcon } from '../../../assets/icons/more/more.tsx'
 import { OutlinedPlayCircle } from '../../../assets/icons/play-circle-outline'
 import { Trash } from '../../../assets/icons/trash'
 import { CreateCardDto } from '../../../services/cards/types.ts'
@@ -13,7 +12,8 @@ import { DeleteDeckModal } from '../../decks-list-content/decks-list/modal/delet
 import { UpdateDeckModal } from '../../decks-list-content/decks-list/modal/update-deck/update-deck.tsx'
 import { Button } from '../../ui/button'
 import { Cover } from '../../ui/cover/cover.tsx'
-import { Dropdown } from '../../ui/dropdown/dropdown.tsx'
+import { DropdownNewItemWithIcon } from '../../ui/dropdown-new/dropdown-new-items/dropdow-new-item.tsx'
+import { DropdownNew } from '../../ui/dropdown-new/dropdown-new.tsx'
 import { TextField } from '../../ui/textfield'
 import { Typography } from '../../ui/typography'
 
@@ -35,6 +35,12 @@ export const DeckPanel: FC<Props> = ({
   setEditPackModalIsOpen,
   editPackModalIsOpen,
 }) => {
+  const navigate = useNavigate()
+
+  const toLearn = () => {
+    navigate(`/learn/${deckId}`)
+  }
+
   const [addNewCardModalIsOpen, setAddNewCardModalIsOpen] = useState(false)
   const closeModal = () => {
     !loadingCreateCard && setAddNewCardModalIsOpen(false)
@@ -44,30 +50,21 @@ export const DeckPanel: FC<Props> = ({
     updateDeck({ id: deckId, body: appendDataToFormData(args) })
   }
 
-  const dropdownElements: ReactNode[] = [
-    <Link to={`/learn/${deckId}`} key={'learn'} className={s.dropdownElements}>
-      <OutlinedPlayCircle />
-      <Typography variant={'caption'}>Learn</Typography>
-    </Link>,
-    <Button
-      asChild
-      key={'Edit'}
-      className={s.dropdownElements}
-      onClick={() => setEditPackModalIsOpen(true)}
-    >
-      <Edit />
-      <Typography variant={'caption'}>Edit</Typography>
-    </Button>,
-    <Button
-      asChild
-      key={'Delete'}
-      className={s.dropdownElements}
-      onClick={() => setDeletePackModalIsOpen(true)}
-    >
-      <Trash />
-      <Typography variant={'caption'}>Delete</Typography>
-    </Button>,
-  ]
+  const dropdown = (
+    <DropdownNew>
+      <DropdownNewItemWithIcon icon={<OutlinedPlayCircle />} text={'Learn'} onSelect={toLearn} />
+      <DropdownNewItemWithIcon
+        icon={<Edit />}
+        text={'Edit'}
+        onSelect={() => setEditPackModalIsOpen(true)}
+      />
+      <DropdownNewItemWithIcon
+        icon={<Trash />}
+        text={'Delete'}
+        onSelect={() => setDeletePackModalIsOpen(true)}
+      />
+    </DropdownNew>
+  )
 
   return (
     <>
@@ -94,7 +91,7 @@ export const DeckPanel: FC<Props> = ({
             <Typography variant={'large'} as={'h1'}>
               {name}
             </Typography>
-            {isAuthor && <Dropdown trigger={<MoreIcon />} dropdownElements={dropdownElements} />}
+            {isAuthor && dropdown}
           </div>
 
           {isAuthor ? (
