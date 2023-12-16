@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { NewLogo1 } from '../../../assets/icons/logo/version/new-logo1/NewLogo1.tsx'
 import { Logout } from '../../../assets/icons/logout'
@@ -7,7 +7,8 @@ import { Nullable } from '../../../types/common.types.ts'
 import { Avatar } from '../avatar'
 import { Button } from '../button'
 import { Container } from '../container'
-import { Dropdown } from '../dropdown/dropdown.tsx'
+import { DropdownNewItem } from '../dropdown-new/dropdown-new-items/dropdow-new-item.tsx'
+import { DropdownNew } from '../dropdown-new/dropdown-new.tsx'
 import { Typography } from '../typography'
 
 import s from './header.module.scss'
@@ -27,6 +28,11 @@ export const Header = ({
   email = '',
   logout,
 }: HeaderPropsType) => {
+  const navigate = useNavigate()
+
+  const toProfile = () => {
+    navigate('profile')
+  }
   const dropdownHeader = (name?: string, email?: string, avatarSrc?: Nullable<string>) => {
     return (
       <div className={s.dropDownHeader}>
@@ -46,7 +52,7 @@ export const Header = ({
       Sign In
     </Button>
   ) : (
-    <Dropdown
+    <DropdownNew
       trigger={
         <div className={s.avatarContainer}>
           <Typography className={s.name} variant={'subtitle1'}>
@@ -55,22 +61,19 @@ export const Header = ({
           <Avatar src={avatarSrc ?? ''} />
         </div>
       }
-      dropdownElements={[
-        dropdownHeader(name, email, avatarSrc),
-        <>
-          <Link to={'profile'} className={s.dropDownElement}>
-            <Person />
-            <Typography>Profile</Typography>
-          </Link>
-        </>,
-        <>
-          <div onClick={logout} className={s.dropDownElement}>
-            <Logout />
-            <span>Logout</span>
-          </div>
-        </>,
-      ]}
-    />
+    >
+      <DropdownNewItem>{dropdownHeader(name, email, avatarSrc)}</DropdownNewItem>
+      <DropdownNewItem onSelect={toProfile}>
+        <Person />
+        <Typography>Profile</Typography>
+      </DropdownNewItem>
+      <DropdownNewItem>
+        <div onClick={logout} className={s.dropDownElement}>
+          <Logout />
+          <Typography>Logout</Typography>
+        </div>
+      </DropdownNewItem>
+    </DropdownNew>
   )
 
   return (
