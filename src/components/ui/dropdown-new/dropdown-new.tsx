@@ -34,7 +34,7 @@ export const DropdownNew = forwardRef<ElementRef<typeof DropdownPrimitive.Conten
               forceMount
             >
               <div>
-                <div>{children}</div>
+                <div onClick={() => setOpen(false)}>{children}</div>
                 <DropdownPrimitive.Arrow className={s.arrow} />
               </div>
             </DropdownPrimitive.Content>
