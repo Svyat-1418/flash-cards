@@ -35,7 +35,9 @@ export const DropdownNew = forwardRef<ElementRef<typeof DropdownPrimitive.Conten
             >
               <div>
                 <div onClick={() => setOpen(false)}>{children}</div>
-                <DropdownPrimitive.Arrow className={s.arrow} />
+                <DropdownPrimitive.Arrow asChild>
+                  <div className={s.arrow}></div>
+                </DropdownPrimitive.Arrow>
               </div>
             </DropdownPrimitive.Content>
           </DropdownPrimitive.Portal>
