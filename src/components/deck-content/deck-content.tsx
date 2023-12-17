@@ -38,6 +38,7 @@ export const DeckContent: FC<Props> = ({
       <GoBack title={'Back to Decks List'} />
       <DeckPanel
         deckId={deckId}
+        cardsData={cardsData}
         name={name}
         cover={cover}
         isAuthor={isAuthor}

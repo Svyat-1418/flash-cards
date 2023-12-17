@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Edit } from '../../../assets/icons/edit'
 import { OutlinedPlayCircle } from '../../../assets/icons/play-circle-outline'
 import { Trash } from '../../../assets/icons/trash'
-import { CreateCardDto } from '../../../services/cards/types.ts'
+import { Card, CreateCardDto } from '../../../services/cards/types.ts'
 import { UpdateDeckRequestType } from '../../../services/decks/types.ts'
 import { appendDataToFormData } from '../../../shared/utils/append-data-to-form-data.ts'
 import { DeleteDeckModal } from '../../decks-list-content/decks-list/modal/delete-deck.modal'
@@ -22,6 +22,7 @@ import { AddNewCardModal } from './modal/add-new-card.modal'
 
 export const DeckPanel: FC<Props> = ({
   deckId,
+  cardsData,
   isAuthor,
   name,
   cover,
@@ -52,7 +53,9 @@ export const DeckPanel: FC<Props> = ({
 
   const dropdown = (
     <DropdownNew>
-      <DropdownNewItemWithIcon icon={<OutlinedPlayCircle />} text={'Learn'} onSelect={toLearn} />
+      {cardsData.length !== 0 && (
+        <DropdownNewItemWithIcon icon={<OutlinedPlayCircle />} text={'Learn'} onSelect={toLearn} />
+      )}
       <DropdownNewItemWithIcon
         icon={<Edit />}
         text={'Edit'}
@@ -118,6 +121,7 @@ type Props = {
   deckId: string
   name: string
   cover: string
+  cardsData: Card[]
   isAuthor: boolean
   searchCard: (cardName: string) => void
   createCard: (args: CreateCardDto) => Promise<any>
