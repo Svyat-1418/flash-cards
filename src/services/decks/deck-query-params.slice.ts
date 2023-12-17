@@ -18,6 +18,7 @@ type initialStateType = {
   editingDeck: Deck
   sort: Nullable<Sort>
   itemsPerPage: string
+  isClearedFilter: boolean
 }
 
 const initialState: initialStateType = {
@@ -33,6 +34,7 @@ const initialState: initialStateType = {
   editingDeck: {} as Deck,
   sort: null as Nullable<Sort>,
   itemsPerPage: '10',
+  isClearedFilter: false,
 }
 
 export const decksSlice = createSlice({
@@ -70,7 +72,10 @@ export const decksSlice = createSlice({
       state.editingDeck = action.payload.deck
     },
     setClearFilter: () => {
-      return initialState
+      return { ...initialState, isClearedFilter: true }
+    },
+    setIsClearedFilter: (state, action: PayloadAction<{ value: boolean }>) => {
+      state.isClearedFilter = action.payload.value
     },
     setSort: (state, action: PayloadAction<{ sort: Sort }>) => {
       state.sort = action.payload.sort
@@ -93,5 +98,6 @@ export const {
   setEditingDeck,
   setClearFilter,
   setItemsPerPage,
+  setIsClearedFilter,
 } = decksSlice.actions
 export const { actions: decksActions } = decksSlice
