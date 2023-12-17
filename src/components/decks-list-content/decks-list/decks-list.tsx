@@ -83,6 +83,7 @@ export const DecksList = ({
             cover={editingDeck.cover}
           />
           <DeleteDeckModal
+            name={editingDeck?.name}
             modalIsOpen={deletePackModalIsOpen}
             setModalIsOpen={setDeletePackModalIsOpen}
             onSubmit={deleteDeckHandle}
