@@ -80,6 +80,7 @@ export const DeckPanel: FC<Props> = ({
         modalIsOpen={deleteDeckModalIsOpen}
         setModalIsOpen={setDeletePackModalIsOpen}
         onSubmit={() => deleteDeck(deckId)}
+        name={name}
       />
       <UpdateDeckModal
         name={name}
