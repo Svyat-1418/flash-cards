@@ -13,6 +13,7 @@ type Props = {
   toLearn?: string
   handleEdit?: () => void
   handleDelete?: () => void
+  deckIsEmpty?: boolean
 }
 
 export const ControlButtons = ({
@@ -21,10 +22,11 @@ export const ControlButtons = ({
   handleEdit,
   handleDelete,
   forCards,
+  deckIsEmpty,
 }: Props) => {
   return (
     <div className={s.controlButtonContainer}>
-      {!forCards && toLearn && (
+      {!forCards && toLearn && !deckIsEmpty && (
         <Button as={Link} asChild to={toLearn} className={s.controlButton}>
           <OutlinedPlayCircle />
         </Button>
