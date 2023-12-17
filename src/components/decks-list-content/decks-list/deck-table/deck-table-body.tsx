@@ -56,6 +56,7 @@ export const DeckTableBody: FC<Props> = ({ deckContent, userId, editDeck, delete
                 toLearn={`learn/${item.id}`}
                 handleDelete={deleteItem}
                 handleEdit={editItem}
+                deckIsEmpty={item.cardsCount === 0}
               />
             </Table.Cell>
           </Table.Row>
