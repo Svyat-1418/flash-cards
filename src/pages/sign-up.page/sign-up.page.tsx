@@ -15,7 +15,7 @@ export const SignUpPage = () => {
         toast.success('Signed up successfully')
         navigate('/login')
       })
-      .catch(err => toast.error(err.data.message))
+      .catch((e: { data: { errorMessages: string[] } }) => toast.error(e.data.errorMessages[0]))
   }
 
   return <SignUp onSubmit={handleSignUp} />
