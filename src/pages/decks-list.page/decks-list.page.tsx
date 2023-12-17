@@ -15,6 +15,7 @@ import {
   setDeletePackModalIsOpen,
   setEditingDeck,
   setEditPackModalIsOpen,
+  setIsClearedFilter,
   setItemsPerPage,
   setShowMyDecks,
   setSliderRangeValues,
@@ -43,6 +44,7 @@ export const DecksListPage = () => {
     editingDeck,
     sort,
     itemsPerPage,
+    isClearedFilter,
   } = useAppSelector(state => state.decksQueryParams)
 
   const setCurrentPageHandle = (page: number) => {
@@ -155,9 +157,10 @@ export const DecksListPage = () => {
   useEffect(() => {
     if (sliderRangeValues[1] !== decksData?.maxCardsCount) {
       setSliderRangeValuesHandle([sliderRangeValues[0], decksData?.maxCardsCount || 100])
-      setSliderValuesHandle([sliderValues[0], decksData?.maxCardsCount || 10])
+      setSliderValuesHandle([sliderValues[0], decksData?.maxCardsCount || 100])
     }
-  }, [decksData?.maxCardsCount])
+    dispatch(setIsClearedFilter({ value: false }))
+  }, [decksData?.maxCardsCount, isClearedFilter])
 
   //todo заменить userId на флаг isAdmin
   return (
