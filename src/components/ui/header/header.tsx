@@ -4,7 +4,7 @@ import { NewLogo1 } from '../../../assets/icons/logo/version/new-logo1/NewLogo1.
 import { Logout } from '../../../assets/icons/logout'
 import { Person } from '../../../assets/icons/person'
 import { Nullable } from '../../../types/common.types.ts'
-import { Avatar } from '../avatar'
+import { Avatar } from '../avatar-with-fallback'
 import { Button } from '../button'
 import { Container } from '../container'
 import { DropdownNewItem } from '../dropdown-new/dropdown-new-items/dropdow-new-item.tsx'
@@ -36,7 +36,7 @@ export const Header = ({
   const dropdownHeader = (name?: string, email?: string, avatarSrc?: Nullable<string>) => {
     return (
       <div className={s.dropDownHeader}>
-        <Avatar src={avatarSrc ?? ''} />
+        <Avatar userName={name ?? ''} image={avatarSrc ?? ''} />
         <div>
           <Typography variant={'subtitle2'}>{name}</Typography>
           <Typography variant={'caption'} className={s.email}>
@@ -58,7 +58,7 @@ export const Header = ({
           <Typography className={s.name} variant={'subtitle1'}>
             {name}
           </Typography>
-          <Avatar src={avatarSrc ?? ''} />
+          <Avatar userName={name ?? ''} image={avatarSrc ?? ''} />
         </div>
       }
     >

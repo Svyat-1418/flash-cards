@@ -1,6 +1,6 @@
 import { ComponentProps } from 'react'
 
-import s from './avatar.module.scss'
+import s from './avatar-old.module.scss'
 
 export type AvatarProps = {
   name?: string
@@ -8,6 +8,6 @@ export type AvatarProps = {
   size?: ComponentProps<'img'>['width']
 }
 
-export const Avatar = ({ name, src, size = 36 }: AvatarProps) => {
+export const AvatarOld = ({ name, src, size = 36 }: AvatarProps) => {
   return <img className={s.avatar} src={src} alt={`${name} avatar`} width={size} height={size} />
 }
