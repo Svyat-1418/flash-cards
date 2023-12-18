@@ -15,7 +15,7 @@ export const Rating: FC<Props> = ({ starCount, grade }) => {
       {[...Array(starCount)].map((star, index) => {
         const currentStarGrade = index + 1
 
-        return currentStarGrade <= grade ? <FilledStar /> : <OutlinedStar />
+        return currentStarGrade <= grade ? <FilledStar key={star} /> : <OutlinedStar />
       })}
     </>
   )
