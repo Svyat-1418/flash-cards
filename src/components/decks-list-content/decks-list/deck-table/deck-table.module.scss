@@ -1,0 +1,25 @@
+.scrollBar {
+  /* Firefox scroll styles */
+  scrollbar-color: #333 #000;
+  scrollbar-width: auto;
+
+  /* common styles */
+  overflow-y: auto;
+  max-height: 658px;
+}
+
+/* Chrome, Edge, and Safari scroll styles */
+.scrollBar::-webkit-scrollbar {
+  position: absolute;
+  width: 10px;
+}
+
+.scrollBar::-webkit-scrollbar-track {
+  background: #000;
+}
+
+.scrollBar::-webkit-scrollbar-thumb {
+  background-color: #333;
+  border: 1px none #fff;
+  border-radius: 10px;
+}
