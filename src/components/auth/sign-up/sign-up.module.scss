@@ -42,3 +42,14 @@
     color: var(--color-accent-700);
   }
 }
+
+.signInLink {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 11px;
+
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--color-primary-500, #8c61ff);
+  text-decoration-line: underline;
+}
