@@ -10,6 +10,26 @@ html {
 *::before,
 *::after {
   box-sizing: border-box;
+
+  /* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  scrollbar-width: auto;
+  scrollbar-color: #333333 #000000;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #333333;
+  border-radius: 10px;
+  border: 1px none #ffffff;
 }
 
 input,
