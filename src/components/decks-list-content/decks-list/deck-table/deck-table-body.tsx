@@ -21,7 +21,7 @@ type Props = {
 
 export const DeckTableBody: FC<Props> = ({ deckContent, userId, editDeck, deleteDeck }: Props) => {
   return (
-    <Table.Body>
+    <Table.Body className={s.tableBody}>
       {deckContent.map(item => {
         const isAdmin = item.userId === userId
         const editItem = () => {
