@@ -3,6 +3,7 @@ import { Table, TableHeader } from '../../../ui/table'
 
 import { deckColumns } from './deck-fake-data.ts'
 import { DeckTableBody } from './deck-table-body.tsx'
+import s from './deck-table.module.scss'
 
 export type DeckTablePropsType = {
   userId?: string | undefined
@@ -27,14 +28,16 @@ export const DeckTable = ({
   handleSort,
 }: DeckTablePropsType) => {
   return (
-    <Table.Root>
-      <TableHeader columns={deckColumns} sort={sort} onSort={handleSort} />
-      <DeckTableBody
-        deckContent={deckContent}
-        userId={userId}
-        editDeck={editDeck}
-        deleteDeck={deleteDeck}
-      />
-    </Table.Root>
+    <div className={s.scrollBar}>
+      <Table.Root>
+        <TableHeader columns={deckColumns} sort={sort} onSort={handleSort} />
+        <DeckTableBody
+          deckContent={deckContent}
+          userId={userId}
+          editDeck={editDeck}
+          deleteDeck={deleteDeck}
+        />
+      </Table.Root>
+    </div>
   )
 }
