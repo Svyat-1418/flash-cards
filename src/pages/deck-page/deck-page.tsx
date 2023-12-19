@@ -30,6 +30,7 @@ import {
 import { UpdateDeckRequestType } from '../../services/decks/types.ts'
 import { appendDataToFormData } from '../../shared/utils/append-data-to-form-data.ts'
 import { getSortString } from '../../shared/utils/get-sort-string.ts'
+import { useDebounce } from '../../shared/utils/hooks/use-debounce'
 
 export const DeckPage = () => {
   const { deckId } = useParams<{ deckId: string }>()
@@ -49,7 +50,7 @@ export const DeckPage = () => {
   const { currentData: currentCardsData, data: cardsData } = useGetCardsQuery({
     deckId: deckId || '',
     currentPage: currentPage,
-    question: searchByQuestion,
+    question: useDebounce(searchByQuestion, 1000),
     orderBy: getSortString(sort),
     itemsPerPage: itemsPerPage,
   })
