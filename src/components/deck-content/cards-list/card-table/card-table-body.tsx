@@ -8,6 +8,8 @@ import { Rating } from '../../../ui/rating'
 import { Table } from '../../../ui/table'
 import { Typography } from '../../../ui/typography'
 
+import s from './card-table-body.module.scss'
+
 type Props = {
   content: Card[]
   isAuthor: boolean
@@ -20,8 +22,8 @@ export const CardTableBody: FC<Props> = ({ content, isAuthor, editCard, deleteCa
     <Table.Body>
       {content.map(item => (
         <Table.Row key={item.id}>
-          <Table.Cell>
-            {item.questionImg && <Cover src={item.questionImg} />}
+          <Table.Cell className={s.nameAndCover}>
+            {item.questionImg && <Cover as={'image'} src={item.questionImg} />}
             <Typography variant={'body2'}>
               {item.question.length > 20 ? `${item.question.slice(0, 20)} ...` : item.question}
             </Typography>
