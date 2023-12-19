@@ -29,6 +29,7 @@ import {
 } from '../../services/decks/decks-endpoints.ts'
 import { AddDeckRequestType, Deck, UpdateDeckRequestType } from '../../services/decks/types.ts'
 import { getSortString } from '../../shared/utils/get-sort-string.ts'
+import { useDebounce } from '../../shared/utils/hooks/use-debounce'
 
 export const DecksListPage = () => {
   const dispatch = useAppDispatch()
@@ -109,7 +110,7 @@ export const DecksListPage = () => {
     authorId: showMyDecks ? user?.id : undefined,
     minCardsCount: sliderValues[0].toString(),
     maxCardsCount: sliderValues[1].toString(),
-    name: decksName,
+    name: useDebounce(decksName, 1000),
     orderBy: getSortString(sort),
     itemsPerPage: +itemsPerPage,
   })
