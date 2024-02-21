@@ -3,13 +3,11 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { Learn } from '../../components/learn/learn.tsx'
-import { Container } from '../../components/ui/container'
-import { GoBack } from '../../components/ui/go-back'
-import { useGetDeckByIdQuery } from '../../services/decks/decks-endpoints.ts'
-import { useLearnDeckQuery, useSaveGradeMutation } from '../../services/learn/learn-endpoints.ts'
-
-//import s from './learn-page.module.scss'
+import { Container } from '@/shared/ui-kit/container'
+import { GoBack } from '@/shared/ui-kit/go-back'
+import { Learn } from '@/widgets/learn/learn'
+import { useGetDeckByIdQuery } from '@services/decks/decks-endpoints'
+import { useLearnDeckQuery, useSaveGradeMutation } from '@services/learn/learn-endpoints'
 
 export const LearnPage = () => {
   const { deckId } = useParams<{ deckId: string }>()

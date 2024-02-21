@@ -1,10 +1,6 @@
 import { isEmpty } from 'remeda'
 
-import { RootState } from '../../app/store.ts'
-import { getFileFromFormData } from '../../shared/utils/get-file-from-form-data'
-import { getTextFromFormData } from '../../shared/utils/get-text-from-form-data'
-import { selectCardsQueryArgs } from '../../shared/utils/selectCardsQueryArgs.ts'
-import { baseApi } from '../base-api.ts'
+import { baseApi } from '../base-api'
 
 import {
   CreateCardArgs,
@@ -13,7 +9,12 @@ import {
   GetCardsArgs,
   GetCardsResponse,
   UpdateCardArgs,
-} from './types.ts'
+} from './types'
+
+import { getFileFromFormData } from '@/shared/utils/get-file-from-form-data'
+import { getTextFromFormData } from '@/shared/utils/get-text-from-form-data'
+import { RootState } from '@app/store/types/root-state'
+import { selectCardsQueryArgs } from '@services/cards/utils/select-cards-query-args'
 
 const cardsEndpoints = baseApi.injectEndpoints({
   endpoints: builder => ({

@@ -1,7 +1,8 @@
-import { baseApi } from '../base-api.ts'
-import { Deck } from '../decks/types.ts'
+import { Deck } from '../decks/types'
 
-import { LearnDeckResponse, SaveGradeArds } from './types.ts'
+import { LearnDeckResponse, SaveGradeArds } from './types'
+
+import { baseApi } from '@services/base-api'
 
 const learnEndpoints = baseApi.injectEndpoints({
   endpoints: builder => ({

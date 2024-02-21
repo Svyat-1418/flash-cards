@@ -1,8 +1,6 @@
 import { getFileFromFormData } from '../../shared/utils/get-file-from-form-data'
-import { getTextFromFormData } from '../../shared/utils/get-text-from-form-data'
-import { Nullable } from '../../types/common.types.ts'
-import { baseApi } from '../base-api.ts'
-import { setClearFilter } from '../decks/deck-query-params.slice.ts'
+import { baseApi } from '../base-api'
+import { setClearFilter } from '../decks/deck-query-params.slice'
 
 import {
   ForgotPasswordArgs,
@@ -12,7 +10,10 @@ import {
   NewPasswordArgs,
   SignUpArgs,
   SignUpResponse,
-} from './types.ts'
+} from './types'
+
+import { Nullable } from '@/shared/types/nullable'
+import { getTextFromFormData } from '@shared/utils/get-text-from-form-data'
 
 export const authEndpoints = baseApi.injectEndpoints({
   endpoints: builder => ({

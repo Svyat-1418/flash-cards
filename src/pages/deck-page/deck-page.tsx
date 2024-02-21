@@ -1,36 +1,37 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { useAppDispatch, useAppSelector } from '../../app/hooks.ts'
-import { Sort } from '../../components/deck-content/cards-list/card-table'
-import { DeckContent } from '../../components/deck-content/deck-content.tsx'
-import { useMeQuery } from '../../services/auth/auth-endpoints.ts'
+import { useMeQuery } from '@/services/auth/auth-endpoints'
 import {
   useCreateCardMutation,
   useDeleteCardMutation,
   useGetCardsQuery,
   useUpdateCardMutation,
-} from '../../services/cards/cards-endpoints.ts'
+} from '@/services/cards/cards-endpoints'
 import {
   cardsActions,
   setCurrentPage,
   setItemsPerPage,
   setSearchByQuestion,
-} from '../../services/cards/cards.slice.ts'
-import { CreateCardDto, DeleteCardArgs, UpdateCardArgs } from '../../services/cards/types.ts'
+} from '@/services/cards/cards.slice'
+import { CreateCardDto, DeleteCardArgs, UpdateCardArgs } from '@/services/cards/types'
 import {
   setDeletePackModalIsOpen,
   setEditPackModalIsOpen,
-} from '../../services/decks/deck-query-params.slice.ts'
+} from '@/services/decks/deck-query-params.slice'
 import {
   useDeleteDeckMutation,
   useGetDeckByIdQuery,
   useUpdateDeckMutation,
-} from '../../services/decks/decks-endpoints.ts'
-import { UpdateDeckRequestType } from '../../services/decks/types.ts'
-import { appendDataToFormData } from '../../shared/utils/append-data-to-form-data.ts'
-import { getSortString } from '../../shared/utils/get-sort-string.ts'
-import { useDebounce } from '../../shared/utils/hooks/use-debounce'
+} from '@/services/decks/decks-endpoints'
+import { UpdateDeckRequestType } from '@/services/decks/types'
+import { appendDataToFormData } from '@/shared/utils/append-data-to-form-data'
+import { getSortString } from '@/shared/utils/get-sort-string'
+import { useAppDispatch } from '@app/store/hooks/use-app-dispatch'
+import { useAppSelector } from '@app/store/hooks/use-app-selector'
+import { useDebounce } from '@shared/hooks/use-debounce'
+import { Sort } from '@shared/types/sort'
+import { DeckContent } from '@widgets/single-deck/deck-content'
 
 export const DeckPage = () => {
   const { deckId } = useParams<{ deckId: string }>()

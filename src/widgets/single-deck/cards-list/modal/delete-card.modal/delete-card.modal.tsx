@@ -1,0 +1,55 @@
+import s from './delete-card.modal.module.scss'
+
+import { Card, DeleteCardArgs } from '@/services/cards/types'
+import { Button } from '@/shared/ui-kit/button'
+import { Modal } from '@/shared/ui-kit/modal'
+import { Typography } from '@/shared/ui-kit/typography'
+
+type DeleteCardModalPropsType = {
+  deletingCard: Card | null
+  modalIsOpen: boolean
+  closeModal: () => void
+  deleteCard: (args: DeleteCardArgs) => Promise<any>
+}
+
+export const DeleteCardModal = ({
+  modalIsOpen,
+  deletingCard,
+  closeModal,
+  deleteCard,
+}: DeleteCardModalPropsType) => {
+  const deleteCardHandle = () => {
+    deletingCard?.id &&
+      deleteCard({
+        deckId: deletingCard.deckId,
+        cardId: deletingCard.id,
+      }).then(() => {
+        closeModal()
+      })
+  }
+
+  return (
+    <Modal
+      open={modalIsOpen}
+      showCloseButton
+      onClose={closeModal}
+      title={
+        <Typography variant={'h2'} as={'h2'}>
+          Delete Card
+        </Typography>
+      }
+    >
+      <Typography
+        variant={'subtitle1'}
+      >{`Do you really want to remove ${deletingCard?.question}?`}</Typography>
+      <div className={s.buttonContainer}>
+        <Button variant={'secondary'} onClick={closeModal}>
+          Cancel
+        </Button>
+        <Button variant={'primary'} onClick={deleteCardHandle}>
+          Delete Card
+        </Button>
+      </div>
+    </Modal>
+  )
+}

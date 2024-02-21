@@ -1,6 +1,4 @@
-import { RootState } from '../../app/store.ts'
-import { selectDeckQueryArgs } from '../../shared/utils/selectDeckQueryArgs.ts'
-import { baseApi } from '../base-api.ts'
+import { baseApi } from '../base-api'
 
 import {
   AddDeckRequestType,
@@ -10,7 +8,10 @@ import {
   DeleteDeckResponseType,
   Deck,
   UpdateDeckRequestType,
-} from './types.ts'
+} from './types'
+
+import { RootState } from '@app/store/types/root-state'
+import { selectDecksQueryArgs } from '@services/decks/utils/select-decks-query-args'
 
 export const decksEndpoints = baseApi.injectEndpoints({
   endpoints: builder => ({
@@ -34,7 +35,7 @@ export const decksEndpoints = baseApi.injectEndpoints({
         const { data: createdDeck } = await queryFulfilled
 
         dispatch(
-          decksEndpoints.util.updateQueryData('getDecks', selectDeckQueryArgs(state), draft => {
+          decksEndpoints.util.updateQueryData('getDecks', selectDecksQueryArgs(state), draft => {
             draft.items.unshift(createdDeck)
           })
         )
@@ -50,7 +51,7 @@ export const decksEndpoints = baseApi.injectEndpoints({
         const state = getState() as RootState
 
         const patchResult = dispatch(
-          decksEndpoints.util.updateQueryData('getDecks', selectDeckQueryArgs(state), draft => {
+          decksEndpoints.util.updateQueryData('getDecks', selectDecksQueryArgs(state), draft => {
             const index = draft?.items?.findIndex(deck => deck.id === id)
 
             if (index !== -1) {
@@ -78,7 +79,7 @@ export const decksEndpoints = baseApi.injectEndpoints({
 
         let cover = ''
         const patchResult = dispatch(
-          decksEndpoints.util.updateQueryData('getDecks', selectDeckQueryArgs(state), draft => {
+          decksEndpoints.util.updateQueryData('getDecks', selectDecksQueryArgs(state), draft => {
             const deck = draft.items.find(deck => deck.id === id)
 
             const name = body.get('name')

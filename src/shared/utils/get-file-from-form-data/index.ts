@@ -1,1 +1,1 @@
-export * from './get-file-from-form-data.ts'
+export { getFileFromFormData } from './get-file-from-form-data'

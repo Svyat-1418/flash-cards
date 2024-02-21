@@ -1,4 +1,4 @@
-import { Nullable } from '../../types/common.types.ts'
+import { Nullable } from '@shared/types/nullable'
 
 export type LoginArgs = {
   email: string

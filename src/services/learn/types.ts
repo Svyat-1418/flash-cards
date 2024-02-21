@@ -1,5 +1,5 @@
-import { Card } from '../cards/types.ts'
-import { Deck } from '../decks/types.ts'
+import { Card } from '../cards/types'
+import { Deck } from '../decks/types'
 
 export type LearnDeckResponse = Omit<Card, 'userId'>
 
