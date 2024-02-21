@@ -1,1 +1,1 @@
-export * from './get-text-from-form-data.ts'
+export { getTextFromFormData } from './get-text-from-form-data'

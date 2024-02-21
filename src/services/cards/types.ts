@@ -1,5 +1,5 @@
-import { Nullable } from '../../types/common.types.ts'
-import { PaginatedEntity } from '../common.types.ts'
+import { PaginatedEntity } from '@/services/common.types'
+import { Nullable } from '@shared/types/nullable'
 
 export type CreateCardDto = {
   question: string

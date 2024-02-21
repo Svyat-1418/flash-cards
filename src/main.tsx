@@ -9,8 +9,8 @@ import { Provider } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-import { store } from './app/store.ts'
-import { App } from './App.tsx'
+import { App } from '@app/App'
+import { store } from '@app/store'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

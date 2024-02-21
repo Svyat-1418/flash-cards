@@ -1,0 +1,1 @@
+export { SliderRange } from './slider'

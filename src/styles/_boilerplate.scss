@@ -9,12 +9,13 @@ html {
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+  scrollbar-color: #333 #000;
 
   /* ===== Scrollbar CSS ===== */
+
   /* Firefox */
   scrollbar-width: auto;
-  scrollbar-color: #333333 #000000;
+  box-sizing: border-box;
 }
 
 /* Chrome, Edge, and Safari */
@@ -23,13 +24,13 @@ html {
 }
 
 *::-webkit-scrollbar-track {
-  background: #000000;
+  background: #000;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #333333;
+  background-color: #333;
+  border: 1px none #fff;
   border-radius: 10px;
-  border: 1px none #ffffff;
 }
 
 input,

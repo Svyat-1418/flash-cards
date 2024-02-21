@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { Sort } from '../../components/deck-content/cards-list/card-table'
-import { Nullable } from '../../types/common.types.ts'
+import type { Deck } from './types'
 
-import { Deck } from './types.ts'
+import { Nullable } from '@shared/types/nullable'
+import { Sort } from '@shared/types/sort'
 
 type initialStateType = {
   authorId: string | undefined
