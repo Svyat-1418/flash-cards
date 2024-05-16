@@ -2,7 +2,7 @@ import { createRoot } from 'react-dom/client'
 
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/700.css'
-import './styles/index.scss' // eslint-disable-next-line import/order
+import '@app/styles/index.scss' // eslint-disable-next-line import/order
 import { StrictMode } from 'react'
 
 import { Provider } from 'react-redux'
